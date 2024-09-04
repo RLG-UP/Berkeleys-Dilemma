@@ -75,3 +75,17 @@
 .call-action-one .call-action-content .call-action-btn {
   margin-top: 50px;
 }
+
+.text-card{
+  background-color: white;
+  border-radius: 10px;
+  margin: 15px;
+}
+
+.us-images{
+  width: 41vh;
+  border-radius: 5px;
+  margin: 10px;
+  /*border-style: dotted;
+  border-color: #903434;*/
+}
