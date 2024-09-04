@@ -1,0 +1,19 @@
+
+.titles{
+    margin-bottom: 5em;
+}
+
+.PageName {
+    position: fixed;
+    top: 1em; /* Adjust as needed */
+    z-index: 1000; /* Ensures the button is above other content */
+    text-shadow: 0px 1px 100px rgba(0, 0, 0, 100); /* Shadow effect */
+  }
+  
+  .fixed-button {
+    position: fixed;
+    top: 20px; /* Adjust as needed */
+    right: 50px; /* Adjust as needed */
+    z-index: 1000; /* Ensures the button is above other content */
+  }
+  

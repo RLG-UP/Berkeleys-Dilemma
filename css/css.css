@@ -9,7 +9,7 @@
 .fixed-button {
   position: fixed;
   top: 20px; /* Adjust as needed */
-  right: 30px; /* Adjust as needed */
+  right: 50px; /* Adjust as needed */
   z-index: 1000; /* Ensures the button is above other content */
 }
 
