@@ -1,19 +1,30 @@
+.thumb_nl_cnt{
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+}
+
+.thumb_nl{
+    margin-bottom: 1em;
+}
+
 
 .titles{
-    height: 1em;
+    height: 6em;
 }
 
 .PageName {
     position: fixed;
-    top: 1em; /* Adjust as needed */
+    top: 0.4em; /* Adjust as needed */
     z-index: 1000; /* Ensures the button is above other content */
     text-shadow: 0px 1px 100px rgba(0, 0, 0, 100); /* Shadow effect */
   }
   
   .fixed-button {
     position: fixed;
-    top: 20px; /* Adjust as needed */
-    right: 50px; /* Adjust as needed */
+    top: 0.1em; /* Adjust as needed */
+    right: 1em; /* Adjust as needed */
     z-index: 1000; /* Ensures the button is above other content */
   }
-  
+
