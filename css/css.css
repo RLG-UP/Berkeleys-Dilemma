@@ -1,3 +1,9 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* Esto evita que aparezca el scroll horizontal si algo se sale del ancho */
+}
 
 .tt{
   overflow: visible;
@@ -29,7 +35,7 @@
 .background-image-div {
   background-image: url("../images/burning_forest2.jpg");
   background-size: cover; /* Makes the image cover the entire div */
-  background-position: center; /* Centers the image */
+  background-position: center; /* Centers the image */  
   background-repeat: no-repeat; /* Ensures the image doesn't repeat */
   padding: 100px 20px; /* Adds space around the text */
   height: 100vh;
@@ -93,12 +99,45 @@
   background-color: white;
   border-radius: 10px;
   margin: 15px;
+  width: 98%;
+  margin-left: 30px;
+  padding: 10px;
 }
 
 .us-images{
-  width: 41vh;
+  width: 80px;
   border-radius: 5px;
   margin: 10px;
   /*border-style: dotted;
   border-color: #903434;*/
+}
+
+.text-card2{
+  background-color: white;
+  border-radius: 10px;
+  margin: 15px;
+  width: 75%;
+  margin-left: 30px;
+  padding: 10px;
+}
+
+.vision-div{
+  display: flex;
+  flex-direction: row;
+}
+
+.imagen-mundo{
+  right: 10%;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  border: 5px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: white; 
+}
+
+.subtitleM{
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: 20px;
 }
