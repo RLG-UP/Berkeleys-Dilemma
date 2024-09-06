@@ -1,3 +1,8 @@
+ .carousel-size{
+  min-height: 1000px;
+ }
+ 
+ 
  /* Change track color (WebKit browsers: Chrome, Safari, etc.) */
  input[type="range"]::-webkit-slider-runnable-track {
   background-color: #E7E5DF; /* Track color */
@@ -14,13 +19,14 @@ input[type="range"]::-webkit-slider-thumb {
   height: 20px;
   background-color: #E7E5DF; /* Thumb color */
   border: 3px solid #b51e1e10;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   border-radius: 15px;
-  transition: background-color 0.3s, border-color 0.2s;
+  transition: background-color 0.1s, border-color 0.2s;
   cursor:e-resize;
 }
 
 input[type="range"]::-webkit-slider-thumb:active {
+  height: 22px;
   background-color: #FF7F11; /* New color when active */
   border-color: #ff3d116e; /* Border color when active */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.447);

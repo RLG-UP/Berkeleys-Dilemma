@@ -47,16 +47,25 @@
   background: var(--primary);
   color: var(--white);
   box-shadow: var(--shadow-2);
+ 
 }
+
 .call-action-one .call-action-content .call-action-btn .active.primary-btn, .call-action-one .call-action-content .call-action-btn .primary-btn:hover, .call-action-one .call-action-content .call-action-btn .primary-btn:focus {
   background: var(--primary-dark);
   color: var(--white);
   box-shadow: var(--shadow-4);
 }
+
+.call-action-btn:hover{
+  background: red;
+  width:40%;
+}
+
 .call-action-one .call-action-content .call-action-btn .deactive.primary-btn {
   background: var(--gray-4);
   color: var(--dark-3);
   pointer-events: none;
+ 
 }
 
 /*===== call action one =====*/
