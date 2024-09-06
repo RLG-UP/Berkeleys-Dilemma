@@ -49,7 +49,12 @@ form{
   justify-content: center;
   text-align: center;
   position: sticky;
-  z-index: 1001; /* Ensures the button is above other content */
+  top: 11%;
+  z-index: 500; /* Ensures the button is above other content */
+}
+
+.top-slide label{
+  margin-bottom:19%;
 }
 
  .carousel-size{
