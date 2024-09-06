@@ -1,16 +1,28 @@
+.top-slide{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: fixed;
+  left: 1em;
+  z-index: 1001; /* Ensures the button is above other content */
+  max-width: 100vh;
+}
+
  .carousel-size{
   min-height: 1000px;
  }
- 
  
  /* Change track color (WebKit browsers: Chrome, Safari, etc.) */
  input[type="range"]::-webkit-slider-runnable-track {
   background-color: #E7E5DF; /* Track color */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   height: 12px;
+  width: 100px;
   border-radius: 10px;
   transition: background-color 0.3s, border-color 0.6s;
 }
+
 
 /* Change thumb color (WebKit browsers) */
 input[type="range"]::-webkit-slider-thumb {
@@ -26,19 +38,18 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 input[type="range"]::-webkit-slider-thumb:active {
-  height: 22px;
+  height: 21px;
   background-color: #FF7F11; /* New color when active */
   border-color: #ff3d116e; /* Border color when active */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.447);
 }
 
-
-
-.slider-container {
-  max-width: 600px;
-  margin: 50px auto;
-  
+input[type="range"]::-webkit-slider-thumb:hover {
+  height: 21px;
+  border-color: #ff3d11b8; /* Border color when active */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.447);
 }
+
 
 .range-slider {
   width: 100%;
@@ -59,17 +70,4 @@ input[type="range"]::-webkit-slider-thumb:active {
     height: 6em;
 }
 
-.PageName {
-    position: fixed;
-    top: 0.4em; /* Adjust as needed */
-    z-index: 1000; /* Ensures the button is above other content */
-    text-shadow: 0px 1px 100px rgba(0, 0, 0, 100); /* Shadow effect */
-  }
-  
-  .fixed-button {
-    position: fixed;
-    top: 0.1em; /* Adjust as needed */
-    right: 1em; /* Adjust as needed */
-    z-index: 1000; /* Ensures the button is above other content */
-  }
 

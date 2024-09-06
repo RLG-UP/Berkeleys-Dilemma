@@ -38,11 +38,26 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: #fff1f1; /* Changes the text color to white */
+  color: #E7E5DF; 
 }
 
 
 /* ===== Buttons Css ===== */
+
+.offcanvas-Box a{
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  text-align: left;
+}
+
+.offcanvas-Box a:hover{
+  color: #ffffff;
+  background-color: #FF7F11; /* New color when active */
+  border-color: #ff3d116e; /* Border color when active */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.286);
+}
+
 .call-action-one .call-action-content .call-action-btn .primary-btn {
   background: var(--primary);
   color: var(--white);
@@ -56,10 +71,6 @@
   box-shadow: var(--shadow-4);
 }
 
-.call-action-btn:hover{
-  background: red;
-  width:40%;
-}
 
 .call-action-one .call-action-content .call-action-btn .deactive.primary-btn {
   background: var(--gray-4);
@@ -90,7 +101,7 @@
 }
 
 .text-card{
-  background-color: white;
+  background-color: #E7E5DF;
   border-radius: 10px;
   margin: 15px;
 }

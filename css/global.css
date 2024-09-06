@@ -1,0 +1,47 @@
+/*
+ #393E41
+ */
+
+.tt button{
+    color: white;
+}
+
+.tt button:hover{
+    background: #ffffff;
+    font-weight: 600;
+    color: #FF7F11;
+    text-shadow: 0 2px 8px #ff3d1174;
+  
+}
+
+.offcanvas-Box a{
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    text-align: left;
+  }
+  
+  .offcanvas-Box a:hover{
+    color: #ffffff;
+    background-color: #FF7F11; /* New color when active */
+    border-color: #ff3d116e; /* Border color when active */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.286);
+  }
+
+  .tt{
+    overflow: visible;
+    z-index:9999;
+  }
+  .PageName {
+    position: fixed;
+    top: 0.4em; /* Adjust as needed */
+    z-index: 1000; /* Ensures the button is above other content */
+    text-shadow: 0 2px 8px rgb(0, 0, 0);
+  }
+  
+  .fixed-button {
+    position: fixed;
+    top: 0.4em; /* Adjust as needed */
+    right: 9em; /* Adjust as needed */
+    z-index: 1000; /* Ensures the button is above other content */
+  }
