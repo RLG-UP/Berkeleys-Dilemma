@@ -10,7 +10,9 @@
   transform: translate(-50%, -50%); /* Center the text */
   width:100%;
   color: white;
-  font-size: 10px;
+  font-family: 'Source Sans 3';
+  font-weight: 400;
+  font-size: 0.8em;
   text-align: center;
   opacity: 0;
   z-index: 2000; /* Ensure the text appears in front */
@@ -49,12 +51,12 @@ form{
   justify-content: center;
   text-align: center;
   position: sticky;
-  top: 11%;
+  top: 7%;
   z-index: 500; /* Ensures the button is above other content */
 }
 
 .top-slide label{
-  margin-bottom:19%;
+  margin-bottom:13%;
 }
 
  .carousel-size{

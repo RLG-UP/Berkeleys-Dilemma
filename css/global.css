@@ -1,9 +1,57 @@
 /*
  #393E41
+ #E7E5DF
+ #BD1E1E
+ #FF7F11
+
  */
 
+ 
+
+ h1, h2{
+  font-family: 'Bebas Neue';
+  font-size: 40px;
+  color: #E7E5DF;
+}
+
+h3, h4{
+  font-family: 'Poppins';
+  font-size: 2em;
+  color: #E7E5DF;
+}
+
+.start-btn{
+  height: 2.5em;
+  width: 9em;
+  background:#e7e5df00;
+  border: 1px;
+  border-radius: 7px;
+  border-style: solid;
+  border-color: #E7E5DF;
+  color: #E7E5DF;
+  transition: 0.3s;
+}
+
+.start-btn:hover{
+  transition: 0.1s;
+  background: #FF7F11;
+  color: #ffffff;
+  text-shadow: 0 2px 8px #ff3d1174;
+}
+
+p{
+  font-family: 'Source Sans 3';
+  font-weight: 300;
+  font-size: 1em;
+  letter-spacing: 0.03em;
+}
+
+.fondo{
+  background-color: #393E41;
+}
 
  html, body {
+  background: #393E41;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -19,13 +67,14 @@
 
 .tt button:hover{
     background: #FF7F11;
-    font-weight: 600;
     color: #ffffff;
     text-shadow: 0 2px 8px #ff3d1174;
   
 }
 
 .offcanvas-Box a{
+    font-family: 'Poppins';
+    font-size: 1em;
     display: flex;
     align-items: left;
     justify-content: left;
@@ -44,6 +93,9 @@
     z-index:9999;
   }
   .PageName {
+    font-family: 'Poppins';
+    font-size: 1em;
+    font-weight: 200;
     position: fixed;
     left: 1em;
     top: 0.4em; /* Adjust as needed */
@@ -57,3 +109,140 @@
     right: 1em; /* Adjust as needed */
     z-index: 1000; /* Ensures the button is above other content */
   }
+
+  .terms-conditions{
+    width: 100%;
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 1em;
+   }
+
+  /* CSS FONTS*/
+
+  /*TITLES*/
+ .bebas-neue-regular {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/*SUBTITLES*/
+.poppins-thin {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.poppins-extralight {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.poppins-light {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.poppins-extrabold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.poppins-black {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.poppins-thin-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.poppins-extralight-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.poppins-light-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.poppins-regular-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.poppins-medium-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.poppins-semibold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.poppins-bold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.poppins-extrabold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.poppins-black-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+/*TEXT*/
+/* <uniquifier>: Use a unique and descriptive class name
+   <weight>: Use a value from 200 to 900
+*/
+
+.source-sans-3-regular {
+  font-family: "Source Sans 3", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
