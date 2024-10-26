@@ -27,7 +27,25 @@ app.route('/')
 
 app.route('/environment')
     .get((req, res)=>{
-        res.render('environment');
+        var carrousel = [
+            `https://via.placeholder.com/1920x1080?text=Foto+1`,
+            `https://via.placeholder.com/1920x1080?text=Foto+2`,
+            `https://via.placeholder.com/1920x1080?text=Foto+3`,
+            `https://via.placeholder.com/1920x1080?text=Foto+4`,
+            `https://via.placeholder.com/1920x1080?text=Foto+5`,
+            `https://via.placeholder.com/1920x1080?text=Foto+6`,
+            `https://via.placeholder.com/1920x1080?text=Foto+7`,
+            `https://via.placeholder.com/1920x1080?text=Foto+8`,
+            `https://via.placeholder.com/1920x1080?text=Foto+9`,
+            `https://via.placeholder.com/1920x1080?text=Foto+10`
+        ];
+
+        const params = {
+            carrousel,
+        }
+
+        
+        res.render('environment', params);
     })
 
 
