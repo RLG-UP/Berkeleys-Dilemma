@@ -1,6 +1,6 @@
 # Berkeley's Dilemma
 
-A project designed and developed by Rodrigo Lopez, with contributions from Pato, focused on creating an interactive web environment with responsive design and dynamic UI elements.
+A project designed and developed by Rodrigo Lopez and David Avalos, with contributions from Erasmo Medina, focused on creating an interactive web environment with responsive design and dynamic UI elements.
 
 ---
 
