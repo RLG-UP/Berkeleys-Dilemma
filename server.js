@@ -18,7 +18,12 @@ const db = process.env.DB;
 
 app.route('/')
     .get((req, res)=>{
-        res.render("index");
+        res.render('index');
+    })
+
+app.route('/environment')
+    .get((req, res)=>{
+        res.render('environment');
     })
 
 
