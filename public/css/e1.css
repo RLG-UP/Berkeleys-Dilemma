@@ -1,5 +1,9 @@
 .envBod{
-  background-color: #393E41 !important;
+  background-color: rgb(57, 62, 65);
+}
+
+#idEnvBod{
+  transition: background-color 0.4s ease;
 }
 
 .photo-1{
