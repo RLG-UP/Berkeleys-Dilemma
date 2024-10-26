@@ -7,15 +7,15 @@ const images = carr;
 
 slider.addEventListener('input', function () {
     const value = this.value; 
-    const R = Math.min(Math.max((57 + value) % 256, 0), 255);
-    const G = Math.min(Math.max((62 + value) % 256, 0), 255);
-    const B = Math.min(Math.max((65 + value) % 256, 0), 255);
+    const R = (57+value)%(256);
+    const G = (62+value)%(62);
+    const B = (65+value)%(18);
     
     console.log(R + " " + G + " " + B); 
     envBack.style.backgroundColor = `rgb(${R}, ${G}, ${B})`;
 
     const index = Math.max(0, Math.floor(this.value / 10)-1);
     console.log(index);
-    carouselImage.src = images[index];
+    carouselImage.src = images[index].src;
     carouselImage.alt = `Foto ${index}`;
 });

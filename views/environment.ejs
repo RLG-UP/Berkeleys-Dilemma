@@ -29,87 +29,28 @@
       <div class="carousel-inner">
         
         <div class="carousel-item active col-12">
-          <img src="<%= carrousel[0] %>" id="carousel-image" class="d-block w-100 h-100" alt="Foto 1">
+          <img src="<%= carrousel[0].src %>" id="carousel-image" class="d-block w-100 h-100" alt="Foto 1">
         </div>
         
 
 
       </div>
-      <!-- Controles del Carousel -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#photoCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#photoCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+      
     </div>
 
     <!-- Thumbnails debajo del carousel -->
-  <div class="thumb-nails col-12 contain-fluid">
-    <!-- Thumbnail 1 -->
-    <div class="row thumb_nl_cnt text-center mt-4">
-      <div class="photo-1 thumb_nl contain-fluid col-lg-3 col-6">
-        <img src="https://via.placeholder.com/400x300?text=Foto+1" class="img-fluid" alt="Thumbnail 1">
-        <div class="overlay-1">My name is Yoshikage Kira. Im 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest.</div>
+    <div class="thumb-nails col-12 contain-fluid">
+      <div class="row thumb_nl_cnt text-center mt-4">
+          <% carrousel.forEach(function(photo, index) { %>
+              <div class="photo-1 thumb_nl contain-fluid col-lg-3 col-6">
+                  <img src="<%= photo.src %>" class="img-fluid" alt="<%= photo.alt %>">
+                  <div class="overlay-1"><%= photo.overlay %></div>
+              </div>
+          <% }); %>
       </div>
-
-      <!-- Thumbnail 2 -->
-  <div class="photo-1 thumb_nl contain-fluid col-lg-3 col-6">
-    <img src="https://via.placeholder.com/400x300?text=Foto+2" class="img-fluid" alt="Thumbnail 2">
-    <div class="overlay-1">My name is Yoshikage Kira. Im 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest.</div>
   </div>
 
-  <!-- Thumbnail 3 -->
-  <div class="photo-1 thumb_nl contain-fluid col-lg-3 col-6">
-    <img src="https://via.placeholder.com/400x300?text=Foto+3" class="img-fluid" alt="Thumbnail 3">
-    <div class="overlay-1">My name is Yoshikage Kira. Im 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest.</div>
-  </div>
-
-  <!-- Thumbnail 4 -->
-  <div class="photo-1 thumb_nl contain-fluid col-lg-3 col-6">
-    <img src="https://via.placeholder.com/400x300?text=Foto+4" class="img-fluid" alt="Thumbnail 4">
-    <div class="overlay-1">My name is Yoshikage Kira. Im 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest.</div>
-  </div>
-
-  <!-- Thumbnail 5 -->
-  <div class="photo-1 thumb_nl contain-fluid col-lg-3 col-6">
-    <img src="https://via.placeholder.com/400x300?text=Foto+5" class="img-fluid" alt="Thumbnail 5">
-    <div class="overlay-1">My name is Yoshikage Kira. Im 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest.</div>
-  </div>
-
-  <!-- Thumbnail 6 -->
-  <div class="photo-1 thumb_nl contain-fluid col-lg-3 col-6">
-    <img src="https://via.placeholder.com/400x300?text=Foto+6" class="img-fluid" alt="Thumbnail 6">
-    <div class="overlay-1">My name is Yoshikage Kira. Im 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest.</div>
-  </div>
-
-  <!-- Thumbnail 7 -->
-  <div class="photo-1 thumb_nl contain-fluid col-lg-3 col-6">
-    <img src="https://via.placeholder.com/400x300?text=Foto+7" class="img-fluid" alt="Thumbnail 7">
-    <div class="overlay-1">My name is Yoshikage Kira. Im 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest.</div>
-  </div>
-
-  <!-- Thumbnail 8 -->
-  <div class="photo-1 thumb_nl contain-fluid col-lg-3 col-6">
-    <img src="https://via.placeholder.com/400x300?text=Foto+8" class="img-fluid" alt="Thumbnail 8">
-    <div class="overlay-1">My name is Yoshikage Kira. Im 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest.</div>
-  </div>
-
-  <!-- Thumbnail 9 -->
-  <div class="photo-1 thumb_nl contain-fluid col-lg-3 col-6">
-    <img src="https://via.placeholder.com/400x300?text=Foto+9" class="img-fluid" alt="Thumbnail 9">
-    <div class="overlay-1">My name is Yoshikage Kira. Im 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest.</div>
-  </div>
-
-  <!-- Thumbnail 10 -->
-  <div class="photo-1 thumb_nl contain-fluid col-lg-3 col-6">
-    <img src="https://via.placeholder.com/400x300?text=Foto+10" class="img-fluid" alt="Thumbnail 10">
-    <div class="overlay-1">My name is Yoshikage Kira. Im 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest.</div>
-  </div>
-</div>
-    </div>
+  
   </div>
 
   <div class="titles">
