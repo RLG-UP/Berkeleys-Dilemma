@@ -16,6 +16,10 @@ const pass = process.env.DB_PASS;
 const db = process.env.DB;
 
 
+const uri = `mongodb+srv://${user}:${pass}@cluster0.m6rt5.mongodb.net/${db}?retryWrites=true&w=majority&appName=Cluster0`;
+
+mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
+
 app.route('/')
     .get((req, res)=>{
         res.render('index');
