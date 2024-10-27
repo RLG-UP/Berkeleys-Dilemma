@@ -7,8 +7,12 @@ require([
     "esri/widgets/Legend",
     "esri/renderers/support/jsonUtils",
     "esri/PopupTemplate",
-    "esri/widgets/Expand"
-  ],(
+    "esri/widgets/Expand",
+    "esri/widgets/BasemapGallery",
+    "esri/widgets/Search",
+    "esri/widgets/Home",
+    "esri/Graphic"
+], (
     esriConfig,
     FeatureLayer,
     Map,
@@ -17,95 +21,99 @@ require([
     Legend,
     rendererUtils,
     popupUtils,
-    Expand
-  )=> {
-
+    Expand,
+    BasemapGallery,
+    Search,
+    Home,
+    Graphic
+) => {
     esriConfig.apiKey = apiKey;
 
     // Create the map layer
     const mapHurricaneLayer = new FeatureLayer({
-      url:
-        "https://sampleserver6.arcgisonline.com/arcgis/rest/services/Hurricanes/MapServer/0",
-      renderer: getMapRenderer(),
-      popupTemplate: getPopupTemplate(),
-      outFields: ["*"],
+        url: "https://sampleserver6.arcgisonline.com/arcgis/rest/services/Hurricanes/MapServer/0",
+        renderer: getMapRenderer(),
+        popupTemplate: getPopupTemplate(),
+        outFields: ["*"],
     });
 
     // Create the scene layer
     const sceneHurricaneLayer = new FeatureLayer({
-      url:
-        "https://sampleserver6.arcgisonline.com/arcgis/rest/services/Hurricanes/MapServer/0",
-      renderer: getSceneRenderer(),
-      popupTemplate: getPopupTemplate(),
-      outFields: ["*"],
+        url: "https://sampleserver6.arcgisonline.com/arcgis/rest/services/Hurricanes/MapServer/0",
+        renderer: getSceneRenderer(),
+        popupTemplate: getPopupTemplate(),
+        outFields: ["*"],
     });
 
     // Add the layers to a map
     const map = new Map({
-      basemap: "arcgis/imagery",
-      layers: [mapHurricaneLayer],
+        basemap: "arcgis/imagery",
+        layers: [mapHurricaneLayer],
     });
 
-    // Add the layers to a map
+    // Add the layers to a scene
     const scene = new Map({
-      basemap: "arcgis/imagery",
-      layers: [sceneHurricaneLayer],
+        basemap: "arcgis/imagery",
+        layers: [sceneHurricaneLayer],
     });
 
     // Button to change the view from 2D to 3D
     const viewControl = document.createElement("div");
-    viewControl.setAttribute(
-      "class",
-      "esri-component esri-widget esri-widget--button esri-interactive view-control"
-    );
+    viewControl.setAttribute("class", "esri-component esri-widget esri-widget--button esri-interactive view-control");
     viewControl.innerHTML = "2D";
 
     viewControl.addEventListener("click", () => {
-      changeView();
+        changeView();
     });
 
-    // Add the map to a new 2d view
+    // Add the map to a new 2D view
     const mapView = new MapView({
-      zoom: 1,
-      center: [-10, 50],
-      map: map,
-      container: null,
-      constraints: {
-        snapToZoom: false
-      }
+        zoom: 1,
+        center: [-10, 50],
+        map: map,
+        container: null,
+        constraints: {
+            snapToZoom: false
+        }
     });
 
     // Initial camera viewpoint
     const camera = {
-      position: {
-        longitude: -60,
-        latitude: 0,
-        z: 8000000  // meters
-      },
-      heading: 358.8,
-      tilt: 17.5,
+        position: {
+            longitude: -60,
+            latitude: 0,
+            z: 8000000 // meters
+        },
+        heading: 358.8,
+        tilt: 17.5,
     };
 
-    // Add the map to a new 3d view
+    // Add the map to a new 3D view
     const sceneView = new SceneView({
-      map: scene,
-      container: "viewDiv",
-      camera: camera,
+        map: scene,
+        container: "viewDiv",
+        camera: camera,
     });
     sceneView.ui.remove(["navigation-toggle", "compass"]);
     sceneView.ui.add(viewControl, "top-left");
 
     // Create the legend
     const legend = new Legend({
-      view: sceneView,
+        view: sceneView,
     });
     const legendExpand = new Expand({
-      sceneView,
-      content:legend,
-      expanded:true
-    })
+        sceneView,
+        content: legend,
+        expanded: true
+    });
 
-    sceneView.ui.add(legendExpand, "top-right");
+    sceneView.ui.add(legendExpand, "top-left");
+
+    // Home Button
+    const homeBtn = new Home({
+        view: sceneView,
+    });
+    sceneView.ui.add(homeBtn, "top-left");
 
     function changeView() {
       // Change to 3D
