@@ -91,7 +91,7 @@ app.route('/environment')
 
 app.route('/account')
     .get((req, res)=>{
-        res.render('account');
+        res.render('map', { apiKey: process.env.MAP_PASS });
     })
 
 
