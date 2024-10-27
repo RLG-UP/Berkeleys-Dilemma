@@ -3,8 +3,11 @@
     <div class="in-div">
         <h2 class="in-title">Berkeley's Dilemma</h2>
         <div class="login-container">
+            <div class="text-center">
             <h3>Log In</h3>
-            <form action="/login" method="POST">
+            <h6 class="log-err-title"><%=dopple ? "That account already exists" : right_log ? null : "Incorrect Username or Password"%></h6>
+        </div>
+            <form action="/" method="POST">
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" class="form-control" id="username" placeholder="Enter your username" required>

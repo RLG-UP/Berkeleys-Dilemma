@@ -38,6 +38,7 @@ const appUser = mongoose.model('appUser', userSchema);
 
 var dopple = false;
 var right_pass = true;
+var right_log = true;
 
 var email = null;
 var name = null;
@@ -76,7 +77,7 @@ async function sendMail(sendEmail){
         });
 
         const mailOptions = {
-            from: EMAIL,
+            from: `Berkeley's Dilemma <${EMAIL}>`,
             to: sendEmail,
             subject: 'Welcome to Berkeleys Dilemma!',
             text: 'Thank you for signing up!',
@@ -103,7 +104,11 @@ userSchema.pre('save', async function(next) {
 
 async function createUser(email, name, username, password) {
     try {
-        const usr = await appUser.findOne({email: email});
+        const usr = await appUser.findOne({
+            $or:[
+            {email: email},
+            {username: username}
+            ]});
         
         if(!usr){
             const user = new User({email, name, username, password});
@@ -125,16 +130,51 @@ async function createUser(email, name, username, password) {
 app.route('/')
     .get((req, res)=>{
         right_pass = true
+        right_log = true;
+
         var params = {
             apiKey: process.env.MAP_PASS ,
+            dopple,
+            right_log,
         };
 
         res.render('account', params);
+    })
+    .post(async (req, res)=>{
+        try {
+            const user = await appUser.findOne({ username });
+            
+            if (!user) {
+                right_log = false;
+            }else{
+                const isMatch = await bcrypt.compare(password, user.password);
+            
+                if (isMatch) {
+                    var sessUser = user;
+                    var params = {
+                        sessUser,
+                    };
+                    res.redirect('/index', params);
+                } else {
+                    right_log = false;
+                }
+            }
+            var params = {
+                apiKey: process.env.MAP_PASS ,
+                dopple,
+                right_log,
+            };
+            res.render('account', params);
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+        }
     });
 
 
 app.route('/signin')
     .get((req, res)=>{
+        dopple = false;
         if(right_pass){
             email = null;
             name = null;
@@ -163,10 +203,13 @@ app.route('/signin')
 
         if(password === conf_password){
             right_pass = true;
-            //createUser(email, name, username, password);
+            dopple = false;
+            createUser(email, name, username, password);
 
             sendMail(email).then(result=>console.log("Email sent", result)).catch(error=>console.error(error.message));
+
             res.redirect('/');
+            
         }else{
             right_pass = false;
             res.redirect('/signin');
@@ -176,7 +219,16 @@ app.route('/signin')
 
 app.route('/index')
     .get((req, res)=>{
-        res.render('index');
+        var sessUser = req.query.sessUser;
+        if(!sessUser){
+            sessUser = null;
+        }
+        var params = {
+            sessUser,
+        };
+
+        console.log(sessUser);
+        res.render('index', params);
     });
 
 app.route('/environment')

@@ -7,7 +7,7 @@
             <div class="offcanvas-header col-11">
                 <div class="offcanvas-Box  call-action-btn rounded-buttons text-lg-end" id="offcanvasWithBackdropLabel">
                     <a href="/" class="btn primary-btn rounded-full mt-3">
-                    <h3>ACCOUNT</h3>
+                    <h3><%=sessUser ? sessUser.username : "Log In" %></h3>
                     </a>
                 </div>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
