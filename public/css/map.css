@@ -17,3 +17,19 @@ html,
   .esri-ui-corner .esri-component.esri-widget--panel {
     width: 200px;
   }
+
+.returnButton{
+    margin-top: 7%;
+    background-color: #e7e5df !important;
+    color: rgb(57, 62, 65);
+    border: none;
+    border-radius: 2px;
+    height: 35px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease-in-out;
+}
+
+.returnButton:hover{
+    scale:1.07;
+    background-color: #fffdf6 !important;
+}

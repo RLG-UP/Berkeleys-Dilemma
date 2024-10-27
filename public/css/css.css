@@ -15,7 +15,7 @@ html, body {
   text-shadow: 0px 1px 15px rgba(0, 0, 0, 0.619); /* Shadow effect */
 }
 .background-image-div {
-  background-image: url("../img/burning_forest2.jpg");
+  background-image: url("https://static.toiimg.com/thumb/msid-111549364,width-1280,height-720,resizemode-4/111549364.jpg");
   background-size: cover; /* Makes the image cover the entire div */
   background-position: center; /* Centers the image */
   background-repeat: no-repeat; /* Ensures the image doesn't repeat */

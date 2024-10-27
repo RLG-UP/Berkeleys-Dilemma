@@ -115,6 +115,17 @@ require([
     });
     sceneView.ui.add(homeBtn, "top-left");
 
+    // Create a custom return button
+    const rtrnBtn = document.createElement("button");
+    rtrnBtn.innerHTML = "Return Home"; // Set the button text
+    rtrnBtn.setAttribute("class", "esri-widget returnButton"); // Apply styles for Esri widget button
+    rtrnBtn.onclick = () => {
+        window.location.href = '/'; // Redirect to the home page
+    };
+
+    // Add the custom button to the scene view UI
+    sceneView.ui.add(rtrnBtn, "top-left");
+
     function changeView() {
       // Change to 3D
       if (mapView.container) {
@@ -125,7 +136,9 @@ require([
         viewControl.innerHTML = "2D";
         legend.view = sceneView;
         sceneView.ui.add(viewControl, "top-left");
-        sceneView.ui.add(legendExpand, "top-right"); // Display the legend
+        sceneView.ui.add(legendExpand, "top-left"); // Display the legend
+        sceneView.ui.add(homeBtn, "top-left");
+        sceneView.ui.add(rtrnBtn, "top-left");
       } else {
         // Change to 2D
         mapView.viewpoint = sceneView.viewpoint.clone(); // Copy the current visible extent
@@ -134,7 +147,9 @@ require([
         viewControl.innerHTML = "3D";
         legend.view = mapView; // Set the active view
         mapView.ui.add(viewControl, "top-left");
-        mapView.ui.add(legendExpand, "top-right"); // Display the legend
+        mapView.ui.add(legendExpand, "top-left"); // Display the legend
+        //mapView.ui.add(homeBtn, "top-left");
+        mapView.ui.add(rtrnBtn, "top-left");
       }
     }
 

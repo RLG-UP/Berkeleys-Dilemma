@@ -22,8 +22,13 @@ mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
 
 app.route('/')
     .get((req, res)=>{
+        res.render('account', { apiKey: process.env.MAP_PASS });
+    });
+
+app.route('/index')
+    .get((req, res)=>{
         res.render('index');
-    })
+    });
 
 app.route('/environment')
     .get((req, res)=>{
@@ -89,10 +94,11 @@ app.route('/environment')
         res.render('environment', params);
     });
 
-app.route('/account')
-    .get((req, res)=>{
-        res.render('map', { apiKey: process.env.MAP_PASS });
-    })
+
+app.route('/map')
+.get((req, res)=>{
+    res.render('map', { apiKey: process.env.MAP_PASS });
+});
 
 
 app.listen(3000, ()=>{

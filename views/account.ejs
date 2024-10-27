@@ -1,30 +1,26 @@
 <%- include("./partials/headerA") -%>
-
-<div class="col-12 d-flex justify-content-center mt-5">
-    <div class="w-50 text-center">
+<div class="back-img">
+    <div class="in-div">
         <h2 class="in-title">Berkeley's Dilemma</h2>
+        <div class="login-container">
+            <h3>Log In</h3>
+            <form>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                </div>
+
+                <button type="submit" class="log-btn col-12">Log In</button>
+
+                <div class="text-center mt-3">
+                    <a href="/index">Continue as Guest</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
-
-
-    <div class="login-container mt-2">
-        <h3 class="text-center">Log In</h3>
-        <form>
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" placeholder="Enter your username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
-            </div>
-
-            <button type="submit" class="log-btn col-12">Log In</button>
-
-            <div class="text-center mt-3">
-                <a href="#">Forgot your password?</a>
-            </div>
-        </form>
-    </div>
-
 <%- include("./partials/footerA") -%>
