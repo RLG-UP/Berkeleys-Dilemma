@@ -4,7 +4,7 @@
         <h2 class="in-title">Berkeley's Dilemma</h2>
         <div class="login-container">
             <h3>Log In</h3>
-            <form>
+            <form action="/login" method="POST">
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" class="form-control" id="username" placeholder="Enter your username" required>
@@ -17,7 +17,7 @@
                 <button type="submit" class="log-btn col-12">Log In</button>
 
                 <div class="text-center mt-3">
-                    <a href="/index">Continue as Guest</a>
+                    <a href="/signin">Sign In</a> or <a href="/index">Continue as Guest</a>
                 </div>
             </form>
         </div>

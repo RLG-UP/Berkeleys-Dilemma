@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/RLG-UP/Berkeleys-Dilemma#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.1",

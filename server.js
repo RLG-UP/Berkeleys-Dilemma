@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+const bcrypt = require('bcrypt');
 const express = require('express');
 const https = require('https');
 const app = express();
@@ -14,16 +15,63 @@ app.set("view engine", "ejs");
 const user = process.env.DB_USER;
 const pass = process.env.DB_PASS;
 const db = process.env.DB;
+const slt = process.env.SALT;
 
 
 const uri = `mongodb+srv://${user}:${pass}@cluster0.m6rt5.mongodb.net/${db}?retryWrites=true&w=majority&appName=Cluster0`;
 
 mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
 
+const userSchema = new mongoose.Schema({
+    email: String,
+    name: String,
+    username: String,
+    password: String
+});
+
+const appUser = mongoose.model('appUser', userSchema);
+var dopple = false;
+
+userSchema.pre('save', async function(next) {
+    if (this.isModified('password')) {
+        const salt = await bcrypt.genSalt(slt); // You can adjust the salt rounds
+        this.password = await bcrypt.hash(this.password, salt);
+    }
+    next();
+});
+
+async function createUser(email, name, username, password) {
+    try {
+        const usr = await appUser.findOne({email: email});
+        
+        if(!usr){
+            const user = new User({email, name, username, password});
+            await user.save();
+            console.log('User created successfully!');
+        }
+        else{
+            dopple = true;
+        }
+
+    } catch (error) {
+        console.log(error);
+    };
+
+    
+};
+
+
 app.route('/')
     .get((req, res)=>{
         res.render('account', { apiKey: process.env.MAP_PASS });
     });
+
+
+app.route('/signin')
+    .get((req, res)=>{
+        res.render('signin');
+    })
+    
 
 app.route('/index')
     .get((req, res)=>{

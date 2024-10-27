@@ -1,0 +1,38 @@
+<%- include("./partials/headerS") -%>
+<div class="back-img">
+    <div class="in-div">
+        <h2 class="in-title">Berkeley's Dilemma</h2>
+        <div class="login-container login-scroll">
+            <h3>Sign In</h3>
+            <form action="/signin" method="POST">
+                <div class="form-group">
+                    <label for="username">E-mail</label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter your e-mail" required>
+                </div>
+                <div class="form-group"> 
+                    <label for="username">Name</label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Confirm Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Confirm your password" required>
+                </div>
+
+                <button type="submit" class="log-btn col-12">Sign In</button>
+
+                <div class="text-center mt-3">
+                    <a href="/">Log In</a> or <a href="/index">Continue as Guest</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include("./partials/footerA") -%>
