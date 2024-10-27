@@ -87,6 +87,11 @@ app.route('/environment')
 
         
         res.render('environment', params);
+    });
+
+app.route('/account')
+    .get((req, res)=>{
+        res.render('account');
     })
 
 

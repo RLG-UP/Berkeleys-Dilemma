@@ -46,6 +46,13 @@ p{
   letter-spacing: 0.03em;
 }
 
+label{
+  font-family: 'Source Sans 3';
+  font-weight: 300;
+  font-size: 1em;
+  letter-spacing: 0.03em;
+}
+
 .fondo{
   background-color: #393E41;
 }
