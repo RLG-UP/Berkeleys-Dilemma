@@ -30,7 +30,16 @@ const userSchema = new mongoose.Schema({
 });
 
 const appUser = mongoose.model('appUser', userSchema);
+
+
 var dopple = false;
+var right_pass = true;
+
+var email = null;
+var name = null;
+var username = null;
+var password = null;
+var conf_password = null;
 
 userSchema.pre('save', async function(next) {
     if (this.isModified('password')) {
@@ -63,14 +72,51 @@ async function createUser(email, name, username, password) {
 
 app.route('/')
     .get((req, res)=>{
-        res.render('account', { apiKey: process.env.MAP_PASS });
+        right_pass = true
+        var params = {
+            apiKey: process.env.MAP_PASS ,
+        };
+
+        res.render('account', params);
     });
 
 
 app.route('/signin')
     .get((req, res)=>{
-        res.render('signin');
+        if(right_pass){
+            email = null;
+            name = null;
+            username = null;
+            password = null;
+            conf_password = null;
+        }
+
+        var params = {
+            right_pass,
+            email,
+            name,
+            username,
+            password,
+            conf_password,
+        };
+
+        res.render('signin', params);
     })
+    .post((req, res)=>{
+        email = req.body.email;
+        name = req.body.name;
+        username = req.body.username;
+        password = req.body.password;
+        conf_password = req.body.conf_password;
+
+        if(password === conf_password){
+            right_pass = true;
+
+        }else{
+            right_pass = false;
+            res.redirect('/signin');
+        };
+    });
     
 
 app.route('/index')
