@@ -29,3 +29,26 @@
 - | **14:31** - Rodrigo Lopez: Merged styling and layout adjustments.
 - | **17:45** - Rodrigo Lopez: Environment display refined with finalized adjustments.
 - | **21:02** - Rodrigo Lopez: Project completed and submitted for the first midterm.
+
+## October 2024
+
+### October 26, 2024
+- | **11:25** - RLG-UP: Introduced new README file and development diary.
+- | **11:26** - RLG-UP: Updated README.
+- | **11:39** - RLG-UP: Tested `.gitignore` functionality.
+- | **11:41** - RLG-UP: Added `.gitignore` file.
+- | **11:54** - RLG-UP: Uploaded initial Express server setup.
+- | **11:56** - RLG-UP: Updated README file.
+- | **12:03** - RLG-UP: Structural updates to EJS.
+- | **12:15** - RLG-UP: Updated Express and EJS functionality.
+- | **13:03** - RLG-UP: Configured MongoDB Atlas for database integration.
+- | **14:03** - RLG-UP: Added functionality and worked on timeline feature.
+- | **16:15** - RLG-UP: Uploaded background with working color-changing effect.
+- | **17:40** - RLG-UP: Uploaded working carousel with timeline.
+- | **17:52** - RLG-UP: Updated EJS formatting for thumbnails.
+- | **18:51** - RLG-UP: Updated login look and feel.
+
+### October 27, 2024
+- | **00:12** - RLG-UP: Uploaded Map component.
+- | **01:58** - RLG-UP: Updated map.
+- | **02:55** - RLG-UP: Finished log in UI and changes to index.
