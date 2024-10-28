@@ -32,8 +32,7 @@ if (isNaN(slt)) {
     process.exit(1);
 }
 
-
-const uri = `mongodb+srv://${user}:${pass}@cluster0.m6rt5.mongodb.net/${db}?retryWrites=true&w=majority&appName=Cluster0`;
+const uri = `mongodb+srv://${user}:${pass}@cluster0.ly2jk.mongodb.net/${db}?retryWrites=true&w=majority&appName=Cluster0`;
 
 mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
 
