@@ -6,6 +6,9 @@
 
  */
 
+ .titles{
+  height: 6em;
+}
 
  h1, h2{
   font-family: 'Bebas Neue';
