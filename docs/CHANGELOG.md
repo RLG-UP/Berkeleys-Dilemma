@@ -5,7 +5,7 @@
 - | **15:53** - Rodrigo Lopez: Initial commit established the foundation of the project.
 - | **16:16** - Rodrigo Lopez: Uploaded changes to FUSION-BRANCH.
 - | **16:21** - Rodrigo Lopez: Merged pull request to integrate contributions from FUSION-BRANCH.
-- | **16:25** - Rodrigo Lopez: Merged with the main branch from https://github.com/RLG-UP/Berkeleys-Dilemma.
+- | **16:25** - Rodrigo Lopez: Merged with the main branch from https://github.com/Rodrigo Lopez/Berkeleys-Dilemma.
 - | **16:48** - Rodrigo Lopez: Restarted from scratch by deleting prior changes.
 - | **16:52** - Rodrigo Lopez: Initial project documents committed.
 - | **18:41** - Rodrigo Lopez: Uploaded initial components for the page.
@@ -32,22 +32,27 @@
 
 ## October 2024
 ### October 26, 2024
-- | **11:25** - RLG-UP: Introduced new README file and development diary.
-- | **11:26** - RLG-UP: Updated README.
-- | **11:39** - RLG-UP: Tested `.gitignore` functionality.
-- | **11:41** - RLG-UP: Added `.gitignore` file.
-- | **11:54** - RLG-UP: Uploaded initial Express server setup.
-- | **11:56** - RLG-UP: Updated README file.
-- | **12:03** - RLG-UP: Structural updates to EJS.
-- | **12:15** - RLG-UP: Updated Express and EJS functionality.
-- | **13:03** - RLG-UP: Configured MongoDB Atlas for database integration.
-- | **14:03** - RLG-UP: Added functionality and worked on timeline feature.
-- | **16:15** - RLG-UP: Uploaded background with working color-changing effect.
-- | **17:40** - RLG-UP: Uploaded working carousel with timeline.
-- | **17:52** - RLG-UP: Updated EJS formatting for thumbnails.
-- | **18:51** - RLG-UP: Updated login look and feel.
+- | **11:25** - Rodrigo Lopez: Introduced new README file and development diary.
+- | **11:26** - Rodrigo Lopez: Updated README.
+- | **11:39** - Rodrigo Lopez: Tested `.gitignore` functionality.
+- | **11:41** - Rodrigo Lopez: Added `.gitignore` file.
+- | **11:54** - Rodrigo Lopez: Uploaded initial Express server setup.
+- | **11:56** - Rodrigo Lopez: Updated README file.
+- | **12:03** - Rodrigo Lopez: Structural updates to EJS.
+- | **12:15** - Rodrigo Lopez: Updated Express and EJS functionality.
+- | **13:03** - Rodrigo Lopez: Configured MongoDB Atlas for database integration.
+- | **14:03** - Rodrigo Lopez: Added functionality and worked on timeline feature.
+- | **16:15** - Rodrigo Lopez: Uploaded background with working color-changing effect.
+- | **17:40** - Rodrigo Lopez: Uploaded working carousel with timeline.
+- | **17:52** - Rodrigo Lopez: Updated EJS formatting for thumbnails.
+- | **18:51** - Rodrigo Lopez: Updated login look and feel.
 
 ### October 27, 2024
-- | **00:12** - RLG-UP: Uploaded Map component.
-- | **01:58** - RLG-UP: Updated map.
-- | **02:55** - RLG-UP: Finished log in UI and changes to index.
+- | **00:12** - Rodrigo Lopez: Uploaded Map component.
+- | **01:58** - Rodrigo Lopez: Updated map.
+- | **02:55** - Rodrigo Lopez: Finished log in UI and changes to index.
+- | **03:04** - Rodrigo Lopez: Updated Development Diaries.
+- | **03:55** - Rodrigo Lopez: Base implementation for sign in using MongoDB and hashing passwords (not completed yet).
+- | **11:19** - Rodrigo Lopez: Updating the sign in screen, now checks for the correct password before saving.
+- | **15:02** - Rodrigo Lopez: Uploaded email sending functionality.
+- | **16:30** - Rodrigo Lopez: Uploaded improved log in design and logic.

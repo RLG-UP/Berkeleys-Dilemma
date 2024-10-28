@@ -19,6 +19,12 @@ h3, h4{
   color: #E7E5DF;
 }
 
+h6{
+  font-family: 'Poppins';
+  font-size: 0.5em;
+  color: #E7E5DF;
+}
+
 .start-btn{
   height: 2.5em;
   width: 9em;

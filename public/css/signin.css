@@ -1,3 +1,8 @@
+.incorrect-pass{
+    color: #FF7F11;
+    font-weight: bold;
+}
+
 .login-scroll {
     max-height: 400px; 
     overflow-y: auto;  

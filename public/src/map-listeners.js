@@ -120,7 +120,7 @@ require([
     rtrnBtn.innerHTML = "Return Home"; // Set the button text
     rtrnBtn.setAttribute("class", "esri-widget returnButton"); // Apply styles for Esri widget button
     rtrnBtn.onclick = () => {
-        window.location.href = '/'; // Redirect to the home page
+        window.location.href = '/index'; // Redirect to the home page
     };
 
     // Add the custom button to the scene view UI

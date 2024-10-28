@@ -29,12 +29,15 @@
   },
   "homepage": "https://github.com/RLG-UP/Berkeleys-Dilemma#readme",
   "dependencies": {
+    "appwrite": "^16.0.2",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
+    "googleapis": "^144.0.0",
     "https": "^1.0.0",
     "mongoose": "^8.7.3",
+    "nodemailer": "^6.9.15",
     "nodemon": "^3.1.7"
   }
 }

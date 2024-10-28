@@ -23,6 +23,9 @@ body {
     top: 15%;
 }
 
+.log-err-title{
+    color:#FF7F11;
+}
 .in-title {
     font-size: 55px;
     text-align: center;
