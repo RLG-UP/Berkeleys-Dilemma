@@ -108,7 +108,7 @@ label{
     font-family: 'Poppins';
     font-size: 1em;
     font-weight: 200;
-    position: fixed;
+    position: absolute;
     left: 1em;
     top: 0.4em; /* Adjust as needed */
     z-index: 1000; /* Ensures the button is above other content */
@@ -116,7 +116,7 @@ label{
   }
   
   .fixed-button {
-    position: fixed;
+    position: absolute;
     top: 0.4em; /* Adjust as needed */
     right: 1em; /* Adjust as needed */
     z-index: 1000; /* Ensures the button is above other content */
