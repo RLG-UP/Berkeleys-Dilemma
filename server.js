@@ -341,6 +341,16 @@ app.route('/map')
     res.render('map', { apiKey: process.env.MAP_PASS });
 });
 
+app.route('/log-out')
+    .get((req, res)=>{
+        req.session.destroy((err) => {
+            if (err) {
+                console.log("!--Impossible to log out: " + err);
+            }
+            res.redirect('/');
+        });
+    })
+
 
 app.listen(3000, ()=>{
     console.log("<|Berkeley listening port 3000|>");

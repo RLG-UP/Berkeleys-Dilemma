@@ -95,6 +95,29 @@ label{
     justify-content: left;
     text-align: left;
   }
+
+  .offcanvas-Box .log-out-btn{
+    font-family: 'Poppins';
+    font-size: 1em;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    text-align: left;
+    color: #ff3d11;
+  }
+
+  .offcanvas-Box .log-out-btn:hover{
+    font-family: 'Poppins';
+    font-size: 1em;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    text-align: left;
+    color: #ffffff;
+    background-color: #ff3d11; /* New color when active */
+    border-color: #ff3d116e; /* Border color when active */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.286);
+  }
   
   .offcanvas-Box a:hover{
     color: #ffffff;
