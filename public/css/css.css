@@ -29,6 +29,11 @@ html, body {
   color: #E7E5DF; 
 }
 
+.start-btn{
+  color: #E7E5DF;
+  border: #E7E5DF solid 1px;
+  border-radius: 10px;
+}
 
 /* ===== Buttons Css ===== */
 
@@ -68,6 +73,16 @@ html, body {
  
 }
 
+.text-card2{
+  background-color: none !important;
+  color: #E7E5DF;
+  border: #E7E5DF solid 1px;
+  border-radius: 10px;
+  margin: 2%;
+  width: 90%;
+  padding: 10px;
+}
+
 .us-text{
   position:relative;
   height:40%;
@@ -97,16 +112,6 @@ html, body {
 
 .vis-mis{
   height:50%;
-}
-
-.text-card2{
-  background-color: #E7E5DF;
-  color: #393E41;
-  border-radius: 10px;
-  margin: 2%;
-  width: 90%;
-  margin-left: 30px;
-  padding: 10px;
 }
 
 
