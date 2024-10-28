@@ -154,6 +154,8 @@ async function createUser(email, name, username, password) {
 
 app.route('/')
     .get((req, res)=>{
+        req.session.sessUser = null;
+
         right_pass = true
         right_log = true;
 
@@ -259,9 +261,7 @@ app.route('/signin')
 app.route('/index')
     .get((req, res)=>{
         const sessUser = req.session.sessUser || null;
-        if(!sessUser){
-            sessUser = null;
-        }
+       
         var params = {
             sessUser,
         };
