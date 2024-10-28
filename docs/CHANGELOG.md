@@ -14,10 +14,10 @@
 
 ## September 2024
 ### September 3, 2024
-- | **14:49** - Pato: Initial updates with “Carita feliz” (a light-hearted addition).
+- | **14:49** - Patricio Alvarez: Initial updates with “Carita feliz” (a light-hearted addition).
 
 ### September 4, 2024
-- | **17:00** - Pato: Updated menu upload and structure.
+- | **17:00** - Patricio Alvarez: Updated menu upload and structure.
 - | **17:05** - Rodrigo Lopez: Environment 1 configuration changes, along with merge.
 - | **17:19** - Rodrigo Lopez: Merged branch updates.
 - | **18:53** - Rodrigo Lopez: Updated images and environment settings.
@@ -56,3 +56,23 @@
 - | **11:19** - Rodrigo Lopez: Updating the sign in screen, now checks for the correct password before saving.
 - | **15:02** - Rodrigo Lopez: Uploaded email sending functionality.
 - | **16:30** - Rodrigo Lopez: Uploaded improved log in design and logic.
+- | **16:32** - Rodrigo Lopez: Update with message send for profile changes.
+- | **16:39** - Rodrigo Lopez: Added Edit User Screen.
+- | **17:30** - Rodrigo Lopez: Uploading log out button.
+- | **17:40** - Rodrigo Lopez: Updated email format.
+- | **18:00** - Rodrigo Lopez: Updating navbar design.
+- | **18:15** - Rodrigo Lopez: More updates to design.
+- | **18:30** - Rodrigo Lopez: Uploading new bios.
+- | **18:45** - Rodrigo Lopez: Improved layout for design.
+- | **19:00** - Rodrigo Lopez: Updated design.
+- | **19:15** - Rodrigo Lopez: Uploading solved guest usage.
+- | **19:30** - Rodrigo Lopez: Uploading correction of errors with user.
+- | **19:45** - Rodrigo Lopez: Updating menu.
+- | **20:00** - Rodrigo Lopez: Merge pull request #9 from Patricio Alvarez: Nav bar, bootstrap and more.
+- | **20:15** - Rodrigo Lopez: Updating log in, now with correct hash comparison.
+- | **20:30** - Rodrigo Lopez: Resolving merge conflicts.
+- | **20:45** - Patricio Alvarez: Better design and bootstrap. Improving the navigation.
+- | **21:00** - Rodrigo Lopez: Improved README.md file.
+- | **21:15** - Rodrigo Lopez: Delete .env.
+- | **21:30** - Rodrigo Lopez: Create base .env in root GitHub.
+- | **21:45** - Rodrigo Lopez: Updated Development Diaries.
