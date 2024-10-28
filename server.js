@@ -17,8 +17,7 @@ const pass = process.env.DB_PASS;
 const db = process.env.DB;
 const slt = process.env.SALT;
 
-
-const uri = `mongodb+srv://${user}:${pass}@cluster0.m6rt5.mongodb.net/${db}?retryWrites=true&w=majority&appName=Cluster0`;
+const uri = `mongodb+srv://${user}:${pass}@cluster0.ly2jk.mongodb.net/${db}?retryWrites=true&w=majority&appName=Cluster0`;
 
 mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
 
