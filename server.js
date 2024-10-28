@@ -9,8 +9,6 @@ const nodemailer = require('nodemailer');
 const {google} = require('googleapis');
 const session = require('express-session');
 
-const sendWelcomeEmail = require('./public/src/emailSend.js');
-
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.static("public"));
@@ -99,6 +97,55 @@ async function sendMail(sendEmail){
     }
 };
 
+
+async function sendEditsMail(sendEmail, user) {
+    try {
+        const accesToken = await oAuth2Client.getAccessToken();
+        const transport = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                type: 'OAuth2',
+                user: EMAIL,
+                clientId: CLIENT_ID,
+                clientSecret: CLIENT_SECRET,
+                refreshToken: REFRESH_TOKEN,
+                accessToken: accesToken,
+            },
+            tls: {
+                rejectUnauthorized: false // Allow self-signed certificates
+            }
+        });
+
+        const mailOptions = {
+            from: `Berkeley's Dilemma <${EMAIL}>`,
+            to: sendEmail,
+            subject: 'Your Information Has Been Updated!',
+            text: 'Your updated information has been saved successfully.',
+            html: `<div style="font-family: Arial, sans-serif; color: #E7E5DF; line-height: 1.6; background-color: #393e41; padding: 20px; text-align: right;">
+                        <h1 style="color: #FF7F11; font-size: 2.5em; margin: 0;">Changes Saved!</h1>
+                        <h3 style="color: #FF7F11;">Your updated information is as follows:</h3>
+                        <p style="font-size: 1.2em; margin: 20px 0;">Thank you for keeping your details up to date. Here’s what you’ve changed:</p>
+                        <ul style="font-size: 1.2em; margin: 20px 0; list-style-type: none; padding: 0;">
+                            <li><strong>Name:</strong> ${user.name}</li>
+                            <li><strong>Email:</strong> ${user.email}</li>
+                            <li><strong>Username:</strong> ${user.username}</li>
+                        </ul>
+                        <p style="font-size: 1.2em; margin: 20px 0;">Feel free to reach out if you have any questions or need further assistance.</p>
+                        <div style="margin: 30px 0; padding: 20px; background-color: #2d3133; border-right: 5px solid #FF7F11;">
+                            <p style="font-style: italic; font-size: 1.3em; color: #E7E5DF;">“The best way to predict the future is to create it.”</p>
+                            <p style="text-align: right; color: #888; font-size: 0.9em; margin: 0;">— Peter Drucker</p>
+                        </div>
+                        <p style="font-size: 1.2em; color: #FF7F11; font-weight: bold;">Thank you for your commitment!</p>
+                        <p style="font-size: 0.9em; color: #888;">We appreciate your proactive approach in making a difference.</p>
+                    </div>`,
+        };
+
+        const result = await transport.sendMail(mailOptions);
+        return result;
+    } catch (error) {
+        return error;
+    }
+};
 //END OF EMAILING FUNCTIONS
 
 
@@ -385,6 +432,14 @@ app.route("/save-profile")
         const user = await appUser.findOne({ username });
         req.session.sessUser = user;
         req.session.userId = user._id;
+        const updatedEmail = req.body.email;
+        const updatedName = req.body.name;
+        const updatedUsername = req.body.username;
+        await sendEditsMail(updatedEmail, {
+            name: updatedName,
+            email: updatedEmail,
+            username: updatedUsername,
+        });
         console.log("------->User ID: " + req.session.userId);
         console.log("-User profile updated");
         
