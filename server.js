@@ -30,7 +30,7 @@ if (isNaN(slt)) {
     process.exit(1);
 }
 
-const uri = `mongodb+srv://${user}:${pass}@cluster0.m6rt5.mongodb.net/${db}?retryWrites=true&w=majority&appName=Cluster0`;
+const uri = `mongodb+srv://${user}:${pass}@cluster0.ly2jk.mongodb.net/${db}?retryWrites=true&w=majority&appName=Cluster0`;
 
 mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
 
@@ -322,54 +322,54 @@ app.route('/environment')
     .get((req, res)=>{
         var carrousel = [
             {
-                src: 'https://via.placeholder.com/400x300?text=Foto+1',
-                alt: 'Thumbnail 1',
-                overlay: 'My name is Yoshikage Kira. I\'m 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest.'
+                src: 'https://hips.hearstapps.com/hmg-prod/images/mata-atlantica-atlantic-forest-in-brazil-royalty-free-image-1668724621.jpg',
+                alt: 'Healthy Amazon',
+                overlay: 'Diverse and balanced ecosystems with rich biodiversity. Sustainable support for indigenous communities and wildlife.'
             },
             {
-                src: 'https://via.placeholder.com/400x300?text=Foto+2',
-                alt: 'Thumbnail 2',
-                overlay: 'My name is Yoshikage Kira. I\'m 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest.'
+                src: 'https://palotoaamazontravel.com/wp-content/uploads/2024/09/amazon-3.webp',
+                alt: 'Thriving Amazon',
+                overlay: 'Preservation of native flora and fauna, with sustainable management practices. Positive interaction between communities and the environment.'
             },
             {
-                src: 'https://via.placeholder.com/400x300?text=Foto+3',
-                alt: 'Thumbnail 3',
-                overlay: 'My name is Yoshikage Kira. I\'m 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest.'
+                src: 'https://u4d2z7k9.rocketcdn.me/wp-content/uploads/2021/11/Untitled-design-88.jpg',
+                alt: 'Threatened Amazon',
+                overlay: 'Increase in deforestation in specific areas.Pressure on natural resources from activities like agriculture and livestock.'
             },
             {
-                src: 'https://via.placeholder.com/400x300?text=Foto+4',
-                alt: 'Thumbnail 4',
-                overlay: 'My name is Yoshikage Kira. I\'m 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest.'
+                src: 'https://scx2.b-cdn.net/gfx/news/2021/a-deforested-area-of-r.jpg',
+                alt: 'Damaged Amazon',
+                overlay: 'Fragmentation of habitats due to road construction and settlements. Loss of native species and alterations in ecosystems.'
             },
             {
-                src: 'https://via.placeholder.com/400x300?text=Foto+5',
-                alt: 'Thumbnail 5',
-                overlay: 'My name is Yoshikage Kira. I\'m 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest.'
+                src: 'https://static.dw.com/image/54488003_605.jpg',
+                alt: 'Severely Damaged Amazon',
+                overlay: 'Increased pollution from pesticides and industrial waste. Displacement of indigenous communities due to resource exploitation.'
             },
             {
-                src: 'https://via.placeholder.com/400x300?text=Foto+6',
-                alt: 'Thumbnail 6',
-                overlay: 'My name is Yoshikage Kira. I\'m 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest.'
+                src: 'https://image.cnbcfm.com/api/v1/image/106975234-1636936362963-gettyimages-1228062683-AFP_1WJ4KX.jpeg?v=1636936106',
+                alt: 'Degraded Amazon',
+                overlay: 'Significant areas of deforested land with eroded soils. Disruption of the water cycle, affecting rivers and local climate.'
             },
             {
-                src: 'https://via.placeholder.com/400x300?text=Foto+7',
-                alt: 'Thumbnail 7',
-                overlay: 'My name is Yoshikage Kira. I\'m 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest.'
+                src: 'https://i.natgeofe.com/n/ab13d39b-7747-4b7e-abd0-362aa4ff6267/283.jpg',
+                alt: 'Critically Damaged Amazon',
+                overlay: 'Significant loss of biodiversity, with many species endangered. Increase in wildfires, both intentional and accidental.'
             },
             {
-                src: 'https://via.placeholder.com/400x300?text=Foto+8',
-                alt: 'Thumbnail 8',
-                overlay: 'My name is Yoshikage Kira. I\'m 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest.'
+                src: 'https://www.butlernature.com/wp-content/uploads/2021/06/GP0STUPV7_AmazonFiresAug20_PressMedia-1200x800.jpeg',
+                alt: 'Devastated Amazon',
+                overlay: 'Collapsed ecosystems with little or no chance of natural recovery. Unregulated urban development affecting the natural environment.'
             },
             {
-                src: 'https://via.placeholder.com/400x300?text=Foto+9',
-                alt: 'Thumbnail 9',
-                overlay: 'My name is Yoshikage Kira. I\'m 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest.'
+                src: 'https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/MMD6AMVZU5TD2EGEBBMHT6Y2LA.JPG',
+                alt: 'Exhausted Amazon',
+                overlay: 'Unfertile soils and loss of nutrients, making regeneration impossible. Contaminated and scarce water resources.'
             },
             {
-                src: 'https://via.placeholder.com/400x300?text=Foto+10',
-                alt: 'Thumbnail 10',
-                overlay: 'My name is Yoshikage Kira. I\'m 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest.'
+                src: 'https://www.greenpeace.org/static/planet4-international-stateless/2022/08/b9d170b7-gp1su5ae_-1024x684.jpg',
+                alt: 'Destroyed Amazon',
+                overlay: 'Total loss of most biodiversity. Irreversibly altered and degraded ecosystems, with massive environmental impact.'
             }
         ];
         
