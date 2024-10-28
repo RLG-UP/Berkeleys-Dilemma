@@ -1,0 +1,79 @@
+<%- include("./partials/headerE") -%>
+
+  <div class="envBod" id="idEnvBod">
+
+    <%- include("./partials/nav") -%>
+
+
+    <div class="titles">
+    </div>
+
+  <div class="container">
+
+    <!-- Carousel -->
+    <div id="photoCarousel" class="container-fluid carousel slide" data-bs-ride="carousel">
+      <div class="top-slide col-8 offset-2">
+
+        <div class="slider-container w-100">
+          <label for="customRange" class="form-label"><h3>Timeline</h3></label>
+          <form action="">
+          <input type="range" class="slide-bar form-range range-slider" min="0" max="100" value="0" id="customRange" name="customRange">
+          </form>
+        </div>
+      </div>
+
+      <div class="carousel-inner">
+        
+        <div class="carousel-item active col-12">
+          <img src="<%= carrousel[0].src %>" id="carousel-image" class="d-block w-100 h-100" alt="Foto 1">
+        </div>
+      </div>
+    </div>
+
+    <!-- Thumbnails debajo del carousel -->
+    <div class="thumb-nails col-12 contain-fluid">
+      <div class="row thumb_nl_cnt text-center mt-4">
+          <% carrousel.forEach(function(photo, index) { %>
+              <div class="photo-1 thumb_nl contain-fluid col-lg-3 col-6">
+                  <img src="<%= photo.src %>" class="img-fluid" alt="<%= photo.alt %>">
+                  <div class="overlay-1"><%= photo.overlay %></div>
+              </div>
+          <% }); %>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="titles">
+            
+  </div>
+
+  <hr/>
+
+  <section class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-12 text-start">
+            <h4>Terms & Conditions</h4>
+            <p>You agree to indemnify, defend, and hold harmless Berkeley's Dilemma, its affiliates, and their respective officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses arising from your use of the Site or violation of these Terms.</p>
+            <p class="mt-5">If you have any questions about these Terms, please contact us at:</p>
+            <address>
+                Berkeley's Dilemma                                      |  
+                <strong><i>221 B - Paradise City</i></strong>           |  
+                berkeleysdilemma@gmail.com                              | 
+              <strong><i>01800-4444-9999</i></strong>
+            </address>
+        </div>
+    </div>
+  </section>
+
+</div>
+
+
+  <%const carr = JSON.stringify(carrousel);%>
+  <script>
+    const carr = <%- carr %>;
+  </script>
+
+
+<%- include("./partials/footerE") -%>
