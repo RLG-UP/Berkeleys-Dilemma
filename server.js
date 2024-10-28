@@ -325,9 +325,10 @@ app.route('/environment')
             }
         ];
         
-
+        const sessUser = req.session.sessUser || null;
         const params = {
             carrousel,
+            sessUser,
         }
 
         
