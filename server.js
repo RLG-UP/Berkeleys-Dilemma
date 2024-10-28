@@ -194,6 +194,7 @@ app.route('/')
     
             if (isMatch) {
                 req.session.sessUser = user;
+                req.session.userId = user._id;
                 return res.redirect('/index');
             } else {
                 right_log = false;
@@ -349,7 +350,51 @@ app.route('/log-out')
             }
             res.redirect('/');
         });
-    })
+    });
+
+app.route('/user')
+    .get((req, res)=>{
+        const sessUser = req.session.sessUser || null;
+       
+        var params = {
+            sessUser,
+        };
+
+        res.render("user", params);
+    });
+
+app.route('/edit-profile')
+    .get((req, res)=>{
+        const sessUser = req.session.sessUser || null;
+       
+        var params = {
+            sessUser,
+        };
+
+        res.render("editUser", params);
+    });
+
+app.route("/save-profile")
+    .post(async (req, res) => {
+        const { name, username, email } = req.body; // Extract data from the request body
+        const userId = req.session.userId; // Assuming you have user ID stored in session
+
+        try {
+        // Update the user details in the database
+        await appUser.findByIdAndUpdate(userId, { name, username, email }, { new: true });
+        const user = await appUser.findOne({ username });
+        req.session.sessUser = user;
+        req.session.userId = user._id;
+        console.log("------->User ID: " + req.session.userId);
+        console.log("-User profile updated");
+        
+        res.redirect("/user"); // Redirect to the profile page after saving
+        } catch (error) {
+        console.error("!--Error updating user profile:", error);
+        res.redirect('/user');
+        }
+    });
+
 
 
 app.listen(3000, ()=>{

@@ -10,9 +10,14 @@
         
         <!-- Título de ACCOUNT alineado a la derecha -->
         <div class="offcanvas-header col-11 justify-content-end">
-            <div class="offcanvas-Box">
-                <a href="/" class="btn primary-btn rounded-full">
+            <div class="offcanvas-Box" style="display:<%= sessUser ? 'inline' : 'none;' %>">
+                <a href="/user" class="btn primary-btn rounded-full">
                     <h3><%=sessUser ? sessUser.username : "Log In" %></h3>
+                </a>
+            </div>
+            <div class="offcanvas-Box" style="display:<%= sessUser ? 'none' : 'inline;' %>">
+                <a href="/" class="btn primary-btn rounded-full">
+                    <h3>Log In</h3>
                 </a>
             </div>
         </div>
