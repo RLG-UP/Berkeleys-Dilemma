@@ -7,6 +7,7 @@ const app = express();
 const mongoose = require('mongoose');
 const nodemailer = require('nodemailer');
 const {google} = require('googleapis');
+const session = require('express-session');
 
 const sendWelcomeEmail = require('./public/src/emailSend.js');
 
@@ -15,11 +16,21 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.static("public"));
 app.engine("ejs", require("ejs").renderFile);
 app.set("view engine", "ejs");
+app.use(session({
+    secret: process.env.DB_PASS, // Replace with a strong secret
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // Set to true if using HTTPS
+}));
 
 const user = process.env.DB_USER;
 const pass = process.env.DB_PASS;
 const db = process.env.DB;
-const slt = process.env.SALT;
+const slt = parseInt(process.env.SALT, 10);
+if (isNaN(slt)) {
+    console.error("SALT must be a number in the .env file");
+    process.exit(1);
+}
 
 
 const uri = `mongodb+srv://${user}:${pass}@cluster0.m6rt5.mongodb.net/${db}?retryWrites=true&w=majority&appName=Cluster0`;
@@ -32,8 +43,6 @@ const userSchema = new mongoose.Schema({
     username: String,
     password: String
 });
-
-const appUser = mongoose.model('appUser', userSchema);
 
 
 var dopple = false;
@@ -94,36 +103,53 @@ async function sendMail(sendEmail){
 //END OF EMAILING FUNCTIONS
 
 
-userSchema.pre('save', async function(next) {
+userSchema.pre('save', async function (next) {
+    console.log("Inside pre-save hook"); // Debugging
+    console.log("Is password modified? ", this.isModified('password')); // Debugging
+
     if (this.isModified('password')) {
-        const salt = await bcrypt.genSalt(slt); // You can adjust the salt rounds
-        this.password = await bcrypt.hash(this.password, salt);
+        try {
+            const salt = await bcrypt.genSalt(slt); // Ensure slt is a valid number
+            this.password = await bcrypt.hash(this.password, salt);
+            console.log("Password hashed:", this.password);
+        } catch (err) {
+            console.error("Error in password hashing", err);
+            return next(err);
+        }
     }
     next();
 });
 
+const appUser = mongoose.model('appUser', userSchema);
+
 async function createUser(email, name, username, password) {
     try {
+        // Reset dopple flag before checking
+        dopple = false;
+
+        // Check for an existing user with the same email or username
         const usr = await appUser.findOne({
-            $or:[
-            {email: email},
-            {username: username}
-            ]});
+            $or: [
+                { email: email },
+                { username: username }
+            ]
+        });
         
-        if(!usr){
-            const user = new User({email, name, username, password});
+        // If no user found, create a new one
+        if (!usr) {
+            const user = new appUser({ email, name, username, password });
             await user.save();
+            console.log(password);
             console.log('User created successfully!');
-        }
-        else{
+        } else {
+            // Set dopple flag to indicate a duplicate user
             dopple = true;
+            console.log("Doppleganger found, no user created");
         }
 
     } catch (error) {
-        console.log(error);
-    };
-
-    
+        console.error("Error creating user:", error);
+    }
 };
 
 
@@ -138,36 +164,50 @@ app.route('/')
             right_log,
         };
 
+        console.log("*$*$*$*$*$ " + dopple);
         res.render('account', params);
     })
     .post(async (req, res)=>{
+        const username = req.body.username;
+        const password = req.body.password;
         try {
             const user = await appUser.findOne({ username });
             
             if (!user) {
+                console.log(username);
                 right_log = false;
-            }else{
-                const isMatch = await bcrypt.compare(password, user.password);
-            
-                if (isMatch) {
-                    var sessUser = user;
-                    var params = {
-                        sessUser,
-                    };
-                    res.redirect('/index', params);
-                } else {
-                    right_log = false;
-                }
+                var params = {
+                    apiKey: process.env.MAP_PASS,
+                    dopple,
+                    right_log,
+                };
+                return res.render('account', params);
             }
-            var params = {
-                apiKey: process.env.MAP_PASS ,
-                dopple,
-                right_log,
-            };
-            res.render('account', params);
+    
+            console.log("Comparing passwords:");
+            console.log("Plain Password: ", password); // The password entered by the user
+            console.log("Hashed Password: ", user.password); // The hashed password from the database
+    
+            const isMatch = await bcrypt.compare(password.trim(), user.password);
+            console.log("Passwords match: ", isMatch); // Log the result of the comparison
+    
+            if (isMatch) {
+                req.session.sessUser = user;
+                return res.redirect('/index');
+            } else {
+                right_log = false;
+                var params = {
+                    apiKey: process.env.MAP_PASS,
+                    dopple,
+                    right_log,
+                };
+                console.log("Incorrect password for user:", username); // Log for debugging
+                return res.render('account', params);
+            }
+            
         } catch (error) {
-            console.error(error);
-            res.status(500).send('Internal Server Error');
+            console.error("Error during login:", error);
+            return res.status(500).send('Internal Server Error');
         }
     });
 
@@ -204,7 +244,7 @@ app.route('/signin')
         if(password === conf_password){
             right_pass = true;
             dopple = false;
-            createUser(email, name, username, password);
+            await createUser(email, name, username, password);
 
             sendMail(email).then(result=>console.log("Email sent", result)).catch(error=>console.error(error.message));
 
@@ -219,7 +259,7 @@ app.route('/signin')
 
 app.route('/index')
     .get((req, res)=>{
-        var sessUser = req.query.sessUser;
+        const sessUser = req.session.sessUser || null;
         if(!sessUser){
             sessUser = null;
         }

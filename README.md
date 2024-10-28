@@ -17,6 +17,7 @@ A project designed and developed by Rodrigo Lopez and David Avalos, with contrib
 - [Technologies](#technologies)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Server-Free Usage](#server-free-usage)
 - [Development Diary](#development-diary)
 - [Contributors](#contributors)
 - [License](#license)
@@ -52,13 +53,17 @@ A project designed and developed by Rodrigo Lopez and David Avalos, with contrib
 1. Clone the repository:
    ```bash
    git clone https://github.com/RLG-UP/Berkeleys-Dilemma.git
-   
+
+---
 
 ## Usage
 
 1. Open `http://localhost:3000` in your browser.
 2. Access different environments through the navigation, sign in with custom forms, and explore UI features.
 3. Use the map interface to visualize location-based environmental data.
+
+## Server-Free Usage
+- Access to the Server-Free runtime of our application at `https://berkeleys-dilemma.onrender.com/` in your browser.
 
 ---
 
