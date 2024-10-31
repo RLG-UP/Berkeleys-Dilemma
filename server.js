@@ -1,39 +1,42 @@
-require('dotenv').config();
+require('dotenv').config(); // Load environment variables from .env file
 
-const bcrypt = require('bcrypt');
-const express = require('express');
-const https = require('https');
-const app = express();
-const mongoose = require('mongoose');
-const nodemailer = require('nodemailer');
-const {google} = require('googleapis');
-const session = require('express-session');
+const bcrypt = require('bcrypt'); // Import bcrypt for password hashing
+const express = require('express'); // Import express to create server
+const https = require('https'); // Import https for secure HTTP requests
+const app = express(); // Initialize express application
+const mongoose = require('mongoose'); // Import mongoose for MongoDB connection
+const nodemailer = require('nodemailer'); // Import nodemailer for email handling
+const { google } = require('googleapis'); // Import google APIs for OAuth2
+const session = require('express-session'); // Import express-session for session management
 
-app.use(express.json());
-app.use(express.urlencoded({extended:true}));
-app.use(express.static("public"));
-app.engine("ejs", require("ejs").renderFile);
-app.set("view engine", "ejs");
-app.use(session({
-    secret: process.env.DB_PASS, // Replace with a strong secret
+// Middleware configurations
+app.use(express.json()); // Parse JSON bodies
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
+app.use(express.static("public")); // Serve static files from "public" folder
+app.engine("ejs", require("ejs").renderFile); // Set EJS as templating engine
+app.set("view engine", "ejs"); // Define view engine
+app.use(session({ // Configure session settings
+    secret: process.env.DB_PASS, // Use DB_PASS as session secret
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false } // Set to true if using HTTPS
+    cookie: { secure: false } // Set secure cookies if using HTTPS
 }));
 
+// MongoDB environment variables
 const user = process.env.DB_USER;
 const pass = process.env.DB_PASS;
 const db = process.env.DB;
-const slt = parseInt(process.env.SALT, 10);
-if (isNaN(slt)) {
+const slt = parseInt(process.env.SALT, 10); // Convert SALT to number for bcrypt
+if (isNaN(slt)) { // Exit if SALT is not a number
     console.error("SALT must be a number in the .env file");
     process.exit(1);
 }
 
+// MongoDB connection URI
 const uri = `mongodb+srv://${user}:${pass}@cluster0.m6rt5.mongodb.net/${db}?retryWrites=true&w=majority&appName=Cluster0`;
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }); // Connect to MongoDB
 
-mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
-
+// Define user schema for MongoDB
 const userSchema = new mongoose.Schema({
     email: String,
     name: String,
@@ -41,47 +44,50 @@ const userSchema = new mongoose.Schema({
     password: String
 });
 
+// State variables
+var dopple = false; // Track duplicate user flag
+var right_pass = true; // Track password correctness flag
+var right_log = true; // Track login correctness flag
 
-var dopple = false;
-var right_pass = true;
-var right_log = true;
-
+// Variables for form inputs
 var email = null;
 var name = null;
 var username = null;
 var password = null;
 var conf_password = null;
 
+// Environment variables for email and OAuth2
 const EMAIL = process.env.EMAIL;
-const CLIENT_ID = process.env.CLIENT_ID; // Your Google Client ID
-const CLIENT_SECRET = process.env.CLIENT_SECRET; // Your Google Client Secret
-const REDIRECT_URI = 'https://developers.google.com/oauthplayground'; // Default redirect URI for testing
-const REFRESH_TOKEN = process.env.REFRESH_TOKEN; // Get this from OAuth2 Playground
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const REDIRECT_URI = 'https://developers.google.com/oauthplayground'; // OAuth2 Playground URI
+const REFRESH_TOKEN = process.env.REFRESH_TOKEN; // OAuth2 refresh token
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; // Ignore TLS errors
 
+// Google OAuth2 client setup
 const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
-oAuth2Client.setCredentials({refresh_token: REFRESH_TOKEN});
+oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN }); // Set refresh token
 
-
-//START OF EMAILING FUNCTIONS
-async function sendMail(sendEmail){
-    try{
-        const accesToken = await oAuth2Client.getAccessToken();
+// Email sending function
+async function sendMail(sendEmail) {
+    try {
+        const accesToken = await oAuth2Client.getAccessToken(); // Obtain access token
         const transport = nodemailer.createTransport({
-            service: 'gmail',
+            service: 'gmail', // Use Gmail service
             auth: {
                 type: 'OAuth2',
                 user: EMAIL,
                 clientId: CLIENT_ID,
                 clientSecret: CLIENT_SECRET,
                 refreshToken: REFRESH_TOKEN,
-                accessToken: accesToken,
+                accessToken: accesToken, // Use access token
             },
             tls: {
                 rejectUnauthorized: false // Allow self-signed certificates
             }
         });
 
+        // Define email options
         const mailOptions = {
             from: `Berkeley's Dilemma <${EMAIL}>`,
             to: sendEmail,
@@ -90,17 +96,17 @@ async function sendMail(sendEmail){
             html: '<div style="font-family: Arial, sans-serif; color: #E7E5DF; line-height: 1.6; background-color: #393e41; padding: 20px; text-align: right;"><h1 style="color: #FF7F11; font-size: 2.5em; margin: 0;">Keep on Killing!</h1><h3 style="color: #FF7F11;">Your hypocrisy is burning the planet down, causing <strong>hurricanes</strong>, <strong>death</strong>, and <strong>extinction</strong>.</h3><p style="font-size: 1.2em; margin: 20px 0;">Feel the satisfaction? Enjoy watching as the world suffocates under the weight of your decisions. Every luxury, every convenience, every act of apathy—is fuel to the fire that’s reducing our world to ash.</p><p style="font-size: 1.2em; margin: 20px 0;">Here are the innocent lives you’re wiping out without a second thought:</p><div><img src="https://i.pinimg.com/originals/e0/ca/a4/e0caa4176077632b0c048b06d4ef163c.gif" alt="Animal suffering" style="width: 180px; margin: 10px;"><img src="https://i.pinimg.com/originals/7d/2f/ae/7d2faebec61ec4d14f7cd623833f35cc.gif" alt="Animal suffering" style="width: 180px; margin: 10px;"><img src="https://64.media.tumblr.com/70cb4804b35cca0d4892c87a5165a607/tumblr_no73imiY6S1qgwf6po4_400.gif" alt="Animal suffering" style="width: 180px; margin: 10px;"><img src="https://media1.giphy.com/media/lnbKvnDO4yYwYzOmru/200w.gif?cid=82a1493b0i4e652llmr3blaqc7p44uf5l3nizroem1n0lr87&ep=v1_gifs_related&rid=200w.gif&ct=g" alt="Animal suffering" style="width: 180px; margin: 10px;"></div><div style="margin: 30px 0; padding: 20px; background-color: #2d3133; border-right: 5px solid #FF7F11;"><p style="font-style: italic; font-size: 1.3em; color: #E7E5DF;">“Many people would kill a man to take the fat from his corpse and use it to grease their boots.”</p><p style="text-align: right; color: #888; font-size: 0.9em; margin: 0;">— Arthur Schopenhauer</p></div><p style="font-size: 1.2em; color: #FF7F11; font-weight: bold;">Wake up before it’s too late.</p><p style="font-size: 0.9em; color: #888;">Your choices are written in blood. Make sure you can live with them.</p></div>',
         };
 
-        const result = await transport.sendMail(mailOptions);
+        const result = await transport.sendMail(mailOptions); // Send email
         return result;
-    }catch(error){
+    } catch (error) {
         return error;
     }
 };
 
-
+// Function to send email for user data edits
 async function sendEditsMail(sendEmail, user) {
     try {
-        const accesToken = await oAuth2Client.getAccessToken();
+        const accesToken = await oAuth2Client.getAccessToken(); // Obtain access token
         const transport = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -112,10 +118,11 @@ async function sendEditsMail(sendEmail, user) {
                 accessToken: accesToken,
             },
             tls: {
-                rejectUnauthorized: false // Allow self-signed certificates
+                rejectUnauthorized: false
             }
         });
 
+        // Define email options for edited information
         const mailOptions = {
             from: `Berkeley's Dilemma <${EMAIL}>`,
             to: sendEmail,
@@ -140,38 +147,35 @@ async function sendEditsMail(sendEmail, user) {
                     </div>`,
         };
 
-        const result = await transport.sendMail(mailOptions);
+
+        const result = await transport.sendMail(mailOptions); // Send email
         return result;
     } catch (error) {
         return error;
     }
 };
-//END OF EMAILING FUNCTIONS
 
-
+// Mongoose pre-save hook to hash passwords
 userSchema.pre('save', async function (next) {
-    console.log("--Inside pre-save hook"); // Debugging
-    console.log("--Is password modified? ", this.isModified('password')); // Debugging
-
-    if (this.isModified('password')) {
+    if (this.isModified('password')) { // Check if password is modified
         try {
-            const salt = await bcrypt.genSalt(slt); // Ensure slt is a valid number
-            this.password = await bcrypt.hash(this.password, salt);
-            console.log("-Password hashed: ", this.password);
+            const salt = await bcrypt.genSalt(slt); // Generate salt with specified rounds
+            this.password = await bcrypt.hash(this.password, salt); // Hash password
         } catch (err) {
-            console.error("!--Error in password hashing", err);
+            console.error("Error in password hashing", err);
             return next(err);
         }
     }
     next();
 });
 
+// Define Mongoose model for users
 const appUser = mongoose.model('appUser', userSchema);
 
+// Function to create a new user in the database
 async function createUser(email, name, username, password) {
     try {
-        // Reset dopple flag before checking
-        dopple = false;
+        dopple = false; // Reset dopple flag before checking
 
         // Check for an existing user with the same email or username
         const usr = await appUser.findOne({
@@ -181,48 +185,39 @@ async function createUser(email, name, username, password) {
             ]
         });
         
-        // If no user found, create a new one
-        if (!usr) {
+        if (!usr) { // Create a new user if none found
             const user = new appUser({ email, name, username, password });
             await user.save();
-            console.log(password);
-            console.log('--User created successfully!');
         } else {
-            // Set dopple flag to indicate a duplicate user
-            dopple = true;
-            console.log("--Doppleganger found, no user created");
+            dopple = true; // Set dopple flag if user exists
         }
-
     } catch (error) {
-        console.error("!--Error creating user:", error);
+        console.error("Error creating user:", error);
     }
 };
 
-
+// Route for home page
 app.route('/')
-    .get((req, res)=>{
+    .get((req, res) => {
         req.session.sessUser = null;
-
-        right_pass = true
+        right_pass = true;
         right_log = true;
 
+        // Parameters for rendering account page
         var params = {
-            apiKey: process.env.MAP_PASS ,
+            apiKey: process.env.MAP_PASS,
             dopple,
             right_log,
         };
-
-        console.log("--->Doppleganger: " + dopple);
         res.render('account', params);
     })
-    .post(async (req, res)=>{
+    .post(async (req, res) => { // Handle login
         const username = req.body.username;
         const password = req.body.password;
         try {
             const user = await appUser.findOne({ username });
             
-            if (!user) {
-                console.log("---->UserName: " + username);
+            if (!user) { // If user not found, set right_log to false
                 right_log = false;
                 var params = {
                     apiKey: process.env.MAP_PASS,
@@ -232,39 +227,33 @@ app.route('/')
                 return res.render('account', params);
             }
     
-            console.log("-Comparing passwords:");
-            console.log("-->Plain Password: ", password); // The password entered by the user
-            console.log("-->Hashed Password: ", user.password); // The hashed password from the database
-    
+            // Compare input password with hashed password
             const isMatch = await bcrypt.compare(password.trim(), user.password);
-            console.log("--->Passwords match: ", isMatch); // Log the result of the comparison
-    
-            if (isMatch) {
+            if (isMatch) { // If passwords match, set session and redirect
                 req.session.sessUser = user;
                 req.session.userId = user._id;
                 return res.redirect('/index');
-            } else {
+            } else { // If passwords don't match, set right_log to false
                 right_log = false;
                 var params = {
                     apiKey: process.env.MAP_PASS,
                     dopple,
                     right_log,
                 };
-                console.log("!--Incorrect password for user: ", username); // Log for debugging
                 return res.render('account', params);
             }
             
         } catch (error) {
-            console.error("!--Error during login:", error);
+            console.error("Error during login:", error);
             return res.status(500).send('Internal Server Error');
         }
     });
 
-
+// Route for sign-in page
 app.route('/signin')
-    .get((req, res)=>{
+    .get((req, res) => {
         dopple = false;
-        if(right_pass){
+        if (right_pass) {
             email = null;
             name = null;
             username = null;
@@ -272,6 +261,7 @@ app.route('/signin')
             conf_password = null;
         }
 
+        // Parameters for rendering signin page
         var params = {
             right_pass,
             email,
@@ -283,43 +273,47 @@ app.route('/signin')
 
         res.render('signin', params);
     })
-    .post(async (req, res)=>{
+    .post(async (req, res) => { // Handle sign-up form submission
         email = req.body.email;
         name = req.body.name;
         username = req.body.username;
         password = req.body.password;
         conf_password = req.body.conf_password;
 
-        if(password === conf_password){
+        if (password === conf_password) { // If passwords match, create user
             right_pass = true;
             dopple = false;
             await createUser(email, name, username, password);
 
-            sendMail(email).then(result=>console.log("Email sent", result)).catch(error=>console.error(error.message));
-
+            sendMail(email).then(result => console.log("Email sent", result)).catch(error => console.error(error.message));
             res.redirect('/');
             
-        }else{
+        } else { // If passwords don't match, set right_pass to false
             right_pass = false;
             res.redirect('/signin');
         };
     });
     
 
+// Route to render the index page
 app.route('/index')
-    .get((req, res)=>{
+    .get((req, res) => {
+        // Retrieve session user information, or set to null if not found
         const sessUser = req.session.sessUser || null;
-       
+
+        // Parameters to pass to the EJS template
         var params = {
-            sessUser,
+            sessUser, // session user data, if available
         };
 
-        console.log("---->User: " + sessUser);
-        res.render('index', params);
+        console.log("---->User: " + sessUser); // Log session user data for debugging
+        res.render('index', params); // Render 'index' template with params
     });
 
+// Route to render the Amazon environment page
 app.route('/environment')
-    .get((req, res)=>{
+    .get((req, res) => {
+        // Define carousel data array, each object represents an image and description
         var carrousel = [
             {
                 src: 'https://hips.hearstapps.com/hmg-prod/images/mata-atlantica-atlantic-forest-in-brazil-royalty-free-image-1668724621.jpg',
@@ -372,20 +366,24 @@ app.route('/environment')
                 overlay: 'Total loss of most biodiversity. Irreversibly altered and degraded ecosystems, with massive environmental impact.'
             }
         ];
-        
+
+        // Retrieve session user information, or set to null if not found
         const sessUser = req.session.sessUser || null;
+
+        // Parameters to pass to the EJS template, including carousel and session user data
         const params = {
             carrousel,
             sessUser,
-        }
+        };
 
-        
+        // Render 'environment' template with params, displaying Amazon ecosystem info
         res.render('environment', params);
     });
 
-
-    app.route('/environment2')
-    .get((req, res)=>{
+// Route to render the Antarctica environment page
+app.route('/environment2')
+    .get((req, res) => {
+        // Define carousel data array for Antarctica, each object represents an image and description
         var carrousel = [
             {
                 src: 'https://www.travelandleisure.com/thmb/qnFoUlxGP3j-1C7uUm04Ut0wqjU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/ice-monolith-antarctica-TRVLTOANT0518-cd3a9ff6d76f4e989d9b896a0bb15089.jpg',
@@ -438,20 +436,24 @@ app.route('/environment')
                 overlay: 'Complete ecosystem collapse with minimal wildlife presence. The region has lost most of its former resilience.'
             }
         ];
-        
-        
+
+        // Retrieve session user information, or set to null if not found
         const sessUser = req.session.sessUser || null;
+
+        // Parameters to pass to the EJS template, including carousel and session user data
         const params = {
             carrousel,
             sessUser,
-        }
+        };
 
-        
+        // Render 'environment2' template with params, displaying Antarctica ecosystem info
         res.render('environment2', params);
     });
 
-    app.route('/environment3')
-    .get((req, res)=>{
+// Route to render the Tasmania environment page
+app.route('/environment3')
+    .get((req, res) => {
+        // Define carousel data array for Tasmania, each object represents an image and description
         var carrousel = [
             {
                 src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTjyZlWwG1Pbsg2Y5Qiek711INFrwa1_wTzQ&s',
@@ -504,89 +506,104 @@ app.route('/environment')
                 overlay: 'Ecosystem collapse in key areas, with irreversible loss of biodiversity and long-term environmental impacts.'
             }
         ];
-        
-        
-        
+
+        // Retrieve session user information, or set to null if not found
         const sessUser = req.session.sessUser || null;
+
+        // Parameters to pass to the EJS template, including carousel and session user data
         const params = {
             carrousel,
             sessUser,
-        }
+        };
 
-        
+        // Render 'environment3' template with params, displaying Tasmania ecosystem info
         res.render('environment3', params);
     });
 
 
+// Route to render the map page
 app.route('/map')
-.get((req, res)=>{
-    res.render('map', { apiKey: process.env.MAP_PASS });
-});
+    .get((req, res) => {
+        // Render the 'map' template and pass the API key from environment variables
+        res.render('map', { apiKey: process.env.MAP_PASS });
+    });
 
+// Route to log the user out and destroy the session
 app.route('/log-out')
-    .get((req, res)=>{
+    .get((req, res) => {
+        // Destroy the current session
         req.session.destroy((err) => {
             if (err) {
-                console.log("!--Impossible to log out: " + err);
+                console.log("!--Impossible to log out: " + err); // Log any errors encountered during logout
             }
-            res.redirect('/');
+            res.redirect('/'); // Redirect to the homepage after logging out
         });
     });
 
+// Route to render the user profile page
 app.route('/user')
-    .get((req, res)=>{
+    .get((req, res) => {
+        // Retrieve session user information, or set to null if not found
         const sessUser = req.session.sessUser || null;
-       
+
+        // Parameters to pass to the EJS template, including session user data
         var params = {
             sessUser,
         };
 
-        res.render("user", params);
+        res.render("user", params); // Render 'user' template with session user data
     });
 
+// Route to render the edit profile page
 app.route('/edit-profile')
-    .get((req, res)=>{
+    .get((req, res) => {
+        // Retrieve session user information, or set to null if not found
         const sessUser = req.session.sessUser || null;
-       
+
+        // Parameters to pass to the EJS template, including session user data
         var params = {
             sessUser,
         };
 
-        res.render("editUser", params);
+        res.render("editUser", params); // Render 'editUser' template with session user data
     });
 
+// Route to save edited profile data
 app.route("/save-profile")
     .post(async (req, res) => {
-        const { name, username, email } = req.body; // Extract data from the request body
-        const userId = req.session.userId; // Assuming you have user ID stored in session
+        // Extract name, username, and email from the request body
+        const { name, username, email } = req.body;
+        const userId = req.session.userId; // Get user ID from session
 
         try {
-        // Update the user details in the database
-        await appUser.findByIdAndUpdate(userId, { name, username, email }, { new: true });
-        const user = await appUser.findOne({ username });
-        req.session.sessUser = user;
-        req.session.userId = user._id;
-        const updatedEmail = req.body.email;
-        const updatedName = req.body.name;
-        const updatedUsername = req.body.username;
-        await sendEditsMail(updatedEmail, {
-            name: updatedName,
-            email: updatedEmail,
-            username: updatedUsername,
-        });
-        console.log("------->User ID: " + req.session.userId);
-        console.log("-User profile updated");
-        
-        res.redirect("/user"); // Redirect to the profile page after saving
+            // Update user details in the database with the new values
+            await appUser.findByIdAndUpdate(userId, { name, username, email }, { new: true });
+            
+            // Retrieve updated user data by username
+            const user = await appUser.findOne({ username });
+            
+            // Update session data with the latest user info
+            req.session.sessUser = user;
+            req.session.userId = user._id;
+            
+            // Send a confirmation email of profile updates
+            await sendEditsMail(req.body.email, {
+                name: req.body.name,
+                email: req.body.email,
+                username: req.body.username,
+            });
+
+            console.log("------->User ID: " + req.session.userId); // Log user ID for debugging
+            console.log("-User profile updated"); // Confirmation log of profile update
+            
+            res.redirect("/user"); // Redirect to the profile page after saving changes
         } catch (error) {
-        console.error("!--Error updating user profile:", error);
-        res.redirect('/user');
+            console.error("!--Error updating user profile:", error); // Log any errors encountered during update
+            res.redirect('/user'); // Redirect to profile page if an error occurs
         }
     });
 
-
-
-app.listen(3000, ()=>{
-    console.log("<|Berkeley listening port 3000|>");
-  });
-  
+// Start the server and listen on port 3000
+app.listen(3000, () => {
+    console.log("<|Berkeley listening port 3000|>"); // Log server start and port information
+});
