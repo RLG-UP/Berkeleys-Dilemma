@@ -71,7 +71,10 @@ oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN }); // Set refresh to
 // Email sending function
 async function sendMail(sendEmail) {
     try {
+        console.log("/Attempting to obtain access token...");
         const accesToken = await oAuth2Client.getAccessToken(); // Obtain access token
+        console.log("//Access token obtained.");
+
         const transport = nodemailer.createTransport({
             service: 'gmail', // Use Gmail service
             auth: {
@@ -87,6 +90,7 @@ async function sendMail(sendEmail) {
             }
         });
 
+        console.log("///Transport created, preparing email options...");
         // Define email options
         const mailOptions = {
             from: `Berkeley's Dilemma <${EMAIL}>`,
@@ -96,9 +100,12 @@ async function sendMail(sendEmail) {
             html: '<div style="font-family: Arial, sans-serif; color: #E7E5DF; line-height: 1.6; background-color: #393e41; padding: 20px; text-align: right;"><h1 style="color: #FF7F11; font-size: 2.5em; margin: 0;">Keep on Killing!</h1><h3 style="color: #FF7F11;">Your hypocrisy is burning the planet down, causing <strong>hurricanes</strong>, <strong>death</strong>, and <strong>extinction</strong>.</h3><p style="font-size: 1.2em; margin: 20px 0;">Feel the satisfaction? Enjoy watching as the world suffocates under the weight of your decisions. Every luxury, every convenience, every act of apathy—is fuel to the fire that’s reducing our world to ash.</p><p style="font-size: 1.2em; margin: 20px 0;">Here are the innocent lives you’re wiping out without a second thought:</p><div><img src="https://i.pinimg.com/originals/e0/ca/a4/e0caa4176077632b0c048b06d4ef163c.gif" alt="Animal suffering" style="width: 180px; margin: 10px;"><img src="https://i.pinimg.com/originals/7d/2f/ae/7d2faebec61ec4d14f7cd623833f35cc.gif" alt="Animal suffering" style="width: 180px; margin: 10px;"><img src="https://64.media.tumblr.com/70cb4804b35cca0d4892c87a5165a607/tumblr_no73imiY6S1qgwf6po4_400.gif" alt="Animal suffering" style="width: 180px; margin: 10px;"><img src="https://media1.giphy.com/media/lnbKvnDO4yYwYzOmru/200w.gif?cid=82a1493b0i4e652llmr3blaqc7p44uf5l3nizroem1n0lr87&ep=v1_gifs_related&rid=200w.gif&ct=g" alt="Animal suffering" style="width: 180px; margin: 10px;"></div><div style="margin: 30px 0; padding: 20px; background-color: #2d3133; border-right: 5px solid #FF7F11;"><p style="font-style: italic; font-size: 1.3em; color: #E7E5DF;">“Many people would kill a man to take the fat from his corpse and use it to grease their boots.”</p><p style="text-align: right; color: #888; font-size: 0.9em; margin: 0;">— Arthur Schopenhauer</p></div><p style="font-size: 1.2em; color: #FF7F11; font-weight: bold;">Wake up before it’s too late.</p><p style="font-size: 0.9em; color: #888;">Your choices are written in blood. Make sure you can live with them.</p></div>',
         };
 
+        console.log("////Sending email...");
         const result = await transport.sendMail(mailOptions); // Send email
+        console.log("/////Email sent successfully!");
         return result;
     } catch (error) {
+        console.error("!--Error sending email:", error);
         return error;
     }
 };
@@ -106,7 +113,11 @@ async function sendMail(sendEmail) {
 // Function to send email for user data edits
 async function sendEditsMail(sendEmail, user) {
     try {
+        console.log("/Attempting to obtain access token...");
+
         const accesToken = await oAuth2Client.getAccessToken(); // Obtain access token
+        console.log("//Access token obtained.");
+
         const transport = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -121,6 +132,8 @@ async function sendEditsMail(sendEmail, user) {
                 rejectUnauthorized: false
             }
         });
+
+        console.log("///Transport created, preparing email options...");
 
         // Define email options for edited information
         const mailOptions = {
@@ -147,10 +160,12 @@ async function sendEditsMail(sendEmail, user) {
                     </div>`,
         };
 
-
+        console.log("////Sending email...");
         const result = await transport.sendMail(mailOptions); // Send email
+        console.log("/////Email sent successfully!");
         return result;
     } catch (error) {
+        console.error("!--Error sending email:", error);
         return error;
     }
 };
