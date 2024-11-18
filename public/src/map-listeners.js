@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 require([
     "esri/config",
     "esri/layers/FeatureLayer",
@@ -27,7 +29,7 @@ require([
     Home,
     Graphic
 ) => {
-    esriConfig.apiKey = apiKey;
+    esriConfig.apiKey = process.env.MAP_PASS;
 
     // Create the map layer
     const mapHurricaneLayer = new FeatureLayer({
