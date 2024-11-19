@@ -1,6 +1,6 @@
 import React from 'react';
-import './signin.css'; // Sign-in specific styles
-import './global.css'; // Global styles
+import '../css/signin.css'; // Sign-in specific styles
+import '../css/global.css'; // Global styles
 import SignInForm from './SignInForm';
 
 function SignIn() {

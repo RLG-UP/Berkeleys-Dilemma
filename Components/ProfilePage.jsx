@@ -1,6 +1,6 @@
 import React from 'react';
-import './user.css'; // Profile page specific styles
-import './global.css'; // Global styles
+import '../css/user.css'; 
+import '../css/global.css'; 
 import ProfileDetails from './ProfileDetails';
 
 function ProfilePage({ user }) {

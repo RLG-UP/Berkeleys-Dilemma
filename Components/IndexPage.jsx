@@ -5,7 +5,8 @@ import Section from './Section';
 import Card from './Card';
 import VisionMission from './VisionMission';
 import Terms from './Terms';
-import './App.css';
+import '../css/css.css';
+import "../css/global.css";
 
 function IndexPage() {
     return (

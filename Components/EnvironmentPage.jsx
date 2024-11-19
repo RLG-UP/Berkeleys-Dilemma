@@ -1,5 +1,6 @@
 import React from "react";
-import "./App.css"; // Include your custom CSS
+import "../css/e1.css"; 
+import "../css/global.css";
 
 const EnvironmentPage = ({ carrousel }) => {
     const CarouselOne = [{

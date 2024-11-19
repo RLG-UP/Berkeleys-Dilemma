@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './App.css'; // Import your custom CSS for styling
+import '../css/account.css'; // Sign-in specific styles
+import '../css/global.css'; // Global styles
 
 function Login() {
     const [errorMessage, setErrorMessage] = useState(null);

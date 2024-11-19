@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './App.css'; // Custom CSS for global and user-specific styles
+import '../css/user.css'; 
+import '../css/global.css'; 
 
 function EditUser({ user }) {
     const [profile, setProfile] = useState({
