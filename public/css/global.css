@@ -11,19 +11,19 @@
 }
 
  h1, h2{
-  font-family: 'Bebas Neue';
+  font-family: var(--font-bebas-neue);
   font-size: 40px;
   color: #E7E5DF;
 }
 
 h3, h4{
-  font-family: 'Poppins';
+  font-family: var(--font-poppins);
   font-size: 2em;
   color: #E7E5DF;
 }
 
 h6{
-  font-family: 'Poppins';
+  font-family: var(--font-poppins);
   font-size: 0.5em;
   color: #E7E5DF;
 }
@@ -48,14 +48,14 @@ h6{
 }
 
 p{
-  font-family: 'Source Sans 3';
+  font-family: var(--font-source-sans-3);
   font-weight: 300;
   font-size: 1em;
   letter-spacing: 0.03em;
 }
 
 label{
-  font-family: 'Source Sans 3';
+  font-family: var(--font-source-sans-3);
   font-weight: 300;
   font-size: 1em;
   letter-spacing: 0.03em;
@@ -88,7 +88,7 @@ label{
 }
 
 .offcanvas-Box a{
-    font-family: 'Poppins';
+  font-family: var(--font-poppins);
     font-size: 1em;
     display: flex;
     align-items: left;
@@ -97,7 +97,7 @@ label{
   }
 
   .offcanvas-Box .log-out-btn{
-    font-family: 'Poppins';
+    font-family: var(--font-poppins);
     font-size: 1em;
     display: flex;
     align-items: left;
@@ -107,7 +107,7 @@ label{
   }
 
   .offcanvas-Box .log-out-btn:hover{
-    font-family: 'Poppins';
+    font-family: var(--font-poppins);
     font-size: 1em;
     display: flex;
     align-items: left;
@@ -131,7 +131,7 @@ label{
     z-index:9999;
   }
   .PageName {
-    font-family: 'Poppins';
+    font-family: var(--font-poppins);
     font-size: 1em;
     font-weight: 200;
     position: absolute;
@@ -150,136 +150,139 @@ label{
 
   .terms-conditions{
     width: 100%;
-    font-family: 'Poppins';
+    font-family: var(--font-poppins);
     font-weight: 500;
     font-size: 1em;
    }
 
   /* CSS FONTS*/
 
-  /*TITLES*/
- .bebas-neue-regular {
-  font-family: "Bebas Neue", sans-serif;
+  /* Define CSS custom properties for font families */
+:root {
+  --font-bebas-neue: "Bebas Neue", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-source-sans-3: "Source Sans 3", sans-serif;
+}
+
+/* TITLES */
+.bebas-neue-regular {
+  font-family: var(--font-bebas-neue);
   font-weight: 400;
   font-style: normal;
 }
 
-/*SUBTITLES*/
+/* SUBTITLES */
 .poppins-thin {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-poppins);
   font-weight: 100;
   font-style: normal;
 }
 
 .poppins-extralight {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-poppins);
   font-weight: 200;
   font-style: normal;
 }
 
 .poppins-light {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-poppins);
   font-weight: 300;
   font-style: normal;
 }
 
 .poppins-regular {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-poppins);
   font-weight: 400;
   font-style: normal;
 }
 
 .poppins-medium {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-poppins);
   font-weight: 500;
   font-style: normal;
 }
 
 .poppins-semibold {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-poppins);
   font-weight: 600;
   font-style: normal;
 }
 
 .poppins-bold {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-poppins);
   font-weight: 700;
   font-style: normal;
 }
 
 .poppins-extrabold {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-poppins);
   font-weight: 800;
   font-style: normal;
 }
 
 .poppins-black {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-poppins);
   font-weight: 900;
   font-style: normal;
 }
 
 .poppins-thin-italic {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-poppins);
   font-weight: 100;
   font-style: italic;
 }
 
 .poppins-extralight-italic {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-poppins);
   font-weight: 200;
   font-style: italic;
 }
 
 .poppins-light-italic {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-poppins);
   font-weight: 300;
   font-style: italic;
 }
 
 .poppins-regular-italic {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-poppins);
   font-weight: 400;
   font-style: italic;
 }
 
 .poppins-medium-italic {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-poppins);
   font-weight: 500;
   font-style: italic;
 }
 
 .poppins-semibold-italic {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-poppins);
   font-weight: 600;
   font-style: italic;
 }
 
 .poppins-bold-italic {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-poppins);
   font-weight: 700;
   font-style: italic;
 }
 
 .poppins-extrabold-italic {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-poppins);
   font-weight: 800;
   font-style: italic;
 }
 
 .poppins-black-italic {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font-poppins);
   font-weight: 900;
   font-style: italic;
 }
 
-/*TEXT*/
-/* <uniquifier>: Use a unique and descriptive class name
-   <weight>: Use a value from 200 to 900
-*/
-
+/* TEXT */
 .source-sans-3-regular {
-  font-family: "Source Sans 3", sans-serif;
+  font-family: var(--font-source-sans-3);
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;

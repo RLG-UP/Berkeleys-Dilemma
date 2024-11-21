@@ -1,7 +1,7 @@
 import React from 'react';
-import '../css/user.css'; 
-import '../css/global.css'; 
-import ProfileDetails from './ProfileDetails';
+import '../public/css/user.css'; 
+import '../public/css/global.css'; 
+import ProfileDetails from './ProfilePageComponents/ProfileDetails';
 
 function ProfilePage({ user }) {
     return (

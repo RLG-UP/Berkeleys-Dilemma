@@ -1,7 +1,7 @@
 import React from 'react';
-import '../css/signin.css'; // Sign-in specific styles
-import '../css/global.css'; // Global styles
-import SignInForm from './SignInForm';
+import '../public/css/signin.css'; // Sign-in specific styles
+import '../public/css/global.css'; // Global styles
+import SignInForm from './SignInComponents/SignInForm';
 
 function SignIn() {
     return (

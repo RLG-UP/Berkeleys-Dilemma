@@ -1,6 +1,6 @@
 import React from 'react';
-import '../src/map-listeners.js';
-import '../css/map.css';
+import '../public/src/map-listeners.js';
+import '../public/css/map.css';
 
 function Map(){
     <div id="viewDiv"></div>

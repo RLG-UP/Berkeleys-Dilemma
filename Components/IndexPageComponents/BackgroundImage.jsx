@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css'; // Adjust path if necessary
 
 function BackgroundImage() {
     return (

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import '../css/user.css'; 
-import '../css/global.css'; 
+import React from 'react';
+import '../public/css/user.css'; 
+import '../public/css/global.css'; 
 
 function EditUser({ user }) {
     const [profile, setProfile] = useState({

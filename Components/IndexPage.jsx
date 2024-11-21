@@ -1,12 +1,12 @@
 import React from 'react';
-import Navbar from './Navbar';
-import BackgroundImage from './BackgroundImage';
-import Section from './Section';
-import Card from './Card';
-import VisionMission from './VisionMission';
+//import Navbar from './Navbar';
+import BackgroundImage from './IndexPageComponents/BackgroundImage';
+import Section from './IndexPageComponents/Section';
+import Card from './IndexPageComponents/Card';
+import VisionMission from './IndexPageComponents/VisionMission';
 import Terms from './Terms';
-import '../css/css.css';
-import "../css/global.css";
+import '../public/css/css.css';
+import "../public/css/global.css";
 
 function IndexPage() {
     return (
