@@ -212,19 +212,20 @@ async function createUser(email, name, username, password) {
 };
 
 // Route for home page
-app.route('/')
+app.route('/login')
     .get((req, res) => {
         req.session.sessUser = null;
         right_pass = true;
         right_log = true;
 
         // Parameters for rendering account page
-        var params = {
+        let params = {
             apiKey: process.env.MAP_PASS,
             dopple,
             right_log,
         };
-        res.render('account', params);
+        //res.render('account', params);
+        res.json(params);
     })
     .post(async (req, res) => { // Handle login
         const username = req.body.username;
@@ -234,12 +235,14 @@ app.route('/')
             
             if (!user) { // If user not found, set right_log to false
                 right_log = false;
-                var params = {
+                let params = {
                     apiKey: process.env.MAP_PASS,
                     dopple,
                     right_log,
                 };
-                return res.render('account', params);
+                //return res.render('account', params);
+
+                return res.json(params);
             }
     
             // Compare input password with hashed password
@@ -250,12 +253,12 @@ app.route('/')
                 return res.redirect('/index');
             } else { // If passwords don't match, set right_log to false
                 right_log = false;
-                var params = {
+                let params = {
                     apiKey: process.env.MAP_PASS,
                     dopple,
                     right_log,
                 };
-                return res.render('account', params);
+                return res.json(params);
             }
             
         } catch (error) {
@@ -277,7 +280,7 @@ app.route('/signin')
         }
 
         // Parameters for rendering signin page
-        var params = {
+        let params = {
             right_pass,
             email,
             name,
@@ -286,7 +289,7 @@ app.route('/signin')
             conf_password,
         };
 
-        res.render('signin', params);
+        res.json(params);
     })
     .post(async (req, res) => { // Handle sign-up form submission
         email = req.body.email;
@@ -300,8 +303,11 @@ app.route('/signin')
             dopple = false;
             await createUser(email, name, username, password);
 
+            if (dopple === false){
             sendMail(email).then(result => console.log("Email sent", result)).catch(error => console.error(error.message));
-            res.redirect('/');
+            }
+
+            res.redirect('/login');
             
         } else { // If passwords don't match, set right_pass to false
             right_pass = false;
@@ -322,7 +328,7 @@ app.route('/index')
         };
 
         console.log("---->User: " + sessUser); // Log session user data for debugging
-        res.render('index', params); // Render 'index' template with params
+        res.json(params); // Render 'index' template with params
     });
 
 // Route to render the Amazon environment page
@@ -540,7 +546,7 @@ app.route('/environment3')
 app.route('/map')
     .get((req, res) => {
         // Render the 'map' template and pass the API key from environment variables
-        res.render('map', { apiKey: process.env.MAP_PASS });
+        res.json({ apiKey: process.env.MAP_PASS });
     });
 
 // Route to log the user out and destroy the session
@@ -566,7 +572,7 @@ app.route('/user')
             sessUser,
         };
 
-        res.render("user", params); // Render 'user' template with session user data
+        res.json(params); // Render 'user' template with session user data
     });
 
 // Route to render the edit profile page

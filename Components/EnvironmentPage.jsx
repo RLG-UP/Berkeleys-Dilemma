@@ -66,7 +66,7 @@ const EnvironmentPage = ({ nCarrousel }) => {
                                     } col-12`}
                                 >
                                     <Image
-                                        src={photo.src} width={10} height={10}
+                                        src={photo.src} width={1920} height={1080}
                                         id="carousel-image"
                                         className="d-block w-100 h-100"
                                         alt={photo.alt}
@@ -85,7 +85,7 @@ const EnvironmentPage = ({ nCarrousel }) => {
                                     className="photo-1 thumb_nl contain-fluid col-lg-3 col-6"
                                 >
                                     <Image
-                                        src={photo.src} width={10} height={10} 
+                                        src={photo.src} width={400} height={400} 
                                         className="img-fluid"
                                         alt={photo.alt}
                                     />

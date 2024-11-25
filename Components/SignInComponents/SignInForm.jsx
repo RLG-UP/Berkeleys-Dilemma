@@ -28,6 +28,7 @@ function SignInForm() {
 
     return (
         <form onSubmit={handleSubmit}>
+        <div className="container-fluid">
             <div className="form-group">
                 <label htmlFor="email">E-mail</label>
                 <input
@@ -110,6 +111,7 @@ function SignInForm() {
             <div className="text-center mt-3">
                 <a href="/">Log In</a> or{' '}
                 <a href="/index">Continue as Guest</a>
+            </div>
             </div>
         </form>
     );

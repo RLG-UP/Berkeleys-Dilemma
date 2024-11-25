@@ -14,7 +14,7 @@ import SignIn from '../Components/SignIn';
 function App(){
     return(
         <>
-            <EnvironmentPage />
+          <SignIn />
         </>
     )
 }

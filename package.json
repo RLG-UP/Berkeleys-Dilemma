@@ -31,6 +31,7 @@
   "homepage": "https://github.com/RLG-UP/Berkeleys-Dilemma#readme",
   "dependencies": {
     "appwrite": "^16.0.2",
+    "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.3",
     "dotenv": "^16.4.5",
@@ -46,5 +47,8 @@
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.5",
     "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
   }
 }

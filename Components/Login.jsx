@@ -45,6 +45,7 @@ function Login() {
                         </h6>
                     </div>
                     <form onSubmit={handleLogin}>
+                        <div className="container-fluid">
                         <div className="form-group">
                             <label htmlFor="username">Username</label>
                             <input
@@ -75,6 +76,7 @@ function Login() {
                         <div className="text-center mt-3">
                             <a href="/signin">Sign In</a> or{' '}
                             <a href="/index">Continue as Guest</a>
+                        </div>
                         </div>
                     </form>
                 </div>
