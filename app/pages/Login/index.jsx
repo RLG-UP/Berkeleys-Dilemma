@@ -1,7 +1,8 @@
 'use client'
 
 import React, {useState} from 'react';
-import styles from '../public/css/account.module.css'; // Sign-in specific styles
+import styles from '../css/account.module.css'; // Sign-in specific styles
+import Link from 'next/link';
 
 function Login() {
     const [errorMessage, setErrorMessage] = useState(null);
@@ -73,8 +74,8 @@ function Login() {
                         </button>
 
                         <div className="text-center mt-3">
-                            <a href="/signin">Sign In</a> or{' '}
-                            <a href="/index">Continue as Guest</a>
+                            <Link href="/Signin">Sign In</Link> or{' '}
+                            <Link href="/IndexPage">Continue as Guest</Link>
                         </div>
                         </div>
                     </form>

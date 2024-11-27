@@ -40,15 +40,15 @@ function HiddenBerkeley() {
             style={{ display: sessUser ? 'inline' : 'none' }}
           >
             <Link href="/user">
-              <h3 className="btn primary-btn rounded-full">{sessUser ? sessUser.username : 'Log In'}</h3>
+              <h2 className="btn primary-btn rounded-full">{sessUser ? sessUser.username : 'Log In'}</h2>
             </Link>
           </div>
           <div
             className="offcanvas-Box"
             style={{ display: sessUser ? 'none' : 'inline' }}
           >
-            <Link href="/">
-              <h3 className="btn primary-btn rounded-full">Log In</h3>
+            <Link href="/Login">
+              <h2 className="btn primary-btn rounded-full">Log In</h2>
             </Link>
           </div>
         </div>
@@ -56,26 +56,26 @@ function HiddenBerkeley() {
         {/* Links inside the offcanvas */}
         <div className="offcanvas-body text-end">
           <div className="offcanvas-Box call-action-btn rounded-buttons">
-            <Link href="/index">
+            <Link href="/Index" className='a'>
               <h3 className="btn primary-btn rounded-full text-end w-100">HOME</h3>
             </Link>
           </div>
 
           <div className="offcanvas-Box call-action-btn rounded-buttons">
-            <Link href="/environment">
-              <h3 className="btn primary-btn rounded-full text-end w-100">1ST ENVIRONMENT</h3>
+            <Link href="/Environment?envId:1">
+              <h3 className="btn primary-btn rounded-full text-end w-100">AMAZON RAINFOREST</h3>
             </Link>
           </div>
 
           <div className="offcanvas-Box call-action-btn rounded-buttons">
-            <Link href="/environment2">
-              <h3 className="btn primary-btn rounded-full text-end w-100">2ND ENVIRONMENT</h3>
+            <Link href="/Environment?envId:2">
+              <h3 className="btn primary-btn rounded-full text-end w-100">ANTARTIC</h3>
             </Link>
           </div>
 
           <div className="offcanvas-Box call-action-btn rounded-buttons">
-            <Link href="/environment3">
-              <h3 className="btn primary-btn rounded-full text-end w-100">3RD ENVIRONMENT</h3>
+            <Link href="/Environment?envId:3">
+              <h3 className="btn primary-btn rounded-full text-end w-100">TAZMANIA</h3>
             </Link>
           </div>
 

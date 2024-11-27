@@ -1,26 +1,42 @@
-import React from "react";
-import "../public/css/e1.css"; 
+import React, {useState, useEffect} from "react";
+import styles from "../css/e1.module.css"; 
 import {CarouselOne, CarouselTwo, CarouselThree} from './EnvironmentPageComponents/CarrouselConst.js';
 import Image from 'next/image';
 
-import Terms from './Terms.jsx';
+import Terms from "../Components/RegularComponents/Terms.jsx";
+import {useRouter} from 'next/router';
+import HiddenBerkeley from "../General_Components/NavBar.jsx";
 
-const EnvironmentPage = ({ nCarrousel }) => {
+const EnvironmentPage = () => {
+    const router = useRouter(); // Initialize useRouter hook
+    const [nCarrousel, setNCarrousel] = useState(3); // Default to CarouselThree
+
+    useEffect(() => {
+        if (router.query.envId) {
+            // Parse envId as integer and set it to nCarrousel
+            setNCarrousel(parseInt(router.query.envId, 10));
+        }
+    }, [router.query.envId]); // This will run every time the query parameter changes
+
+    let carrousel = {};
+
     switch(nCarrousel){
         case 1:
-            var carrousel = CarouselOne;
+            carrousel = CarouselOne;
             break
         case 2:
-            var carrousel = CarouselTwo;
+            carrousel = CarouselTwo;
             break
         default:
-            var carrousel = CarouselThree;
+            carrousel = CarouselThree;
             break
     }
 
     return (
         <div className="fondo text-white">
-            <div className="envBod" id="idEnvBod">
+            <HiddenBerkeley />
+
+            <div className={styles.envBod} id="idEnvBod">
                 {/* Navigation Component */}
                 {/* Replace with your actual navigation component */}
                 <nav>
@@ -37,15 +53,15 @@ const EnvironmentPage = ({ nCarrousel }) => {
                         className="container-fluid carousel slide"
                         data-bs-ride="carousel"
                     >
-                        <div className="top-slide col-8 offset-2">
-                            <div className="slider-container w-100">
-                                <label htmlFor="customRange" className="form-label">
+                        <div className={`${styles.top_slide} col-8 offset-2`}>
+                            <div className={`${styles.slider_container} w-100`}>
+                                <label htmlFor="customRange" className={styles.form_label}>
                                     <h3>Timeline</h3>
                                 </label>
-                                <form action="">
+                                <form action="" className={styles.form}>
                                     <input
                                         type="range"
-                                        className="slide-bar form-range range-slider"
+                                        className={`${styles.slide_bar} form-range ${styles.range_slider}`}
                                         min="0"
                                         max="100"
                                         defaultValue="0"
@@ -60,12 +76,10 @@ const EnvironmentPage = ({ nCarrousel }) => {
                             {carrousel.map((photo, index) => (
                                 <div
                                     key={index}
-                                    className={`carousel-item ${
-                                        index === 0 ? "active" : ""
-                                    } col-12`}
+                                    className={`${styles.carousel_item} ${index === 0 ? styles.active : ''} col-12`}
                                 >
                                     <Image
-                                        src={photo.src} width={1920} height={1080}
+                                        src={photo.src} width={7920} height={4455}
                                         id="carousel-image"
                                         className="d-block w-100 h-100"
                                         alt={photo.alt}
@@ -76,25 +90,25 @@ const EnvironmentPage = ({ nCarrousel }) => {
                     </div>
 
                     {/* Thumbnails Section */}
-                    <div className="thumb-nails col-12 contain-fluid">
+                    <div className="thumb_nails col-12 contain-fluid">
                         <div className="row thumb_nl_cnt text-center mt-4">
                             {carrousel.map((photo, index) => (
                                 <div
                                     key={index}
-                                    className="photo-1 thumb_nl contain-fluid col-lg-3 col-6"
+                                    className={`${styles.photo_1} ${styles.thumb_nl} contain-fluid col-lg-3 col-6`}
                                 >
                                     <Image
-                                        src={photo.src} width={400} height={400} 
-                                        className="img-fluid"
+                                        src={photo.src} width={500} height={500} 
+                                        className="img_fluid w-100 h-100"
                                         alt={photo.alt}
                                     />
-                                    <div className="overlay-1">{photo.overlay}</div>
+                                    <div className={styles.overlay_1}>{photo.overlay}</div>
                                 </div>
                             ))}
                         </div>
                     </div>
                 </div>
-
+                <hr />
                 <Terms />
             </div>
         </div>

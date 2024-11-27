@@ -5,6 +5,17 @@
  #FF7F11
 
  */
+ *,
+ *::before,
+ *::after {
+     box-sizing: border-box;
+ }
+
+ :root {
+  --font-bebas: 'Bebas Neue', sans-serif;
+  --font-poppins: 'Poppins', sans-serif;
+  --font-source-sans: 'Source Sans 3', sans-serif;
+}
 
  .titles{
     height: 6em;
@@ -69,8 +80,47 @@
     background: #393E41;
     margin: 0;
     padding: 0;
-    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
     overflow-x: hidden; /* Esto evita que aparezca el scroll horizontal si algo se sale del ancho */
+    min-height: 100vh;
+  }
+  
+
+  /* Change track color (WebKit browsers: Chrome, Safari, etc.) */
+input[type="range"]::-webkit-slider-runnable-track {
+  background-color: #E7E5DF; /* Track color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  height: 12px;
+  width: 100px;
+  border-radius: 10px;
+  transition: background-color 0.3s, border-color 0.6s;
+}
+
+/* Change thumb color (WebKit browsers) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 90px;
+  height: 20px;
+  background-color: #E7E5DF; /* Thumb color */
+  border: 3px solid #b51e1e10;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
+  transition: background-color 0.1s, border-color 0.2s;
+  cursor: e-resize;
+}
+
+  input[type="range"]::-webkit-slider-thumb:active {
+    height: 21px;
+    background-color: #FF7F11; /* New color when active */
+    border-color: #ff3d116e; /* Border color when active */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.447);
+  }
+  
+  input[type="range"]::-webkit-slider-thumb:hover {
+    height: 21px;
+    border-color: #ff3d11b8; /* Border color when active */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.447);
   }
   
   
@@ -88,17 +138,30 @@
   }
   
   .offcanvas-Box a{
-    font-family: var(--font-poppins);
-      font-size: 1em;
+      font-family: var(--font-poppins);
+      font-size: 1em !important;
       display: flex;
       align-items: left;
       justify-content: left;
       text-align: left;
+      border-radius: 7px;
+      text-decoration: none;
     }
+
+    .offcanvas-Box a h3 {
+      font-family: var(--font-poppins);
+      font-size: 1.1em;
+    }
+
+    .offcanvas-Box a h2{
+      font-family: var(--font-poppins);
+      font-size: 2em;
+    }
+  
   
     .offcanvas-Box .log-out-btn{
       font-family: var(--font-poppins);
-      font-size: 1em;
+      font-size: 1.1em;
       display: flex;
       align-items: left;
       justify-content: left;

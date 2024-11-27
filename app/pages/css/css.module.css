@@ -41,7 +41,15 @@
   .start_btn {
     color: #E7E5DF;
     border: #E7E5DF solid 1px;
-    border-radius: 10px;
+    border-radius: 5px;
+    background-color: transparent;
+    transition: 0.4s;
+  }
+
+  .start_btn:hover {
+    transform: scale(1.05);
+    background-color: #FF7F11; /* New color when active */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.286);
   }
   
   /* ===== Buttons Css ===== */

@@ -10,16 +10,16 @@ import React from 'react';
 //import ProfilePage from './Components/ProfilePage';
 //import EditUser from './EditUser/index';
 //import EnvironmentPage from './Environment/index';
-import IndexPage from './Index/index';
+//import IndexPage from './Index/index';
 //import Map from './Index/index';
 //import ProfilePage from './Profile/index';
 //import SignIn from './Signin/index';
-//import Login from './Login/index';
+import Login from './Login/index';
 
 function App(){
     return(
         <>
-          <IndexPage />
+          <Login />
         </>
     )
 }

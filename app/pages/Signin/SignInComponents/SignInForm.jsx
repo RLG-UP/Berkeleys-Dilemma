@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react';
-
+import styles from '../../css/signin.module.css'; 
+import Link from 'next/link';
 function SignInForm() {
     const [rightPass, setRightPass] = useState(true); // Replace with your validation logic
     const [formData, setFormData] = useState({
@@ -104,13 +105,13 @@ function SignInForm() {
                 />
             </div>
 
-            <button type="submit" className="log-btn col-12">
+            <button type="submit" className={`${styles.log_btn} col-12`}>
                 Sign In
             </button>
 
             <div className="text-center mt-3">
-                <a href="/">Log In</a> or{' '}
-                <a href="/index">Continue as Guest</a>
+                <Link href="/Login">Log In</Link> or{' '}
+                <Link href="/IndexPage">Continue as Guest</Link>
             </div>
             </div>
         </form>
