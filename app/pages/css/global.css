@@ -28,7 +28,7 @@ h6{
   color: #E7E5DF;
 }
 
-.start-btn{
+.start_btn{
   height: 2.5em;
   width: 9em;
   background:#e7e5df00;
@@ -40,7 +40,7 @@ h6{
   transition: 0.3s;
 }
 
-.start-btn:hover{
+.start_btn:hover{
   transition: 0.1s;
   background: #FF7F11;
   color: #ffffff;
@@ -87,7 +87,7 @@ label{
   
 }
 
-.offcanvas-Box a{
+.offcanvas_Box a{
   font-family: var(--font-poppins);
     font-size: 1em;
     display: flex;
@@ -96,7 +96,7 @@ label{
     text-align: left;
   }
 
-  .offcanvas-Box .log-out-btn{
+  .offcanvas_Box .log_out_btn{
     font-family: var(--font-poppins);
     font-size: 1em;
     display: flex;
@@ -106,7 +106,7 @@ label{
     color: #ff3d11;
   }
 
-  .offcanvas-Box .log-out-btn:hover{
+  .offcanvas_Box .log_out_btn:hover{
     font-family: var(--font-poppins);
     font-size: 1em;
     display: flex;
@@ -119,7 +119,7 @@ label{
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.286);
   }
   
-  .offcanvas-Box a:hover{
+  .offcanvas_Box a:hover{
     color: #ffffff;
     background-color: #FF7F11; /* New color when active */
     border-color: #ff3d116e; /* Border color when active */
@@ -141,14 +141,14 @@ label{
     text-shadow: 0 2px 8px rgb(0, 0, 0);
   }
   
-  .fixed-button {
+  .fixed_button {
     position: absolute;
     top: 0.4em; /* Adjust as needed */
     right: 1em; /* Adjust as needed */
     z-index: 1000; /* Ensures the button is above other content */
   }
 
-  .terms-conditions{
+  .terms_conditions{
     width: 100%;
     font-family: var(--font-poppins);
     font-weight: 500;

@@ -8,13 +8,13 @@ import React from 'react';
 //import Login from './Components/Login';
 //import Map from '../Components/Map';
 //import ProfilePage from './Components/ProfilePage';
-import SignIn from './Components/SignIn';
-
+import SignIn from './Signin/index';
+import Login from './Login/index';
 
 function App(){
     return(
         <>
-          <SignIn />
+          <Login />
         </>
     )
 }
