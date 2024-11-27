@@ -1,4 +1,4 @@
-.incorrect_pass{
+.incorrect_pass {
     color: #FF7F11;
     font-weight: bold;
 }
@@ -32,7 +32,7 @@
     padding-top: 20px;
 }
 
-.in_div{
+.in_div {
     position: absolute;
     top: 15%;
 }
@@ -87,4 +87,3 @@
     color: #fffefb;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-

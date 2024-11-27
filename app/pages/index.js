@@ -8,13 +8,18 @@ import React from 'react';
 //import Login from './Components/Login';
 //import Map from '../Components/Map';
 //import ProfilePage from './Components/ProfilePage';
-import SignIn from './Signin/index';
-import Login from './Login/index';
+//import EditUser from './EditUser/index';
+//import EnvironmentPage from './Environment/index';
+import IndexPage from './Index/index';
+//import Map from './Index/index';
+//import ProfilePage from './Profile/index';
+//import SignIn from './Signin/index';
+//import Login from './Login/index';
 
 function App(){
     return(
         <>
-          <Login />
+          <IndexPage />
         </>
     )
 }

@@ -1,6 +1,5 @@
 import React from "react";
-import "../css/e1.css"; 
-import "../css/global.css";
+import "../public/css/e1.css"; 
 import {CarouselOne, CarouselTwo, CarouselThree} from './EnvironmentPageComponents/CarrouselConst.js';
 import Image from 'next/image';
 

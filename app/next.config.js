@@ -3,6 +3,10 @@ const nextConfig = {
     reactStrictMode: true,
     images: {
       domains: [
+        "i.pinimg.com",
+        "www.excelsior.com.mx",
+        "static.toiimg.com",
+        "images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com",
         "hips.hearstapps.com",
         "palotoaamazontravel.com",
         "u4d2z7k9.rocketcdn.me",

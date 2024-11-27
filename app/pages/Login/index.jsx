@@ -1,7 +1,7 @@
 'use client'
 
 import React, {useState} from 'react';
-import styles from '../css/account.module.css'; // Sign-in specific styles
+import styles from '../public/css/account.module.css'; // Sign-in specific styles
 
 function Login() {
     const [errorMessage, setErrorMessage] = useState(null);
@@ -29,8 +29,8 @@ function Login() {
         <div className={styles.back_img}>
             <div className={styles.in_div}>
                 <h2 className={styles.in_title}>Berkeley's Dilemma</h2>
-                <div className={styles.login_container}>
-                    <div className={styles.text_center}>
+                <div className={`${styles.login_container} `}>
+                    <div className="text-center">
                         <h3>Log In</h3>
                         <p>
                             Make an account with a real email and remember your user and password (we encrypt it).
@@ -49,7 +49,7 @@ function Login() {
                             <label htmlFor="username">Username</label>
                             <input
                                 type="text"
-                                className={styles.form_control}
+                                className="form-control"
                                 id="username"
                                 placeholder="Enter your username"
                                 name="username"
@@ -60,7 +60,7 @@ function Login() {
                             <label htmlFor="password">Password</label>
                             <input
                                 type="password"
-                                className={styles.form_control}
+                                className="form-control"
                                 id="password"
                                 placeholder="Enter your password"
                                 name="password"
@@ -68,11 +68,11 @@ function Login() {
                             />
                         </div>
 
-                        <button type="submit" className={`${styles.log_btn} col-12}`}>
+                        <button type="submit" className={`${styles.log_btn} col-12`}>
                             Log In
                         </button>
 
-                        <div className={`${styles.text_center} mt-3`}>
+                        <div className="text-center mt-3">
                             <a href="/signin">Sign In</a> or{' '}
                             <a href="/index">Continue as Guest</a>
                         </div>

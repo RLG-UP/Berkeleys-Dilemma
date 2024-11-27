@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../css/signin.module.css'; // Sign-in specific styles
+import styles from '../public/css/signin.module.css'; // Sign-in specific styles
 //import stylesG from '../css/global.module.css'; // Global styles
 import SignInForm from './SignInComponents/SignInForm';
 

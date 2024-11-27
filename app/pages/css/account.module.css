@@ -18,14 +18,15 @@
     padding-top: 20px;
 }
 
-.in_div{
+.in_div {
     position: absolute;
     top: 15%;
 }
 
-.log_err_title{
-    color:#FF7F11;
+.log_err_title {
+    color: #FF7F11;
 }
+
 .in_title {
     font-size: 55px;
     text-align: center;

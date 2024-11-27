@@ -4,15 +4,16 @@ import BackgroundImage from './IndexPageComponents/BackgroundImage';
 import Section from './IndexPageComponents/Section';
 import Card from './IndexPageComponents/Card';
 import VisionMission from './IndexPageComponents/VisionMission';
-import Terms from './Terms';
-import '../css/css.css';
-import "../css/global.css";
-
+import Terms from '../Components/RegularComponents/Terms';
+import styles from '../css/css.module.css';
+import HiddenBerkeley
+ from '../General_Components/NavBar';
 function IndexPage() {
     return (
-        <div className="fondo text-white">
+        <div className="fondo text-white body">
             
             <BackgroundImage />
+            <HiddenBerkeley />
             <div className="container my-5 d-flex justify-content-center">
                 <div className="row justify-content-center">
                     <Section
@@ -32,18 +33,18 @@ function IndexPage() {
                 <div className="row align-items-center mb-4 mt-5">
                     <Card
                         name="Pato"
-                        image="./img/Yo.jpg"
-                        description="A formidable young man with a heart as strong as his physique..."
+                        image="https://www.excelsior.com.mx/media/pictures/2024/11/21/3216015.jpg"
+                        description="A formidable young man with a heart as strong as his physique. With a passion for adventure fueled by the spirit of One Piece, he embodies the thrill of chasing dreams. When he’s not conquering the weights at the gym, you can find him vibing to the sounds of Travis Scott, Kendrick Lamar, and Don Toliver, their beats echoing his relentless drive."
                     />
                     <Card
                         name="Rodrigo"
-                        image="./img/Rodrigo.jpg"
-                        description="With a soul that craves the rhythm of music and the whispers of philosophy..."
+                        image="https://i.pinimg.com/originals/31/6f/a6/316fa60c17c9bd0a2b22f3daf3087931.gif"
+                        description="Pure Success"
                     />
                     <Card
                         name="Erasmo"
-                        image="./img/Erasmo.jpg"
-                        description="Shrouded in mystery, yet radiating warmth and kindness..."
+                        image="https://i.pinimg.com/originals/3c/a9/b7/3ca9b7055e3e645a6e1221e5c360474e.gif"
+                        description="Shrouded in mystery, yet radiating warmth and kindness. He walks the fine line between shadow and light, drawing people in with an enigmatic charm.  Whether he’s lost in a book, exploring the outdoors, or engaging in thoughtful conversations, there’s always a sense that there’s more beneath the surface."
                     />
                 </div>
             </section>
@@ -52,11 +53,11 @@ function IndexPage() {
                 <div className="row justify-content-center">
                     <VisionMission
                         type="Vision"
-                        text="To cultivate a world where individuals and communities are empowered..."
+                        text="To cultivate a world where individuals and communities are empowered to confront pressing environmental challenges, fostering a sustainable relationship with nature that supports both ecosystems and human well-being. We envision a future where every person acknowledges their role in protecting the planet, actively engages in restoration efforts, and promotes solutions that ensure ecological balance."
                     />
                     <VisionMission
                         type="Mission"
-                        text="Berkeley's Dilemma is dedicated to raising awareness..."
+                        text="Berkeley's Dilemma is dedicated to raising awareness and inspiring action towards the 15th UN Sustainable Development Goal: “Life on Land.” We strive to educate individuals about the importance of protecting terrestrial ecosystems and the biodiversity within them by showing the world how hypocrite and stupid their decisions are by utilizing the satire and irony. Our mission is to bridge the gap between knowledge and action, empowering everyone to be a steward of the earth."
                     />
                 </div>
             </div>
