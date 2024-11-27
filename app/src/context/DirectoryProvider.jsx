@@ -2,7 +2,7 @@ import React, {createContext, useContext, useReducer} from "react";
 import DirectoryReducer
  from "./DirectoryReducer";
 import {SIGNIN, LOGIN, LOGOUT, EDIT_INFO} from "./actions";
-import api from '.../utils/api';
+import api from "../../api/api";
 
 const DirectoryContext = createContext();
 

@@ -1,0 +1,289 @@
+/*
+ #393E41
+ #E7E5DF
+ #BD1E1E
+ #FF7F11
+
+ */
+
+ .titles{
+  height: 6em;
+}
+
+ h1, h2{
+  font-family: var(--font-bebas-neue);
+  font-size: 40px;
+  color: #E7E5DF;
+}
+
+h3, h4{
+  font-family: var(--font-poppins);
+  font-size: 2em;
+  color: #E7E5DF;
+}
+
+h6{
+  font-family: var(--font-poppins);
+  font-size: 0.5em;
+  color: #E7E5DF;
+}
+
+.start-btn{
+  height: 2.5em;
+  width: 9em;
+  background:#e7e5df00;
+  border: 1px;
+  border-radius: 7px;
+  border-style: solid;
+  border-color: #E7E5DF;
+  color: #E7E5DF;
+  transition: 0.3s;
+}
+
+.start-btn:hover{
+  transition: 0.1s;
+  background: #FF7F11;
+  color: #ffffff;
+  text-shadow: 0 2px 8px #ff3d1174;
+}
+
+p{
+  font-family: var(--font-source-sans-3);
+  font-weight: 300;
+  font-size: 1em;
+  letter-spacing: 0.03em;
+}
+
+label{
+  font-family: var(--font-source-sans-3);
+  font-weight: 300;
+  font-size: 1em;
+  letter-spacing: 0.03em;
+}
+
+.fondo{
+  background-color: #393E41;
+}
+
+ html, body {
+  background: #393E41;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* Esto evita que aparezca el scroll horizontal si algo se sale del ancho */
+}
+
+
+.tt button{
+    color: white;
+}
+
+
+
+.tt button:hover{
+    background: #FF7F11;
+    color: #ffffff;
+    text-shadow: 0 2px 8px #ff3d1174;
+  
+}
+
+.offcanvas-Box a{
+  font-family: var(--font-poppins);
+    font-size: 1em;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    text-align: left;
+  }
+
+  .offcanvas-Box .log-out-btn{
+    font-family: var(--font-poppins);
+    font-size: 1em;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    text-align: left;
+    color: #ff3d11;
+  }
+
+  .offcanvas-Box .log-out-btn:hover{
+    font-family: var(--font-poppins);
+    font-size: 1em;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    text-align: left;
+    color: #ffffff;
+    background-color: #ff3d11; /* New color when active */
+    border-color: #ff3d116e; /* Border color when active */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.286);
+  }
+  
+  .offcanvas-Box a:hover{
+    color: #ffffff;
+    background-color: #FF7F11; /* New color when active */
+    border-color: #ff3d116e; /* Border color when active */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.286);
+  }
+
+  .tt{
+    overflow: visible;
+    z-index:9999;
+  }
+  .PageName {
+    font-family: var(--font-poppins);
+    font-size: 1em;
+    font-weight: 200;
+    position: absolute;
+    left: 1em;
+    top: 0.4em; /* Adjust as needed */
+    z-index: 1000; /* Ensures the button is above other content */
+    text-shadow: 0 2px 8px rgb(0, 0, 0);
+  }
+  
+  .fixed-button {
+    position: absolute;
+    top: 0.4em; /* Adjust as needed */
+    right: 1em; /* Adjust as needed */
+    z-index: 1000; /* Ensures the button is above other content */
+  }
+
+  .terms-conditions{
+    width: 100%;
+    font-family: var(--font-poppins);
+    font-weight: 500;
+    font-size: 1em;
+   }
+
+  /* CSS FONTS*/
+
+  /* Define CSS custom properties for font families */
+:root {
+  --font-bebas-neue: "Bebas Neue", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-source-sans-3: "Source Sans 3", sans-serif;
+}
+
+/* TITLES */
+.bebas-neue-regular {
+  font-family: var(--font-bebas-neue);
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* SUBTITLES */
+.poppins-thin {
+  font-family: var(--font-poppins);
+  font-weight: 100;
+  font-style: normal;
+}
+
+.poppins-extralight {
+  font-family: var(--font-poppins);
+  font-weight: 200;
+  font-style: normal;
+}
+
+.poppins-light {
+  font-family: var(--font-poppins);
+  font-weight: 300;
+  font-style: normal;
+}
+
+.poppins-regular {
+  font-family: var(--font-poppins);
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-medium {
+  font-family: var(--font-poppins);
+  font-weight: 500;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: var(--font-poppins);
+  font-weight: 600;
+  font-style: normal;
+}
+
+.poppins-bold {
+  font-family: var(--font-poppins);
+  font-weight: 700;
+  font-style: normal;
+}
+
+.poppins-extrabold {
+  font-family: var(--font-poppins);
+  font-weight: 800;
+  font-style: normal;
+}
+
+.poppins-black {
+  font-family: var(--font-poppins);
+  font-weight: 900;
+  font-style: normal;
+}
+
+.poppins-thin-italic {
+  font-family: var(--font-poppins);
+  font-weight: 100;
+  font-style: italic;
+}
+
+.poppins-extralight-italic {
+  font-family: var(--font-poppins);
+  font-weight: 200;
+  font-style: italic;
+}
+
+.poppins-light-italic {
+  font-family: var(--font-poppins);
+  font-weight: 300;
+  font-style: italic;
+}
+
+.poppins-regular-italic {
+  font-family: var(--font-poppins);
+  font-weight: 400;
+  font-style: italic;
+}
+
+.poppins-medium-italic {
+  font-family: var(--font-poppins);
+  font-weight: 500;
+  font-style: italic;
+}
+
+.poppins-semibold-italic {
+  font-family: var(--font-poppins);
+  font-weight: 600;
+  font-style: italic;
+}
+
+.poppins-bold-italic {
+  font-family: var(--font-poppins);
+  font-weight: 700;
+  font-style: italic;
+}
+
+.poppins-extrabold-italic {
+  font-family: var(--font-poppins);
+  font-weight: 800;
+  font-style: italic;
+}
+
+.poppins-black-italic {
+  font-family: var(--font-poppins);
+  font-weight: 900;
+  font-style: italic;
+}
+
+/* TEXT */
+.source-sans-3-regular {
+  font-family: var(--font-source-sans-3);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}

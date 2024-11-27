@@ -1,0 +1,78 @@
+body {
+    background-color: #393e41 !important;
+    margin: 0;
+    padding: 0;
+}
+
+.back-img {
+    background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/4072ae94-d084-4a20-aee1-52f427810821/d288c4m-1bf45478-58bc-4790-a96c-be768a2a6433.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzQwNzJhZTk0LWQwODQtNGEyMC1hZWUxLTUyZjQyNzgxMDgyMVwvZDI4OGM0bS0xYmY0NTQ3OC01OGJjLTQ3OTAtYTk2Yy1iZTc2OGEyYTY0MzMuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.IU63ywhkB11qZ2-ALpuCjuUNIMEgoAvCjNRsGIFi-68');
+    background-size: auto;
+    background-position: center;
+    background-repeat: repeat;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Aligns items to the top of the viewport */
+    padding-top: 20px;
+}
+
+.in-div{
+    position: absolute;
+    top: 15%;
+}
+
+.log-err-title{
+    color:#FF7F11;
+}
+.in-title {
+    font-size: 55px;
+    text-align: center;
+    margin: 0;
+    color: #fffefb; /* Make sure the title is visible */
+}
+
+.login-container {
+    max-width: 400px;
+    width: 100%;
+    padding: 2rem;
+    background-color: #E7E5DF !important;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.login-container h3 {
+    color: #393e41; /* Set color for the 'Log In' text */
+    text-align: center; /* Center the text */
+}
+
+.form-group input {
+    background-color: #fffefb;
+    color: rgb(57, 62, 65);
+    transition: 0.1s ease-in-out;
+}
+
+.form-group input[type=text]:focus,
+.form-group input[type=password]:focus {
+    border: 3px solid #FF7F11;
+}
+
+.log-btn {
+    margin-top: 12%;
+    background-color: #265a40 !important;
+    color: #E7E5DF;
+    border: none;
+    border-radius: 8px;
+    height: 35px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease-in-out;
+}
+
+.log-btn:hover {
+    transform: scale(1.03);
+    background-color: #FF7F11 !important;
+    color: #fffefb;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

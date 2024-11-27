@@ -1,0 +1,129 @@
+.envBod{
+  background-color: rgb(57, 62, 65);
+}
+
+#idEnvBod{
+  transition: background-color 0.4s ease;
+}
+
+.photo-1{
+  position:relative;
+ }
+ 
+ /* The text overlay */
+ .overlay-1{
+  position: absolute;
+  top: 100%; /* Position in the middle */
+  left: 50%; /* Position in the middle */
+  transform: translate(-50%, -50%); /* Center the text */
+  width:100%;
+  color: white;
+  font-family: 'Source Sans 3';
+  font-weight: 400;
+  font-size: 0.8em;
+  text-align: center;
+  opacity: 0;
+  z-index: 2000; /* Ensure the text appears in front */
+  background-color: #FF7F11; 
+  border-color: #ff3d116e; /* Border color when active */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.447);
+  border-radius: 10px;
+  padding: 10px; /* Optional: add some padding */
+  transition: top 1s ease, opacity 0.2s ease;
+}
+
+
+/* Hover effect to display the text */
+.photo-1:hover .overlay-1 {
+  transition: top 2s ease, opacity 0.5s ease;
+  visibility: visible;
+  top: 10px;
+  color:#E7E5DF;
+  opacity: 100;
+}
+
+.slide-bar{
+  display: flex;
+  width:100%;
+}
+
+form{
+  display: flex;
+  width:100%;
+}
+
+.top-slide{
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: sticky;
+  top: 7%;
+  z-index: 500; /* Ensures the button is above other content */
+}
+
+.top-slide label{
+  margin-bottom:13%;
+}
+
+ .carousel-size{
+  min-height: 1000px;
+ }
+ 
+ /* Change track color (WebKit browsers: Chrome, Safari, etc.) */
+ input[type="range"]::-webkit-slider-runnable-track {
+  background-color: #E7E5DF; /* Track color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  height: 12px;
+  width: 100px;
+  border-radius: 10px;
+  transition: background-color 0.3s, border-color 0.6s;
+}
+
+
+/* Change thumb color (WebKit browsers) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 90px;
+  height: 20px;
+  background-color: #E7E5DF; /* Thumb color */
+  border: 3px solid #b51e1e10;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
+  transition: background-color 0.1s, border-color 0.2s;
+  cursor:e-resize;
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+  height: 21px;
+  background-color: #FF7F11; /* New color when active */
+  border-color: #ff3d116e; /* Border color when active */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.447);
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  height: 21px;
+  border-color: #ff3d11b8; /* Border color when active */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.447);
+}
+
+
+.range-slider {
+  width: 100%;
+}
+
+.thumb_nl_cnt{
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+}
+
+.thumb_nl{
+    margin-bottom: 1em;
+}
+
+
+
+
