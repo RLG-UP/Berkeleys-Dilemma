@@ -1,20 +1,39 @@
-import {SIGNIN, LOGIN, LOGOUT, EDIT_INFO} from "./actions";
+import { SIGNIN, LOGIN, LOGOUT, EDIT_INFO, SEND_EMAIL } from './actions';
 
-function DirectoryReducer(state, action){
-    switch(action.type){
-        case SIGNIN: return{
-            ...state,
-        }
-        case LOGIN: return{
-            ...state,
-        }
-        case LOGOUT: return{
-            ...state,
-        }
-        case EDIT_INFO: return{
-            ...state,
-        }
-        default: throw new Error(`Unsupported action ${action.type}`);
+function DirectoryReducer(state, action) {
+    switch (action.type) {
+        case SIGNIN:
+            return {
+                ...state,
+                user: action.payload,  // Update user state after sign-in
+            };
+        case LOGIN:
+            return {
+                ...state,
+                user: action.payload,  // Update user state after login
+            };
+        case LOGOUT:
+            return {
+                ...state,
+                user: {},  // Clear user data on logout
+            };
+        case EDIT_INFO:
+            return {
+                ...state,
+                user: { ...state.user, ...action.payload },  // Update user data after edit
+            };
+        case SEND_EMAIL:
+            return {
+                ...state,
+                emailStatus: action.payload,  // Store email sending status
+            };
+        case UPDATE_SCORE:
+            return {
+                ...state,
+                bestScore: action.payload,  // Update the bestScore
+            };
+        default:
+            throw new Error(`Unsupported action ${action.type}`);
     }
 }
 
