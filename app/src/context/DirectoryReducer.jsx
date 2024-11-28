@@ -1,4 +1,4 @@
-import { SIGNIN, LOGIN, LOGOUT, EDIT_INFO, SEND_EMAIL } from './actions';
+import { SIGNIN, LOGIN, LOGOUT, EDIT_INFO, UPDATE_SCORE } from './actions';
 
 function DirectoryReducer(state, action) {
     switch (action.type) {

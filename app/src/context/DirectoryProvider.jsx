@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import DirectoryReducer from './DirectoryReducer';
-import { SIGNIN, LOGIN, LOGOUT, EDIT_INFO, SEND_EMAIL } from './actions';
+import { SIGNIN, LOGIN, LOGOUT, EDIT_INFO, UPDATE_SCORE } from './actions';
 import api from '../../api/api';
 
 const DirectoryContext = createContext();
@@ -9,6 +9,7 @@ function DirectoryProvider({ children }) {
     const initialState = {
         user: {bestScore:0},
         loggedState: false,
+        apiKey: process.env.MAP_PASS,
 
     };
     
@@ -77,8 +78,9 @@ async function editUser(name, username, email, dispatch) {
 }
 
 async function updateScore(dispatch, userId, score) {
+    console.log("---->CLIENT USER ID: ", userId);
     try {
-        const res = await api.put('/update-score', { userId, score });
+        const res = await api.post('/update-score', { userId, score });
         if (res.data.bestScore !== undefined) {
             dispatch({ type: UPDATE_SCORE, payload: res.data.bestScore });  // Dispatch the bestScore
         } else {

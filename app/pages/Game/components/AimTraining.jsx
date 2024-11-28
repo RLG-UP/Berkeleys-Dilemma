@@ -12,12 +12,12 @@ import start from "../sounds/start.mp3";
 import splat from "../sounds/splat.mp3";
 import explosion from "../images/3iCN.gif";
 import styles from './AimTraining.module.css';  // Assuming you are using CSS Modules
-import { useBerkeleysContext } from '../../../src/context/DirectoryProvider';
+import { useBerkeleysContext, updateScore } from '../../../src/context/DirectoryProvider';
 
 const animalImages = [animal1, animal2, animal3, animal4, animal5, animal6];
 
 const AimTraining = () => {
-  const { updateScore, state, dispatch } = useBerkeleysContext();
+  const { state, dispatch } = useBerkeleysContext();
   const [score, setScore] = useState(0);
   const [position, setPosition] = useState({ top: "50%", left: "50%" });
   const [lives, setLives] = useState(3);
@@ -52,7 +52,8 @@ const AimTraining = () => {
     if (score > state.user.bestScore) {
       // Call updateScore when the score is greater than the best score
       if(state.loggedState === true){
-        updateScore(score);
+        console.log("#####ABOUT TO CHANGE RECORD");
+        updateScore(dispatch, state.user._id, score);
       }
     }
   }, [score, state.user.bestScore, updateScore]);
@@ -138,7 +139,7 @@ const AimTraining = () => {
             {/* Best Score on the top-right */}
             <div className="d-flex flex-column align-items-end me-4 col-6 ">
             {/* Best Score */}
-            <div className={`${styles.best_score} mt-2 me-3`}>{state.loggedState? `Best: {state.user.bestScore}` : `Log To Save Score`}</div>
+            <div className={`${styles.best_score} mt-2 me-3`}>{state.loggedState? `Best: ${state.user.bestScore}` : `Log To Save Score`}</div>
             
             {/* Lives container */}
             <div className={`${styles.lives_container} mt-4 me-3`}>
