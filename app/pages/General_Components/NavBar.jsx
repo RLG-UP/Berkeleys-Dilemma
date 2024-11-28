@@ -56,32 +56,38 @@ function HiddenBerkeley() {
         {/* Links inside the offcanvas */}
         <div className="offcanvas-body text-end">
           <div className="offcanvas-Box call-action-btn rounded-buttons">
-            <Link href="/Index" className='a'>
+            <Link href="/IndexPage" className='a'>
               <h3 className="btn primary-btn rounded-full text-end w-100">HOME</h3>
             </Link>
           </div>
 
           <div className="offcanvas-Box call-action-btn rounded-buttons">
-            <Link href="/Environment?envId:1">
+            <Link href="/Environment?envId=1">
               <h3 className="btn primary-btn rounded-full text-end w-100">AMAZON RAINFOREST</h3>
             </Link>
           </div>
 
           <div className="offcanvas-Box call-action-btn rounded-buttons">
-            <Link href="/Environment?envId:2">
+            <Link href="/Environment?envId=2">
               <h3 className="btn primary-btn rounded-full text-end w-100">ANTARTIC</h3>
             </Link>
           </div>
 
           <div className="offcanvas-Box call-action-btn rounded-buttons">
-            <Link href="/Environment?envId:3">
+            <Link href="/Environment?envId=3">
               <h3 className="btn primary-btn rounded-full text-end w-100">TAZMANIA</h3>
             </Link>
           </div>
 
           <div className="offcanvas-Box call-action-btn rounded-buttons">
-            <Link href="/map">
+            <Link href="/Map">
               <h3 className="btn primary-btn rounded-full text-end w-100">HURRICANE MAP</h3>
+            </Link>
+          </div>
+
+          <div className="offcanvas-Box call-action-btn rounded-buttons">
+            <Link href="/Game">
+              <h3 className="btn primary-btn rounded-full text-end w-100">BERKELEY'S HUNT</h3>
             </Link>
           </div>
 
@@ -99,7 +105,7 @@ function HiddenBerkeley() {
       </div>
 
       {/* Page name */}
-      <h7 className="PageName col-1 mt-5 p-10 w-50">Berkeley's Dilemma</h7>
+      <h4 className="PageName col-1 mt-5 p-10 w-50">Berkeley's Dilemma</h4>
     </div>
   );
 }

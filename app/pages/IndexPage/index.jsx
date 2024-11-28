@@ -4,7 +4,7 @@ import BackgroundImage from './IndexPageComponents/BackgroundImage';
 import Section from './IndexPageComponents/Section';
 import Card from './IndexPageComponents/Card';
 import VisionMission from './IndexPageComponents/VisionMission';
-import Terms from '../Components/RegularComponents/Terms';
+import Terms from '../General_Components/Terms.jsx';
 import styles from '../css/css.module.css';
 import HiddenBerkeley
  from '../General_Components/NavBar';

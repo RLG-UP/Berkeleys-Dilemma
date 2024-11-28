@@ -1,9 +1,9 @@
-import React from 'react';
-import '../../../public/src/map-listeners.js';
-import '../css/map.css';
+import dynamic from 'next/dynamic';
 
-function Map(){
-    <div id="viewDiv"></div>
+const PsMap = dynamic(() => import('./MapPageComponents/PsMap'), { ssr: false });
+
+function Map() {
+  return <PsMap />;
 }
 
 export default Map;

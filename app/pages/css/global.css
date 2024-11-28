@@ -5,6 +5,7 @@
  #FF7F11
 
  */
+
  *,
  *::before,
  *::after {
@@ -15,6 +16,13 @@
   --font-bebas: 'Bebas Neue', sans-serif;
   --font-poppins: 'Poppins', sans-serif;
   --font-source-sans: 'Source Sans 3', sans-serif;
+}
+
+
+#mapDiv {
+  width: 100%;
+  height: 500px;
+  border: 1px solid #ccc;
 }
 
  .titles{
@@ -76,15 +84,25 @@
     background-color: #393E41;
   }
   
-   html, body {
-    background: #393E41;
+  html, body {
+    overflow-x: hidden; /* This prevents horizontal scrolling */
+    overflow-y: auto;
+    min-height: 100vh;
     margin: 0;
     padding: 0;
-    min-width: 100%;
+    width: 100%;
     max-width: 100%;
-    overflow-x: hidden; /* Esto evita que aparezca el scroll horizontal si algo se sale del ancho */
-    min-height: 100vh;
-  }
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+body {
+    background: #393E41;
+    min-height: 100vh;  /* Ensure full height */
+    height: 100%; /* Ensure the body height is 100% of the viewport */
+}
   
 
   /* Change track color (WebKit browsers: Chrome, Safari, etc.) */
