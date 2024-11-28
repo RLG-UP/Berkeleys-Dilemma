@@ -54,13 +54,19 @@ async function signIn(email, name, username, password) {
     }
 }
 
-// Function to send email after sign-in or update
-async function sendEmail(email) {
+// Function to edit user details (name, username, email)
+async function editUser(name, username, email, dispatch) {
     try {
-        const res = await api.post('/send-email', { email });
-        dispatch({ type: SEND_EMAIL, payload: res.data.status });
+        const res = await api.post('/save-profile', { name, username, email });
+        
+        if (res.status === 200) {
+            // Update the user state with the new values after the profile update
+            dispatch({ type: EDIT_INFO, payload: { name, username, email } });
+        } else {
+            console.error("Error updating user profile:", res.data.message);
+        }
     } catch (error) {
-        console.error("Error sending email:", error);
+        console.error("Error editing user profile:", error);
     }
 }
 
@@ -79,4 +85,4 @@ async function updateScore(userId, score, dispatch) {
 
 
 export default DirectoryProvider;
-export { useBerkeleysContext, login, signIn, sendEmail, updateScore };
+export { useBerkeleysContext, login, signIn, editUser, updateScore };

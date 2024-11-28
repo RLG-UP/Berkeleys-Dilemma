@@ -20,12 +20,10 @@ function DirectoryReducer(state, action) {
         case EDIT_INFO:
             return {
                 ...state,
-                user: { ...state.user, ...action.payload },  // Update user data after edit
-            };
-        case SEND_EMAIL:
-            return {
-                ...state,
-                emailStatus: action.payload,  // Store email sending status
+                user: {
+                    ...state.user,
+                    ...action.payload,  // Update the user details
+                },
             };
         case UPDATE_SCORE:
             return {

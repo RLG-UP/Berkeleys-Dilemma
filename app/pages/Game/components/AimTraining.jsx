@@ -12,10 +12,12 @@ import start from "../sounds/start.mp3";
 import splat from "../sounds/splat.mp3";
 import explosion from "../images/3iCN.gif";
 import styles from './AimTraining.module.css';  // Assuming you are using CSS Modules
+import { useBerkeleysContext } from '../../context/DirectoryProvider';
 
 const animalImages = [animal1, animal2, animal3, animal4, animal5, animal6];
 
 const AimTraining = () => {
+  const { updateScore } = useBerkeleysContext();
   const [best, setBest] = useState(0);
   const [score, setScore] = useState(0);
   const [position, setPosition] = useState({ top: "50%", left: "50%" });
@@ -45,6 +47,16 @@ const AimTraining = () => {
 
     return () => clearInterval(moveTarget);
   }, [clicked, gameStarted]);
+
+
+  useEffect(() => {
+    if (score > best) {
+      setBest(score);
+      // Call updateScore when the score is greater than the best score
+      updateScore(score);
+    }
+  }, [score, best, updateScore]);
+
 
   const handleClick = (event) => {
     const gunAudio = new Audio(clickSound);

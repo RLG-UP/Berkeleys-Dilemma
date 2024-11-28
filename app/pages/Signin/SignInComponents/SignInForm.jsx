@@ -2,7 +2,10 @@
 import React, { useState } from 'react';
 import styles from '../../css/signin.module.css'; 
 import Link from 'next/link';
+import { useBerkeleysContext } from '../../context/DirectoryProvider';
+
 function SignInForm() {
+    const { signIn, dispatch } = useBerkeleysContext(); 
     const [rightPass, setRightPass] = useState(true); // Replace with your validation logic
     const [formData, setFormData] = useState({
         email: '',
@@ -17,13 +20,22 @@ function SignInForm() {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (formData.password !== formData.confPassword) {
-            setRightPass(false);
+            setRightPass(false);  // Show error if passwords don't match
         } else {
-            // Submit form logic here
-            console.log('Form submitted:', formData);
+            try {
+                // Call the signIn function from DirectoryProvider
+                await signIn(formData.email, formData.name, formData.username, formData.password, dispatch);
+
+                // Handle success: You could redirect or show a success message
+                alert('Sign In successful!');
+            } catch (error) {
+                // Handle any errors that occur during sign-in
+                console.error("Sign In failed:", error);
+                setRightPass(false);  // Optionally set an error state here
+            }
         }
     };
 

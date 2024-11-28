@@ -3,28 +3,34 @@
 import React, {useState} from 'react';
 import styles from '../css/account.module.css'; // Sign-in specific styles
 import Link from 'next/link';
+import { useBerkeleysContext } from '../../context/DirectoryProvider';
 
 function Login() {
+    const { login, dispatch } = useBerkeleysContext();
     const [errorMessage, setErrorMessage] = useState(null);
     const [accountExists, setAccountExists] = useState(false);
 
     // Simulated login logic (replace with actual logic)
-    const handleLogin = (event) => {
+    const handleLogin = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
         const username = formData.get('username');
         const password = formData.get('password');
 
-        // Example: Replace this with your login validation logic
-        if (username === 'test' && password === 'test') {
+        try {
+            // Call the login function from DirectoryProvider
+            await login(username, password, dispatch);  // Dispatch the login action
+
+            // Assuming login function works and dispatches the user data, reset error states
             setErrorMessage(null);
             alert('Login successful!');
-        } else if (username === 'existingUser') {
-            setAccountExists(true);
-        } else {
+        } catch (error) {
+            // If there's an error with the login, show the appropriate error message
+            console.error("Login failed:", error);
             setErrorMessage('Incorrect Username or Password');
         }
     };
+
 
     return (
         <div className={styles.back_img}>

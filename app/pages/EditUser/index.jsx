@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
 import '../css/user.css'; 
 import '../css/global.css'; 
+import { useBerkeleysContext } from '../../context/DirectoryProvider';
 
 function EditUser({ user }) {
+    const { editUser } = useBerkeleysContext();
     const [profile, setProfile] = useState({
         name: user.name,
         username: user.username,
         email: user.email,
+        bestScore: user.bestScore,
     });
 
     const handleChange = (e) => {
@@ -17,11 +20,18 @@ function EditUser({ user }) {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Profile saved:', profile);
+        try {
+            // Call the editUser function to save the updated profile
+            await editUser(profile.name, profile.username, profile.email);
 
-        // Add your API call logic here to save the profile
+            // On success, you can redirect or show a success message
+            alert('Profile updated successfully!');
+        } catch (error) {
+            // Handle error (e.g., show an error message)
+            setErrorMessage('Error updating profile. Please try again.');
+        }
     };
 
     return (
