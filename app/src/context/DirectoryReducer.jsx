@@ -11,11 +11,13 @@ function DirectoryReducer(state, action) {
             return {
                 ...state,
                 user: action.payload,  // Update user state after login
+                loggedState: true,
             };
         case LOGOUT:
             return {
                 ...state,
                 user: {},  // Clear user data on logout
+                loggedState: false,
             };
         case EDIT_INFO:
             return {

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import styles from '../../css/signin.module.css'; 
 import Link from 'next/link';
-import { useBerkeleysContext } from '../../context/DirectoryProvider';
+import { useBerkeleysContext } from '../../../src/context/DirectoryProvider';
 
 function SignInForm() {
     const { signIn, dispatch } = useBerkeleysContext(); 

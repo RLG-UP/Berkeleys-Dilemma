@@ -3,7 +3,7 @@
 import React, {useState} from 'react';
 import styles from '../css/account.module.css'; // Sign-in specific styles
 import Link from 'next/link';
-import { useBerkeleysContext } from '../../context/DirectoryProvider';
+import { useBerkeleysContext } from '../../src/context/DirectoryProvider';
 
 function Login() {
     const { login, dispatch } = useBerkeleysContext();

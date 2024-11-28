@@ -7,8 +7,9 @@ const DirectoryContext = createContext();
 
 function DirectoryProvider({ children }) {
     const initialState = {
-        user: {},
-        emailStatus: null,  // Store email sending status
+        user: {bestScore:0},
+        loggedState: false,
+
     };
     
     const [state, dispatch] = useReducer(DirectoryReducer, initialState);
@@ -16,7 +17,7 @@ function DirectoryProvider({ children }) {
     
 
     return (
-        <DirectoryContext.Provider value={{ state, dispatch, login, signIn, sendEmail, updateScore }}>
+        <DirectoryContext.Provider value={{ state, dispatch, login, signIn, updateScore }}>
             {children}
         </DirectoryContext.Provider>
     );
@@ -27,7 +28,7 @@ function useBerkeleysContext() {
 }
 
 // Function to trigger login
-async function login(username, password) {
+async function login(dispatch, username, password) {
     try {
         const res = await api.post('/login', { username, password });
         if (res.data.statusCode === 1) {
@@ -41,7 +42,7 @@ async function login(username, password) {
 }
 
 // Function to trigger sign-in
-async function signIn(email, name, username, password) {
+async function signIn(dispatch, email, name, username, password) {
     try {
         const res = await api.post('/signin', { email, name, username, password });
         if (res.data.right_pass) {
@@ -55,7 +56,7 @@ async function signIn(email, name, username, password) {
 }
 
 // Function to edit user details (name, username, email)
-async function editUser(name, username, email, dispatch) {
+async function editUser(dispatch, name, username, email) {
     try {
         const res = await api.post('/save-profile', { name, username, email });
         
@@ -70,7 +71,7 @@ async function editUser(name, username, email, dispatch) {
     }
 }
 
-async function updateScore(userId, score, dispatch) {
+async function updateScore(dispatch, userId, score) {
     try {
         const res = await api.put('/update-score', { userId, score });
         if (res.data.bestScore !== undefined) {

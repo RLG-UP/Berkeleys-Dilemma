@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import '../css/user.css'; 
 import '../css/global.css'; 
-import { useBerkeleysContext } from '../../context/DirectoryProvider';
+import { useBerkeleysContext } from '../../src/context/DirectoryProvider';
 
 function EditUser({ user }) {
     const { editUser } = useBerkeleysContext();
