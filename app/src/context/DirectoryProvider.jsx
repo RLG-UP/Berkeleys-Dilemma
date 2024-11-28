@@ -23,5 +23,12 @@ function useBerkeleysContext(){
     return useContext(DirectoryContext);
 }
 
+async function login(){
+    try{
+        const res = await api.post("/login", {user});
+        if(res.data.statusCode === 1)
+    }
+}
+
 export default DirectoryProvider;
 export {useBerkeleysContext};

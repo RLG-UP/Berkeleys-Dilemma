@@ -42,7 +42,7 @@ const PsMap = () => {
         Graphic
       ]) => {
         // Set the API Key for ArcGIS
-        esriConfig.apiKey = 'AAPTxy8BH1VEsoebNVZXo8HurACUe-L4CAx7XQkw2L7IhqrxgEe2Zq2OghqvEsLlW6LtfkOljygFe5GJ_MnnSWTGYFYPw_WBujRAlvI8l02naBo2OMYPtQpXnYJ7fw8VwJmput75tJfB60YK0m_1T9YcemXkd2688B773OlkbQ1rB6PBh7PDdqjdnmsYT72c5f9uVTFA_6do3806YjJ95fiy07u1koliIkwMcy8_CXP9nHo.AT1_IqfDO82G'; // Use your environment variable for the API key
+        esriConfig.apiKey = 'KEY_HERE'; // Use your environment variable for the API key
 
         const mapHurricaneLayer = new FeatureLayer({
             url: "https://sampleserver6.arcgisonline.com/arcgis/rest/services/Hurricanes/MapServer/0",
