@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import '../css/user.css'; 
 import '../css/global.css'; 
-import { useBerkeleysContext } from '../../src/context/DirectoryProvider';
+import { useBerkeleysContext, editUser } from '../../src/context/DirectoryProvider';
 
 function EditUser({ user }) {
-    const { editUser } = useBerkeleysContext();
+    const { dispatch } = useBerkeleysContext();
     const [profile, setProfile] = useState({
         name: user.name,
         username: user.username,

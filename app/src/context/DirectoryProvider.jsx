@@ -28,10 +28,10 @@ function useBerkeleysContext() {
 }
 
 // Function to trigger login
-async function login(dispatch, username, password) {
+async function login(username, password, dispatch) {
     try {
         const res = await api.post('/login', { username, password });
-        if (res.data.statusCode === 1) {
+        if (res.data.success) {
             dispatch({ type: LOGIN, payload: res.data.user });
         } else {
             dispatch({ type: LOGIN, payload: null });
@@ -42,13 +42,18 @@ async function login(dispatch, username, password) {
 }
 
 // Function to trigger sign-in
-async function signIn(dispatch, email, name, username, password) {
+async function signIn(email, name, username, password, dispatch) {
+    console.log("Axios API Instance:", api);
     try {
+        console.log("--->Requesting to: /signin")
         const res = await api.post('/signin', { email, name, username, password });
-        if (res.data.right_pass) {
-            dispatch({ type: SIGNIN, payload: { email, name, username } });
+        console.log("Response from sign-in:", res);
+        if (res.data.success) {
+            var bestScore = 0;
+            dispatch({ type: SIGNIN, payload: { email, name, username, bestScore } });
         } else {
             dispatch({ type: SIGNIN, payload: null });
+            console.log(res.data.message); // Log the error message if the passwords don't match
         }
     } catch (error) {
         console.error("Error signing in:", error);
@@ -56,7 +61,7 @@ async function signIn(dispatch, email, name, username, password) {
 }
 
 // Function to edit user details (name, username, email)
-async function editUser(dispatch, name, username, email) {
+async function editUser(name, username, email, dispatch) {
     try {
         const res = await api.post('/save-profile', { name, username, email });
         
@@ -84,6 +89,15 @@ async function updateScore(dispatch, userId, score) {
     }
 }
 
+async function logout(dispatch){
+    try{
+
+        dispatch({type: LOGOUT, payload: null});
+
+    }catch(error){
+        console.error("Error Logging Out: ", error);
+    }
+}
 
 export default DirectoryProvider;
-export { useBerkeleysContext, login, signIn, editUser, updateScore };
+export { useBerkeleysContext, login, signIn, editUser, updateScore, logout};

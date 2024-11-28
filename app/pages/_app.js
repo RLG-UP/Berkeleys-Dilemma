@@ -17,16 +17,7 @@ import DirectoryProvider from '../src/context/DirectoryProvider';
 import Script from 'next/script';
 
 function MyApp({ Component, pageProps }) {
-  useEffect(() => {
-    // Ensure scrolling is enabled after the page loads
-    document.body.style.overflow = 'auto'; // Enable scroll
 
-    // Optional: Cleanup effect if needed
-    return () => {
-      document.body.style.overflow = ''; // Clean up
-    };
-  }, []);
-  
   return (
     <DirectoryProvider>
         <Component {...pageProps} />

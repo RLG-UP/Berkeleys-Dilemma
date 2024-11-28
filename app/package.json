@@ -18,7 +18,7 @@
     "start": "next start",
     "build": "next build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "npm run --prefix ../",
+    "server": "npm run start --prefix ../",
     "client": "next dev",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },

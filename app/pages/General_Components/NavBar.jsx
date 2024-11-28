@@ -1,9 +1,19 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useBerkeleysContext, logout } from '../../src/context/DirectoryProvider';
+import { useRouter } from "next/router";
+
 
 function HiddenBerkeley() {
-  const [sessUser, setSessUser] = useState(null); // You can set this state based on your authentication logic
+  const {state, dispatch} = useBerkeleysContext();
 
+  const router = useRouter();
+
+  function handleLogout(){
+    logout(dispatch);
+    router.push('/Login');
+
+  }
   return (
     <div className="tt container">
       {/* Button to trigger offcanvas */}
@@ -37,15 +47,15 @@ function HiddenBerkeley() {
         <div className="offcanvas-header col-11 justify-content-end">
           <div
             className="offcanvas-Box"
-            style={{ display: sessUser ? 'inline' : 'none' }}
+            style={{ display: state.user ? 'inline' : 'none' }}
           >
             <Link href="/user">
-              <h2 className="btn primary-btn rounded-full">{sessUser ? sessUser.username : 'Log In'}</h2>
+              <h2 className="btn primary-btn rounded-full">{state.user ? state.user.username : 'Log In'}</h2>
             </Link>
           </div>
           <div
             className="offcanvas-Box"
-            style={{ display: sessUser ? 'none' : 'inline' }}
+            style={{ display: state.loggedState ? 'none' : 'inline' }}
           >
             <Link href="/Login">
               <h2 className="btn primary-btn rounded-full">Log In</h2>
@@ -92,13 +102,13 @@ function HiddenBerkeley() {
           </div>
 
           {/* Conditional log-out button */}
-          {sessUser && (
+          {state.loggedState && (
             <div className="offcanvas-Box call-action-btn rounded-buttons">
-              <Link href="/log-out">
+              <button onClick={handleLogout}>
                 <h3 className="log-out-btn btn primary-btn rounded-full text-end w-100 my-5">
                   Log Out
                 </h3>
-              </Link>
+              </button>
             </div>
           )}
         </div>

@@ -2,10 +2,12 @@
 import React, { useState } from 'react';
 import styles from '../../css/signin.module.css'; 
 import Link from 'next/link';
-import { useBerkeleysContext } from '../../../src/context/DirectoryProvider';
+import { useBerkeleysContext, signIn } from '../../../src/context/DirectoryProvider';
+import { useRouter } from "next/router";
 
 function SignInForm() {
-    const { signIn, dispatch } = useBerkeleysContext(); 
+    const router = useRouter();
+    const { dispatch } = useBerkeleysContext(); 
     const [rightPass, setRightPass] = useState(true); // Replace with your validation logic
     const [formData, setFormData] = useState({
         email: '',
@@ -27,10 +29,10 @@ function SignInForm() {
         } else {
             try {
                 // Call the signIn function from DirectoryProvider
-                await signIn(formData.email, formData.name, formData.username, formData.password, dispatch);
+                signIn(formData.email, formData.name, formData.username, formData.password, dispatch);
 
                 // Handle success: You could redirect or show a success message
-                alert('Sign In successful!');
+                router.push('/IndexPage');
             } catch (error) {
                 // Handle any errors that occur during sign-in
                 console.error("Sign In failed:", error);

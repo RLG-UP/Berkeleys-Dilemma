@@ -3,10 +3,12 @@
 import React, {useState} from 'react';
 import styles from '../css/account.module.css'; // Sign-in specific styles
 import Link from 'next/link';
-import { useBerkeleysContext } from '../../src/context/DirectoryProvider';
+import { useBerkeleysContext, login } from '../../src/context/DirectoryProvider';
+import { useRouter } from "next/router";
 
 function Login() {
-    const { login, dispatch } = useBerkeleysContext();
+    const router = useRouter();
+    const { dispatch } = useBerkeleysContext();
     const [errorMessage, setErrorMessage] = useState(null);
     const [accountExists, setAccountExists] = useState(false);
 
@@ -23,7 +25,7 @@ function Login() {
 
             // Assuming login function works and dispatches the user data, reset error states
             setErrorMessage(null);
-            alert('Login successful!');
+            router.push('/IndexPage');
         } catch (error) {
             // If there's an error with the login, show the appropriate error message
             console.error("Login failed:", error);
