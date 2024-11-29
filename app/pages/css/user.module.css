@@ -1,11 +1,6 @@
 /* Body and Background */
-body {
-    background-color: #393e41 !important;
-    margin: 0;
-    padding: 0;
-}
 
-.start_btn {
+.start_btn, .button {
     height: 2.5em;
     width: 9em;
     background: #e7e5df00;
@@ -14,6 +9,9 @@ body {
     border-style: solid;
     border-color: #E7E5DF;
     color: #E7E5DF;
+    padding-top: 2%;
+    text-align: center;
+    text-decoration: none;
     transition: 0.3s;
 }
 

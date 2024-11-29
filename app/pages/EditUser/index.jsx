@@ -1,15 +1,17 @@
-import React, {useState} from 'react';
-import '../css/user.css'; 
-import '../css/global.css'; 
+import React, { useState } from 'react';
+import styles from '../css/user.module.css';
 import { useBerkeleysContext, editUser } from '../../src/context/DirectoryProvider';
+import { useRouter } from "next/router";
 
 function EditUser({ user }) {
-    const { dispatch } = useBerkeleysContext();
+    const { dispatch, state } = useBerkeleysContext();
+    const router = useRouter();
+
     const [profile, setProfile] = useState({
-        name: user.name,
-        username: user.username,
-        email: user.email,
-        bestScore: user.bestScore,
+        name: state.user.name,
+        username: state.user.username,
+        email: state.user.email,
+        bestScore: state.user.bestScore,
     });
 
     const handleChange = (e) => {
@@ -24,10 +26,10 @@ function EditUser({ user }) {
         e.preventDefault();
         try {
             // Call the editUser function to save the updated profile
-            await editUser(profile.name, profile.username, profile.email);
+            await editUser(state.user._id, profile.name, profile.username, profile.email, dispatch);
 
             // On success, you can redirect or show a success message
-            alert('Profile updated successfully!');
+            router.push('/Profile');
         } catch (error) {
             // Handle error (e.g., show an error message)
             setErrorMessage('Error updating profile. Please try again.');
@@ -35,13 +37,13 @@ function EditUser({ user }) {
     };
 
     return (
-        <div className="back-img profile-page">
-            <div className="in-div my-5 justify-content-center">
-                <h2 className="in-title text-right">Edit Your Profile</h2>
-                <div className="profile-container mx-4">
+        <div className={`${styles.back_img} ${styles.profile_page}`}>
+            <div className={`${styles.in_div} my-5 justify-content-center`}>
+                <h2 className={`${styles.in_title} text-right`}>Edit Your Profile</h2>
+                <div className={`${styles.profile_container} mx-4`}>
                     <div className="row col-12 mx-2">
-                        <div className="text-right col-md-6 col-12 p-3">
-                            <h3 className="welcome-title">
+                        <div className={`${styles.text_right} col-md-6 col-12 p-3`}>
+                            <h3 className={styles.welcome_title}>
                                 <em>Edit Mode</em>
                             </h3>
                         </div>
@@ -51,13 +53,13 @@ function EditUser({ user }) {
                                 <button
                                     type="submit"
                                     form="profileForm"
-                                    className="start-btn me-2"
+                                    className={`${styles.start_btn} me-2`}
                                 >
                                     Save
                                 </button>
                                 <button
                                     onClick={() => (window.location.href = '/log-out')}
-                                    className="start-btn"
+                                    className={styles.start_btn}
                                 >
                                     Log Out
                                 </button>
@@ -69,8 +71,8 @@ function EditUser({ user }) {
                         <div className="row mx-2">
                             {/* Profile Details */}
                             <div className="col-md-6 mb-3">
-                                <h5 className="profile-section-title">Profile Details</h5>
-                                <ul className="list-group profile-details">
+                                <h5 className={styles.profile_section_title}>Profile Details</h5>
+                                <ul className={`list-group ${styles.profile_details}`}>
                                     <li className="list-group-item">
                                         <em>Name:</em>
                                         <input
@@ -115,7 +117,7 @@ function EditUser({ user }) {
 
                     {/* Back to Home Link */}
                     <div className="text-right mt-4 mx-4">
-                        <a href="/index" className="back-home-link">
+                        <a href="/index" className={styles.back_home_link}>
                             Back to Home
                         </a>
                     </div>

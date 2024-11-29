@@ -32,7 +32,7 @@ function SignInForm() {
                 signIn(formData.email, formData.name, formData.username, formData.password, dispatch);
 
                 // Handle success: You could redirect or show a success message
-                router.push('/IndexPage');
+                router.push('/Login');
             } catch (error) {
                 // Handle any errors that occur during sign-in
                 console.error("Sign In failed:", error);

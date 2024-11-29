@@ -33,6 +33,7 @@ async function login(username, password, dispatch) {
     try {
         const res = await api.post('/login', { username, password });
         if (res.data.success) {
+
             dispatch({ type: LOGIN, payload: res.data.user });
         } else {
             dispatch({ type: LOGIN, payload: null });
@@ -62,9 +63,9 @@ async function signIn(email, name, username, password, dispatch) {
 }
 
 // Function to edit user details (name, username, email)
-async function editUser(name, username, email, dispatch) {
+async function editUser(userId, name, username, email, dispatch) {
     try {
-        const res = await api.post('/save-profile', { name, username, email });
+        const res = await api.post('/save-profile', { userId, name, username, email });
         
         if (res.status === 200) {
             // Update the user state with the new values after the profile update
@@ -78,7 +79,7 @@ async function editUser(name, username, email, dispatch) {
 }
 
 async function updateScore(dispatch, userId, score) {
-    console.log("---->CLIENT USER ID: ", userId);
+    console.log("---->Trying to update score");
     try {
         const res = await api.post('/update-score', { userId, score });
         if (res.data.bestScore !== undefined) {

@@ -47,10 +47,10 @@ function HiddenBerkeley() {
         <div className="offcanvas-header col-11 justify-content-end">
           <div
             className="offcanvas-Box"
-            style={{ display: state.user ? 'inline' : 'none' }}
+            style={{ display: state.loggedState ? 'inline' : 'none' }}
           >
-            <Link href="/user">
-              <h2 className="btn primary-btn rounded-full">{state.user ? state.user.username : 'Log In'}</h2>
+            <Link href="/Profile">
+              <h2 className="btn primary-btn rounded-full">{state.loggedState ? state.user.username : 'Log In'}</h2>
             </Link>
           </div>
           <div
@@ -104,10 +104,8 @@ function HiddenBerkeley() {
           {/* Conditional log-out button */}
           {state.loggedState && (
             <div className="offcanvas-Box call-action-btn rounded-buttons">
-              <button onClick={handleLogout}>
-                <h3 className="log-out-btn btn primary-btn rounded-full text-end w-100 my-5">
+              <button onClick={handleLogout} className="log-out-btn btn primary-btn rounded-full text-end w-100 my-5">
                   Log Out
-                </h3>
               </button>
             </div>
           )}
