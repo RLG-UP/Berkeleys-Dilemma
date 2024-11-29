@@ -140,7 +140,7 @@ const AimTraining = () => {
             {/* Best Score on the top-right */}
             <div className="d-flex flex-column align-items-end me-4 col-6 ">
             {/* Best Score */}
-            <div className={`${styles.best_score} mt-2 me-3`}>{state.loggedState? `Best: ${state.user.bestScore}` : `Log To Save Score`}</div>
+            <div className={`${styles.best_score} mt-2 me-3`}>{state.loggedState? `Best: ${state.user.bestScore}` : `Log To Save`}</div>
             
             {/* Lives container */}
             <div className={`${styles.lives_container} mt-4 me-3`}>

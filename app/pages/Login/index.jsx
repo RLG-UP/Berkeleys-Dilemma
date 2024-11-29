@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 
 function Login() {
     const router = useRouter();
-    const { dispatch } = useBerkeleysContext();
+    const { dispatch, state } = useBerkeleysContext();
     const [errorMessage, setErrorMessage] = useState(null);
     const [accountExists, setAccountExists] = useState(false);
 
@@ -25,7 +25,9 @@ function Login() {
 
             // Assuming login function works and dispatches the user data, reset error states
             setErrorMessage(null);
-            router.push('/IndexPage');
+            if (!state.dopple){
+                router.push('/IndexPage');
+            }
         } catch (error) {
             // If there's an error with the login, show the appropriate error message
             console.error("Login failed:", error);
@@ -47,8 +49,8 @@ function Login() {
                             <strong>Treat it as one.</strong>
                         </p>
                         <h6 className={styles.log_err_title}>
-                            {accountExists
-                                ? 'That account already exists'
+                            {state.dopple
+                                ? 'User or Password Incorrect'
                                 : errorMessage}
                         </h6>
                     </div>

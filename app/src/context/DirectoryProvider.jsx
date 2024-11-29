@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import DirectoryReducer from './DirectoryReducer';
-import { SIGNIN, LOGIN, LOGOUT, EDIT_INFO, UPDATE_SCORE, UPDATE_TOP } from './actions';
+import { SIGNIN, LOGIN, LOGOUT, EDIT_INFO, UPDATE_SCORE, UPDATE_TOP, FAKE_LOG } from './actions';
 import api from '../../api/api';
 
 const DirectoryContext = createContext();
@@ -13,6 +13,7 @@ function DirectoryProvider({ children }) {
         loggedState: false,
         apiKey: process.env.MAP_PASS,
         topUsers: [],
+        dopple: false,
 
     };
     
@@ -39,7 +40,7 @@ async function login(username, password, dispatch) {
 
             dispatch({ type: LOGIN, payload: res.data.user });
         } else {
-            dispatch({ type: LOGIN, payload: null });
+            dispatch({type: FAKE_LOG, payload: true});
         }
     } catch (error) {
         console.error("Error logging in:", error);

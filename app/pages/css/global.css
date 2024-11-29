@@ -270,12 +270,13 @@ input[type="range"]::-webkit-slider-thumb {
   cursor: pointer;
   border-radius: 5px;
   text-transform: uppercase;
+  transition: 0.1s;
 }
 
 .retro_button:hover {
   background-color: #ffffff;
   color: #000000;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 /* Table styling */

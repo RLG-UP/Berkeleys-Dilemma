@@ -29,7 +29,7 @@ require([
     Home,
     Graphic
 ) => {
-    esriConfig.apiKey = 'AAPTxy8BH1VEsoebNVZXo8HurACUe-L4CAx7XQkw2L7IhqrxgEe2Zq2OghqvEsLlW6LtfkOljygFe5GJ_MnnSWTGYFYPw_WBujRAlvI8l02naBo2OMYPtQpXnYJ7fw8VwJmput75tJfB60YK0m_1T9YcemXkd2688B773OlkbQ1rB6PBh7PDdqjdnmsYT72c5f9uVTFA_6do3806YjJ95fiy07u1koliIkwMcy8_CXP9nHo.AT1_IqfDO82G';
+    esriConfig.apiKey = process.env.MAP_PASS;
 
     // Create the map layer
     const mapHurricaneLayer = new FeatureLayer({
