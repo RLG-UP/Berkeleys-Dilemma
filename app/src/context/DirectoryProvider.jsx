@@ -1,15 +1,18 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import DirectoryReducer from './DirectoryReducer';
-import { SIGNIN, LOGIN, LOGOUT, EDIT_INFO, UPDATE_SCORE } from './actions';
+import { SIGNIN, LOGIN, LOGOUT, EDIT_INFO, UPDATE_SCORE, UPDATE_TOP } from './actions';
 import api from '../../api/api';
 
 const DirectoryContext = createContext();
 
+
 function DirectoryProvider({ children }) {
+    
     const initialState = {
         user: {bestScore:0},
         loggedState: false,
         apiKey: process.env.MAP_PASS,
+        topUsers: [],
 
     };
     
@@ -102,5 +105,14 @@ async function logout(dispatch){
     }
 }
 
+
+
+async function stateTop(dispatch){
+    const res = await api.post('/Top');
+    if(res.status){
+        dispatch({type: UPDATE_TOP, payload: res.data.topUsers});
+    }
+}
+
 export default DirectoryProvider;
-export { useBerkeleysContext, login, signIn, editUser, updateScore, logout};
+export { useBerkeleysContext, login, signIn, editUser, updateScore, logout, stateTop};

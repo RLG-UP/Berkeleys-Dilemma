@@ -86,7 +86,7 @@
   
   html, body {
     overflow-x: hidden; /* This prevents horizontal scrolling */
-    overflow-y: auto;
+    overflow-y: visible;
     min-height: 100vh;
     margin: 0;
     padding: 0;
@@ -94,14 +94,10 @@
     max-width: 100%;
 }
 
-html{
-  scroll-behavior: smooth;
-}
 
 body {
     background: #393E41;
     min-height: 100vh;  /* Ensure full height */
-    height: 100%; /* Ensure the body height is 100% of the viewport */
 }
   
 
@@ -235,7 +231,86 @@ input[type="range"]::-webkit-slider-thumb {
       font-weight: 500;
       font-size: 1em;
      }
-  
+
+
+
+     /*CSS FOR TOP PLAYERS TABLE*/
+     /* Retro-style container */
+.retro_container {
+  font-family: 'Courier New', Courier, monospace;
+  color: #00ff00;
+  background-color: #000000;
+  padding: 20px;
+  border: 2px solid #ffffff;
+  width: 80%;
+  margin: 20px auto;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* Title styling */
+.retro_title {
+  font-size: 2rem;
+  text-shadow: 2px 2px #ff00ff;
+  margin-bottom: 20px;
+}
+
+/* Buttons styling */
+.button_group {
+  margin-bottom: 20px;
+}
+
+.retro_button {
+  background-color: #000000;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  padding: 10px 20px;
+  margin: 0 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+
+.retro_button:hover {
+  background-color: #ffffff;
+  color: #000000;
+  transform: scale(1.1);
+}
+
+/* Table styling */
+.retro_table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.retro_table th,
+.retro_table td {
+  border: 1px solid #ffffff;
+  padding: 10px;
+  text-align: center;
+}
+
+.retro_table th {
+  background-color: #000000;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.retro_table tr:nth-child(even) {
+  background-color: #333333;
+}
+
+.retro_table tr:nth-child(odd) {
+  background-color: #444444;
+}
+
+.retro_table tr:hover {
+  background-color: #222222;
+}
+
+
     /* CSS FONTS*/
   
     /* Define CSS custom properties for font families */

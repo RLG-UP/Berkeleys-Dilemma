@@ -1,4 +1,4 @@
-import { SIGNIN, LOGIN, LOGOUT, EDIT_INFO, UPDATE_SCORE } from './actions';
+import { SIGNIN, LOGIN, LOGOUT, EDIT_INFO, UPDATE_SCORE, UPDATE_TOP } from './actions';
 
 function DirectoryReducer(state, action) {
     switch (action.type) {
@@ -32,6 +32,12 @@ function DirectoryReducer(state, action) {
                 ...state,
                 bestScore: action.payload,  // Update the bestScore
             };
+        case UPDATE_TOP:
+            return{
+                ...state,
+                topUsers: action.payload,
+            }
+
         default:
             throw new Error(`Unsupported action ${action.type}`);
     }

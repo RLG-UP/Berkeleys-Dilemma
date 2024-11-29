@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { useBerkeleysContext, logout } from '../../src/context/DirectoryProvider';
 import { useRouter } from "next/router";
@@ -8,6 +8,16 @@ function HiddenBerkeley() {
   const {state, dispatch} = useBerkeleysContext();
 
   const router = useRouter();
+
+    useEffect(() => {
+      const resetOverflow = () => {
+        document.body.style.overflow = 'auto';
+      };
+  
+      // Cleanup on component unmount
+      return () => resetOverflow();
+    }, []);
+
 
   function handleLogout(){
     logout(dispatch);

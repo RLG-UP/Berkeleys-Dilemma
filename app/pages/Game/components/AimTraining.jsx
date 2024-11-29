@@ -13,6 +13,7 @@ import splat from "../sounds/splat.mp3";
 import explosion from "../images/3iCN.gif";
 import styles from './AimTraining.module.css';  // Assuming you are using CSS Modules
 import { useBerkeleysContext, updateScore } from '../../../src/context/DirectoryProvider';
+import TopPlayersTable from './TopTable';
 
 const animalImages = [animal1, animal2, animal3, animal4, animal5, animal6];
 
@@ -216,6 +217,8 @@ const AimTraining = () => {
           )}
         </div>
       </div>
+
+      <TopPlayersTable />
     </div>
   );
 };
