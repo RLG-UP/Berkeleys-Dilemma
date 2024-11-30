@@ -1,0 +1,1 @@
+"use strict";exports.id=175,exports.ids=[175],exports.modules={4175:(e,s,t)=>{t.r(s),t.d(s,{default:()=>u});var r=t(8732),i=t(2015);t(6383);var d=t(6715);let u=()=>{let e=(0,i.useRef)(null),s=(0,d.useRouter)();return(0,i.useEffect)(()=>{},[s]),(0,r.jsx)("div",{children:(0,r.jsx)("div",{id:"viewDiv",ref:e,style:{height:"100vh"}})})}}};
