@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  output: 'standalone',
+  output: 'export',  // Change from 'standalone' to 'export'
   images: {
     domains: [
       "i.pinimg.com",
