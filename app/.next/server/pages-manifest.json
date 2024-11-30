@@ -1,9 +1,1 @@
-{
-  "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/IndexPage": "pages/IndexPage.js",
-  "/": "pages/index.js",
-  "/Environment": "pages/Environment.js",
-  "/Map": "pages/Map.js"
-}
+{"/_app":"pages/_app.js","/_error":"pages/_error.js","/_document":"pages/_document.js","/EditUser":"pages/EditUser.html","/Environment":"pages/Environment.html","/Game/components/AimTraining":"pages/Game/components/AimTraining.html","/Game":"pages/Game.html","/Game/components/TopTable":"pages/Game/components/TopTable.html","/General_Components/Terms":"pages/General_Components/Terms.html","/IndexPage/IndexPageComponents/BackgroundImage":"pages/IndexPage/IndexPageComponents/BackgroundImage.html","/General_Components/NavBar":"pages/General_Components/NavBar.html","/IndexPage/IndexPageComponents/Card":"pages/IndexPage/IndexPageComponents/Card.html","/IndexPage/IndexPageComponents/Section":"pages/IndexPage/IndexPageComponents/Section.html","/IndexPage/IndexPageComponents/VisionMission":"pages/IndexPage/IndexPageComponents/VisionMission.html","/IndexPage/layout":"pages/IndexPage/layout.html","/Map":"pages/Map.html","/Login":"pages/Login.html","/Map/MapPageComponents/PsMap":"pages/Map/MapPageComponents/PsMap.html","/Profile/ProfilePageComponents/ProfileDetails":"pages/Profile/ProfilePageComponents/ProfileDetails.html","/Profile":"pages/Profile.html","/IndexPage":"pages/IndexPage.html","/Signin/SignInComponents/SignInForm":"pages/Signin/SignInComponents/SignInForm.html","/Signin":"pages/Signin.html","/":"pages/index.html","/layout":"pages/layout.html","/404":"pages/404.html"}
