@@ -53,6 +53,7 @@
   },
   "devDependencies": {
     "concurrently": "^9.1.0",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "eslint-config-react-app": "^7.0.1"
   }
 }
