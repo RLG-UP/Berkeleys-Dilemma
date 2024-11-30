@@ -18,30 +18,20 @@
       "static/chunks/main.js",
       "static/chunks/pages/index.js"
     ],
-    "/Game": [
+    "/Environment": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Game.js"
+      "static/chunks/pages/Environment.js"
     ],
     "/IndexPage": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/IndexPage.js"
     ],
-    "/Login": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Login.js"
-    ],
     "/Map": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/Map.js"
-    ],
-    "/Profile": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Profile.js"
     ],
     "/_app": [
       "static/chunks/webpack.js",
