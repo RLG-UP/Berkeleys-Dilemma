@@ -66,6 +66,28 @@
     text-shadow: 0 2px 8px #ff3d1174;
   }
   
+
+  .start-btn2{
+    text-align: center;
+    height: 100%;
+    width: 9.1em;
+    font-size: 15px !important;
+    background:#e7e5df00;
+    border: 1px;
+    border-radius: 7px;
+    border-style: solid;
+    border-color: #E7E5DF !important;
+    color: #E7E5DF !important;
+    transition: 0.3s;
+  }
+  
+  .start-btn2:hover{
+    transition: 0.1s;
+    background: #FF7F11 !important;
+    color: #ffffff !important;
+    text-shadow: 0 2px 8px #ff3d1174;
+  }
+
   p{
     font-family: var(--font-source-sans-3);
     font-weight: 300;

@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Terms from "../General_Components/Terms.jsx";
 import { useRouter } from 'next/router';
 import HiddenBerkeley from "../General_Components/NavBar.jsx";
-
+import Link from 'next/link';
 const EnvironmentPage = () => {
     const router = useRouter(); // Initialize useRouter hook
     const [nCarrousel, setNCarrousel] = useState(3); // Default to CarouselThree
@@ -52,6 +52,7 @@ const EnvironmentPage = () => {
         setCurrentImageIndex(index);
     };
 
+
     return (
         <div className="fondo text-white" style={{ backgroundColor }}>
             <HiddenBerkeley />
@@ -75,6 +76,26 @@ const EnvironmentPage = () => {
                                 <label htmlFor="customRange" className={styles.form_label}>
                                     <h3>Timeline</h3>
                                 </label>
+                                <div className="row justify-content-center">
+                                    <div className="col-12 d-flex flex-wrap justify-content-between">
+                                        <div className="col-12 col-md-4 p-2">
+                                        <Link href="/Environment?envId=1" className="btn w-100 start-btn2">
+                                            AMAZON RAINFOREST
+                                        </Link>
+                                        </div>
+                                        <div className="col-12 col-md-4 p-2">
+                                        <Link href="/Environment?envId=2" className="btn  w-100 start-btn2">
+                                            ANTARCTIC
+                                        </Link>
+                                        </div>
+                                        <div className="col-12 col-md-4 p-2">
+                                        <Link href="/Environment?envId=3" className="btn w-100 start-btn2">
+                                            TASMANIA
+                                        </Link>
+                                        </div>
+                                    </div>
+                                    </div>
+
                                 <form>
                                     <input
                                         type="range"

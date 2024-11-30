@@ -83,19 +83,7 @@ function HiddenBerkeley() {
 
           <div className="offcanvas-Box call-action-btn rounded-buttons">
             <Link href="/Environment?envId=1">
-              <h3 className="btn primary-btn rounded-full text-end w-100">AMAZON RAINFOREST</h3>
-            </Link>
-          </div>
-
-          <div className="offcanvas-Box call-action-btn rounded-buttons">
-            <Link href="/Environment?envId=2">
-              <h3 className="btn primary-btn rounded-full text-end w-100">ANTARTIC</h3>
-            </Link>
-          </div>
-
-          <div className="offcanvas-Box call-action-btn rounded-buttons">
-            <Link href="/Environment?envId=3">
-              <h3 className="btn primary-btn rounded-full text-end w-100">TAZMANIA</h3>
+              <h3 className="btn primary-btn rounded-full text-end w-100">ENVIRONMENTS</h3>
             </Link>
           </div>
 
