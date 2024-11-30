@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "next build",
+    "build": "npx next build",
     "start": "nodemon server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix app",
@@ -47,6 +47,7 @@
     "googleapis": "^144.0.0",
     "https": "^1.0.0",
     "mongoose": "^8.7.3",
+    "next": "^15.0.3",
     "nodemailer": "^6.9.15",
     "nodemon": "^3.1.7"
   },
