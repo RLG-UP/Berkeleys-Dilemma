@@ -24,8 +24,7 @@
   "server": "npm run start --prefix ../",
   "client": "next dev",
   "dev": "concurrently \"npm run server\" \"npm run client\"",
-  "prod": "npm run build && npm run export",
-  "export": "next export"  
+  "prod": "npm run build"
 },
   "eslintConfig": {
     "extends": [
