@@ -1,0 +1,86 @@
+.envBod {
+  background-color: rgb(57, 62, 65);
+}
+
+#idEnvBod {
+  transition: background-color 0.4s ease;
+}
+
+.photo_1 {
+  position: relative;
+}
+
+/* The text overlay */
+.overlay_1 {
+  position: absolute;
+  top: 100%; /* Position in the middle */
+  left: 50%; /* Position in the middle */
+  transform: translate(-50%, -50%); /* Center the text */
+  width: 100%;
+  color: white;
+  font-family: 'Source Sans 3';
+  font-weight: 400;
+  font-size: 0.8em;
+  text-align: center;
+  opacity: 0;
+  z-index: 2000; /* Ensure the text appears in front */
+  background-color: #FF7F11;
+  border-color: #ff3d116e; /* Border color when active */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.447);
+  border-radius: 10px;
+  padding: 10px; /* Optional: add some padding */
+  transition: top 1s ease, opacity 0.2s ease;
+}
+
+/* Hover effect to display the text */
+.photo_1:hover .overlay_1 {
+  transition: top 2s ease, opacity 0.5s ease;
+  visibility: visible;
+  top: 10px;
+  color: #E7E5DF;
+  opacity: 100;
+}
+
+.slide_bar {
+  display: flex;
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  width: 100%;
+}
+
+.top_slide {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: sticky;
+  top: 7%;
+  z-index: 500; /* Ensures the button is above other content */
+}
+
+.top_slide label {
+  margin-bottom: 13%;
+}
+
+.carousel_size {
+  min-height: 1000px;
+}
+
+
+.range_slider {
+  width: 100%;
+}
+
+.thumb_nl_cnt {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.thumb_nl {
+  margin-bottom: 1em;
+}

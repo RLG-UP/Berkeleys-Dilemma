@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.body {
+  font-family: 'Press Start 2P', cursive;
+  color: #E7E5DF; /* Changed white to #E7E5DF */
+}
+
+.h1, .h2, .h4, .button {
+  font-family: 'Press Start 2P', cursive;
+  color: #E7E5DF; /* Changed white to #E7E5DF */
+}
+
+.h1{
+  font-size: 1.3em;
+}
+.game_container {
+  background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/3fffe330-0a41-49ed-9885-6e3aba462e70/ddxkac6-ebe2ffce-8080-4ebf-b301-598019f384b0.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzNmZmZlMzMwLTBhNDEtNDllZC05ODg1LTZlM2FiYTQ2MmU3MFwvZGR4a2FjNi1lYmUyZmZjZS04MDgwLTRlYmYtYjMwMS01OTgwMTlmMzg0YjAucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.axxzTibMfkRu03fwZBSQTnycdkMOj-U14iKZzrsMUhI');
+  width: 80%;
+  height: 40em;
+  border: 2px solid #000;
+  border-radius: 10px;
+  position: relative;
+  margin: auto;
+  margin-top: 20px;
+  overflow: hidden;
+  background-color: #fff;
+  font-family: 'Press Start 2P', cursive;
+  background-repeat: no-repeat;
+  background-size: cover;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.score_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: rgb(59, 92, 59);
+  border-bottom: 2px solid #000;
+  font-size: 12px;
+}
+
+.lives_container {
+  display: flex;
+  gap: 5px;
+}
+
+.best_score {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-weight: bold;
+  font-size: 12px;
+  color: #E7E5DF; /* Changed white to #E7E5DF */
+}
+
+.game_area {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 50px);
+  overflow: hidden;
+}
+
+.game_area:hover {
+  cursor: crosshair !important;
+}
+
+.animal {
+  position: absolute;
+  width: 10%;
+  height: auto;
+}
+
+.animal:hover{
+  cursor: crosshair !important;
+}
+
+.button {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  border: 1px solid #E7E5DF; /* Changed white to #E7E5DF */
+  transition: 0.1s ease-in-out;
+}
+
+.button:hover {
+  transform: scale(1.05);
+  background-color: #E7E5DF; /* Changed white to #E7E5DF */
+  color: #BD1E1E; /* Changed red to #BD1E1E */
+  border: 1px solid #E7E5DF; /* Changed white to #E7E5DF */
+}
+
+.game_over_container {
+  text-align: center;
+  margin-top: 20%;
+}
+
+.start_container {
+  text-align: center;
+  margin-top: 20%;
+}
+
+.game_over {
+  text-align: center;
+  color: #BD1E1E; /* Changed red to #BD1E1E */
+  font-size: 16px;
+}
+
+.score_over {
+  text-align: center;
+  font-size: 14px;
+}
+
+@media (max-width: 700px) and (max-height:400px){
+  .contai_whi {
+    width: auto !important;
+    height: 50px !important;
+  }
+  .game_container {
+    width: auto !important;
+    height: 50 !important;
+  }
+}
+
+.animal_gif {
+  animation: scale-up 0.5s ease-in-out;
+}
+
+@keyframes scale-up {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.buttons {
+  height: 60px;
+  width: 80px;
+  background-color: yellow;
+  color: black;
+}
+
+

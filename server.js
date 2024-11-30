@@ -2,6 +2,8 @@ require('dotenv').config(); // Load environment variables from .env file
 
 const bcrypt = require('bcrypt'); // Import bcrypt for password hashing
 const express = require('express'); // Import express to create server
+const dev = process.env.NODE_ENV !== 'production';
+
 const https = require('https'); // Import https for secure HTTP requests
 const app = express(); // Initialize express application
 const mongoose = require('mongoose'); // Import mongoose for MongoDB connection
@@ -13,14 +15,22 @@ const session = require('express-session'); // Import express-session for sessio
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 app.use(express.static("public")); // Serve static files from "public" folder
-app.engine("ejs", require("ejs").renderFile); // Set EJS as templating engine
-app.set("view engine", "ejs"); // Define view engine
 app.use(session({ // Configure session settings
     secret: process.env.DB_PASS, // Use DB_PASS as session secret
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false } // Set secure cookies if using HTTPS
+    cookie: {
+    secure: false, 
+  }
 }));
+
+
+const cors = require('cors');
+app.use(cors());
+
+
+// Server Environment variables
+const PORT = 5000;
 
 // MongoDB environment variables
 const user = process.env.DB_USER;
@@ -41,7 +51,11 @@ const userSchema = new mongoose.Schema({
     email: String,
     name: String,
     username: String,
-    password: String
+    password: String,
+    bestScore: {
+        type: Number,
+        default: 0,  // Default score is 0
+    },
 });
 
 // State variables
@@ -144,13 +158,13 @@ async function sendEditsMail(sendEmail, user) {
             html: `<div style="font-family: Arial, sans-serif; color: #E7E5DF; line-height: 1.6; background-color: #393e41; padding: 20px; text-align: right;">
                         <h1 style="color: #FF7F11; font-size: 2.5em; margin: 0;">Changes Saved!</h1>
                         <h3 style="color: #FF7F11;">Your updated information is as follows:</h3>
-                        <p style="font-size: 1.2em; margin: 20px 0;">Thank you for keeping your details up to date. Here’s what you’ve changed:</p>
+                        <p style="font-size: 1.2em; margin: 20px 0;color: #E7E5DF">Thank you for keeping your details up to date. Here’s what you’ve changed:</p>
                         <ul style="font-size: 1.2em; margin: 20px 0; list-style-type: none; padding: 0;">
                             <li><strong>Name:</strong> ${user.name}</li>
                             <li><strong>Email:</strong> ${user.email}</li>
                             <li><strong>Username:</strong> ${user.username}</li>
                         </ul>
-                        <p style="font-size: 1.2em; margin: 20px 0;">Feel free to reach out if you have any questions or need further assistance.</p>
+                        <p style="font-size: 1.2em; margin: 20px 0;color: #E7E5DF">Feel free to reach out if you have any questions or need further assistance.</p>
                         <div style="margin: 30px 0; padding: 20px; background-color: #2d3133; border-right: 5px solid #FF7F11;">
                             <p style="font-style: italic; font-size: 1.3em; color: #E7E5DF;">“The best way to predict the future is to create it.”</p>
                             <p style="text-align: right; color: #888; font-size: 0.9em; margin: 0;">— Peter Drucker</p>
@@ -211,20 +225,26 @@ async function createUser(email, name, username, password) {
     }
 };
 
-// Route for home page
+
 app.route('/')
+    .get((req, res)=>{
+        res.send("<h1>Berkeley's API Running</h1>");
+    })
+// Route for home page
+app.route('/login')
     .get((req, res) => {
         req.session.sessUser = null;
         right_pass = true;
         right_log = true;
 
         // Parameters for rendering account page
-        var params = {
+        let params = {
             apiKey: process.env.MAP_PASS,
             dopple,
             right_log,
         };
-        res.render('account', params);
+        //res.render('account', params);
+        res.json(params);
     })
     .post(async (req, res) => { // Handle login
         const username = req.body.username;
@@ -234,12 +254,9 @@ app.route('/')
             
             if (!user) { // If user not found, set right_log to false
                 right_log = false;
-                var params = {
-                    apiKey: process.env.MAP_PASS,
-                    dopple,
-                    right_log,
-                };
-                return res.render('account', params);
+                //return res.render('account', params);
+
+                return res.json({success: false});
             }
     
             // Compare input password with hashed password
@@ -247,15 +264,13 @@ app.route('/')
             if (isMatch) { // If passwords match, set session and redirect
                 req.session.sessUser = user;
                 req.session.userId = user._id;
-                return res.redirect('/index');
+                
+                console.log("Session data:", req.session);
+                console.log("--###>>USER ID: ",req.session.userId);
+                return res.json({ success: true, user: req.session.sessUser});
             } else { // If passwords don't match, set right_log to false
                 right_log = false;
-                var params = {
-                    apiKey: process.env.MAP_PASS,
-                    dopple,
-                    right_log,
-                };
-                return res.render('account', params);
+                return res.json({success: false})
             }
             
         } catch (error) {
@@ -277,7 +292,7 @@ app.route('/signin')
         }
 
         // Parameters for rendering signin page
-        var params = {
+        let params = {
             right_pass,
             email,
             name,
@@ -286,27 +301,26 @@ app.route('/signin')
             conf_password,
         };
 
-        res.render('signin', params);
+        res.json(params);
     })
     .post(async (req, res) => { // Handle sign-up form submission
-        email = req.body.email;
-        name = req.body.name;
-        username = req.body.username;
-        password = req.body.password;
-        conf_password = req.body.conf_password;
+        const { email, name, username, password} = req.body;
+        console.log("--->Trying to create User")
 
-        if (password === conf_password) { // If passwords match, create user
-            right_pass = true;
-            dopple = false;
-            await createUser(email, name, username, password);
+        right_pass = true;
+        dopple = false;
 
-            sendMail(email).then(result => console.log("Email sent", result)).catch(error => console.error(error.message));
-            res.redirect('/');
+        await createUser(email, name, username, password);
+
+        const user = {email, name, username};
+
+        if (dopple === false){
+        sendMail(email).then(result => console.log("Email sent", result)).catch(error => console.error(error.message));
+        sendEditsMail(email, user);
+        }
+        
+        return res.json({ success: true, message: 'User created successfully' });
             
-        } else { // If passwords don't match, set right_pass to false
-            right_pass = false;
-            res.redirect('/signin');
-        };
     });
     
 
@@ -322,226 +336,38 @@ app.route('/index')
         };
 
         console.log("---->User: " + sessUser); // Log session user data for debugging
-        res.render('index', params); // Render 'index' template with params
+        res.json(params); // Render 'index' template with params
     });
 
-// Route to render the Amazon environment page
-app.route('/environment')
-    .get((req, res) => {
-        // Define carousel data array, each object represents an image and description
-        var carrousel = [
-            {
-                src: 'https://hips.hearstapps.com/hmg-prod/images/mata-atlantica-atlantic-forest-in-brazil-royalty-free-image-1668724621.jpg',
-                alt: 'Healthy Amazon',
-                overlay: 'Diverse and balanced ecosystems with rich biodiversity. Sustainable support for indigenous communities and wildlife.'
-            },
-            {
-                src: 'https://palotoaamazontravel.com/wp-content/uploads/2024/09/amazon-3.webp',
-                alt: 'Thriving Amazon',
-                overlay: 'Preservation of native flora and fauna, with sustainable management practices. Positive interaction between communities and the environment.'
-            },
-            {
-                src: 'https://u4d2z7k9.rocketcdn.me/wp-content/uploads/2021/11/Untitled-design-88.jpg',
-                alt: 'Threatened Amazon',
-                overlay: 'Increase in deforestation in specific areas.Pressure on natural resources from activities like agriculture and livestock.'
-            },
-            {
-                src: 'https://scx2.b-cdn.net/gfx/news/2021/a-deforested-area-of-r.jpg',
-                alt: 'Damaged Amazon',
-                overlay: 'Fragmentation of habitats due to road construction and settlements. Loss of native species and alterations in ecosystems.'
-            },
-            {
-                src: 'https://static.dw.com/image/54488003_605.jpg',
-                alt: 'Severely Damaged Amazon',
-                overlay: 'Increased pollution from pesticides and industrial waste. Displacement of indigenous communities due to resource exploitation.'
-            },
-            {
-                src: 'https://image.cnbcfm.com/api/v1/image/106975234-1636936362963-gettyimages-1228062683-AFP_1WJ4KX.jpeg?v=1636936106',
-                alt: 'Degraded Amazon',
-                overlay: 'Significant areas of deforested land with eroded soils. Disruption of the water cycle, affecting rivers and local climate.'
-            },
-            {
-                src: 'https://i.natgeofe.com/n/ab13d39b-7747-4b7e-abd0-362aa4ff6267/283.jpg',
-                alt: 'Critically Damaged Amazon',
-                overlay: 'Significant loss of biodiversity, with many species endangered. Increase in wildfires, both intentional and accidental.'
-            },
-            {
-                src: 'https://www.butlernature.com/wp-content/uploads/2021/06/GP0STUPV7_AmazonFiresAug20_PressMedia-1200x800.jpeg',
-                alt: 'Devastated Amazon',
-                overlay: 'Collapsed ecosystems with little or no chance of natural recovery. Unregulated urban development affecting the natural environment.'
-            },
-            {
-                src: 'https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/MMD6AMVZU5TD2EGEBBMHT6Y2LA.JPG',
-                alt: 'Exhausted Amazon',
-                overlay: 'Unfertile soils and loss of nutrients, making regeneration impossible. Contaminated and scarce water resources.'
-            },
-            {
-                src: 'https://www.greenpeace.org/static/planet4-international-stateless/2022/08/b9d170b7-gp1su5ae_-1024x684.jpg',
-                alt: 'Destroyed Amazon',
-                overlay: 'Total loss of most biodiversity. Irreversibly altered and degraded ecosystems, with massive environmental impact.'
-            }
-        ];
+//Update the score
+app.post('/update-score', async (req, res) => {
+    const { userId, score } = req.body;  // Expecting userId and score in the request body
+    console.log("---->User ID: ", userId);
+    if(userId === null){
+        return;
+    }
 
-        // Retrieve session user information, or set to null if not found
-        const sessUser = req.session.sessUser || null;
-
-        // Parameters to pass to the EJS template, including carousel and session user data
-        const params = {
-            carrousel,
-            sessUser,
-        };
-
-        // Render 'environment' template with params, displaying Amazon ecosystem info
-        res.render('environment', params);
-    });
-
-// Route to render the Antarctica environment page
-app.route('/environment2')
-    .get((req, res) => {
-        // Define carousel data array for Antarctica, each object represents an image and description
-        var carrousel = [
-            {
-                src: 'https://www.travelandleisure.com/thmb/qnFoUlxGP3j-1C7uUm04Ut0wqjU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/ice-monolith-antarctica-TRVLTOANT0518-cd3a9ff6d76f4e989d9b896a0bb15089.jpg',
-                alt: 'Pristine Antarctica',
-                overlay: 'Untouched landscapes, abundant marine life, and stable ice shelves supporting diverse ecosystems.'
-            },
-            {
-                src: 'https://storage.googleapis.com/travel-web-app-1.appspot.com/flamelink/media/Antartic%20penguins.jpg?GoogleAccessId=firebase-adminsdk-g2s60%40travel-web-app-1.iam.gserviceaccount.com&Expires=16725225600&Signature=GWyZ2Q2dbCdI9jQ5molzj4QSjUKafPDhG8qTazv4A47eTqJhsKbonPjXALgRG%2FT4THnggDGbvqlQO6CWWK8IsHBNirEzxNKmiCr7x3e4WAyYBa1O2HiWQhjflavdeMz%2F%2Blbw0s8D%2Fl7K8U29S5Ux4TkyIPhHIuAL739gdj4u4jyei%2BNDuhhdjk2tO1AbLByOmnTl7TWlHeEZkeEUO7oTuPuN6m9ZgcT4G9hlOXAHQsxEYyMYjtZilBl7heEaJazK%2BL42ukjPcwDn16%2F4L0658bw6E0sW8VgPNLNFxoPAA39QBUjbmRdv7fnhG6%2FRVYLoP5YzKR4U9cI9P%2FtUXneMBg%3D%3D',
-                alt: 'Balanced Ecosystem',
-                overlay: 'Balanced ecosystems with thriving marine and bird species, minimal human impact.'
-            },
-            {
-                src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZQYnpopmS1k-yqttBjpmZc6_We2N84DqfhA&s',
-                alt: 'Melting Ice Shelves',
-                overlay: 'Increasing melt rates of ice shelves, impacting habitats for seals, penguins, and other wildlife.'
-            },
-            {
-                src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm3FxOXhym_AxNXsHKLvB_N4ZlV9qD6h4jOg&s',
-                alt: 'Stressed Ecosystem',
-                overlay: 'Icebergs are melting at accelerated rates. Marine species face habitat reduction and food scarcity.'
-            },
-            {
-                src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtUkK6iwe-ejvfpld_DW5wEcv-OgiDMmXutg&s',
-                alt: 'Threatened Biodiversity',
-                overlay: 'Increased ocean temperatures threaten biodiversity and disrupt native species migration patterns.'
-            },
-            {
-                src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9eUh4vqlyB2A99oWG_waSYugWtJOWmkqybw&s',
-                alt: 'Fragile Ecosystem',
-                overlay: 'Vulnerable ice shelves and glaciers. Impacts on species dependent on stable, icy habitats.'
-            },
-            {
-                src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSWDalY4RujZi8yvlYyp_Lul8JzVET1lnE18w&s',
-                alt: 'Declining Penguin Populations',
-                overlay: 'Penguin populations dwindle due to habitat loss, with dwindling food resources and harsh conditions.'
-            },
-            {
-                src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb330JVCDwcal7bjDxuGDC_lFKp9tncXkZog&s',
-                alt: 'Severely Impacted Ice Sheets',
-                overlay: 'Rapid ice sheet melting leads to rising sea levels, impacting coastlines globally.'
-            },
-            {
-                src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl-s4oaL8C5Oq29r3I09vMgKu6XXielNvmRg&s',
-                alt: 'Endangered Ecosystem',
-                overlay: 'Lack of stable ice severely disrupts the ecosystem, affecting the Antarctic food chain and breeding patterns.'
-            },
-            {
-                src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJUR2j4y75T8mAAtyIwENwQru2mW2nkz037A&s',
-                alt: 'Collapsed Ice Ecosystem',
-                overlay: 'Complete ecosystem collapse with minimal wildlife presence. The region has lost most of its former resilience.'
-            }
-        ];
-
-        // Retrieve session user information, or set to null if not found
-        const sessUser = req.session.sessUser || null;
-
-        // Parameters to pass to the EJS template, including carousel and session user data
-        const params = {
-            carrousel,
-            sessUser,
-        };
-
-        // Render 'environment2' template with params, displaying Antarctica ecosystem info
-        res.render('environment2', params);
-    });
-
-// Route to render the Tasmania environment page
-app.route('/environment3')
-    .get((req, res) => {
-        // Define carousel data array for Tasmania, each object represents an image and description
-        var carrousel = [
-            {
-                src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTjyZlWwG1Pbsg2Y5Qiek711INFrwa1_wTzQ&s',
-                alt: 'Pristine Tasmania',
-                overlay: 'Untouched landscapes with unique flora and fauna, home to a thriving biodiversity and rare species like the Tasmanian devil.'
-            },
-            {
-                src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO-izIhKTsurOsUSu8FuMIRdYUwaS32heKJw&s',
-                alt: 'Balanced Tasmanian Ecosystem',
-                overlay: 'Stable ecosystems with lush forests, clean rivers, and abundant wildlife, minimally impacted by human activity.'
-            },
-            {
-                src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUfAvAGdNW7eL_SEiZ_P7dFIiGZarEdbNPYA&s',
-                alt: 'Deforestation Impact',
-                overlay: 'Rising deforestation rates impacting natural habitats. Increased land clearing threatens Tasmania’s biodiversity.'
-            },
-            {
-                src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYiq1DBkbTlWOX6_btoLcVKVsKZcwjxKgq1w&s',
-                alt: 'Stressed Ecosystem',
-                overlay: 'Invasive species and habitat destruction put pressure on native wildlife, creating scarcity of resources.'
-            },
-            {
-                src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7FmZYZp_m9_vnLMUDDRQ6xVb3wci-9MqnyA&s',
-                alt: 'Threatened Biodiversity',
-                overlay: 'Warming ocean temperatures disrupt marine life along the coasts, affecting fish populations and kelp forests.'
-            },
-            {
-                src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyE1dG9ZASw-O2wY0JaSq4gIetFaN4UfaY1w&s',
-                alt: 'Fragile Forest Ecosystem',
-                overlay: 'Logging and mining encroach upon protected forests, altering habitats and threatening endangered species.'
-            },
-            {
-                src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO96S0ptPfLcauVyso0PjhxD8K7xycdV8MZw&s',
-                alt: 'Declining Tasmanian Devil Populations',
-                overlay: 'Disease and habitat loss cause a decline in Tasmanian devil populations, endangering this iconic species.'
-            },
-            {
-                src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV1X5ojiJKQwVIApdlt1nwUhpegSzC_O9fDQ&s',
-                alt: 'Severely Impacted Coastlines',
-                overlay: 'Coastal erosion and pollution threaten marine ecosystems, affecting both tourism and local fishing industries.'
-            },
-            {
-                src: 'https://upload.wikimedia.org/wikipedia/commons/3/3d/Babel_Island_Aerial.jpg',
-                alt: 'Endangered Forests',
-                overlay: 'Logging practices lead to fragmented forests, with many plant and animal species struggling to survive.'
-            },
-            {
-                src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSFkWjtWj18V8z_JO-bD-2fPy753S1VSSE1Q&s',
-                alt: 'Critically Damaged Ecosystem',
-                overlay: 'Ecosystem collapse in key areas, with irreversible loss of biodiversity and long-term environmental impacts.'
-            }
-        ];
-
-        // Retrieve session user information, or set to null if not found
-        const sessUser = req.session.sessUser || null;
-
-        // Parameters to pass to the EJS template, including carousel and session user data
-        const params = {
-            carrousel,
-            sessUser,
-        };
-
-        // Render 'environment3' template with params, displaying Tasmania ecosystem info
-        res.render('environment3', params);
-    });
-
-
-// Route to render the map page
-app.route('/map')
-    .get((req, res) => {
-        // Render the 'map' template and pass the API key from environment variables
-        res.render('map', { apiKey: process.env.MAP_PASS });
-    });
+    try {
+      const user = await appUser.findById(userId); // Find the user by ID
+  
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      // Update the bestScore only if the new score is higher than the current one
+      if (score > user.bestScore) {
+        user.bestScore = score;
+        await user.save();
+        res.json({bestScore: user.bestScore});
+      }
+      else{
+        res.json({bestScore: score});
+      }
+  
+    } catch (error) {
+      res.status(500).json({ message: 'Error updating score', error });
+    }
+  });
 
 // Route to log the user out and destroy the session
 app.route('/log-out')
@@ -566,7 +392,7 @@ app.route('/user')
             sessUser,
         };
 
-        res.render("user", params); // Render 'user' template with session user data
+        res.json(params); // Render 'user' template with session user data
     });
 
 // Route to render the edit profile page
@@ -587,19 +413,23 @@ app.route('/edit-profile')
 app.route("/save-profile")
     .post(async (req, res) => {
         // Extract name, username, and email from the request body
-        const { name, username, email } = req.body;
-        const userId = req.session.userId; // Get user ID from session
+        const userId = req.body.userId;
+        const name = req.body.name;
+        const username = req.body.username;
+        const email = req.body.email;
+        // Get user ID from session
 
         try {
             // Update user details in the database with the new values
-            await appUser.findByIdAndUpdate(userId, { name, username, email }, { new: true });
-            
-            // Retrieve updated user data by username
-            const user = await appUser.findOne({ username });
-            
+            const searchUser = await appUser.findById(userId);
+            const user = await appUser.findByIdAndUpdate(userId, {name, username, email}); // Find the user by ID
+            //console.log("-))>>** UserId: ", user);
+
             // Update session data with the latest user info
             req.session.sessUser = user;
             req.session.userId = user._id;
+
+
             
             // Send a confirmation email of profile updates
             await sendEditsMail(req.body.email, {
@@ -608,17 +438,34 @@ app.route("/save-profile")
                 username: req.body.username,
             });
 
-            console.log("------->User ID: " + req.session.userId); // Log user ID for debugging
+            console.log(userId);
             console.log("-User profile updated"); // Confirmation log of profile update
             
-            res.redirect("/user"); // Redirect to the profile page after saving changes
+            res.json({success: true, user}); // Redirect to the profile page after saving changes
         } catch (error) {
             console.error("!--Error updating user profile:", error); // Log any errors encountered during update
-            res.redirect('/user'); // Redirect to profile page if an error occurs
+            res.json({success: false}); 
         }
     });
 
-// Start the server and listen on port 3000
-app.listen(3000, () => {
-    console.log("<|Berkeley listening port 3000|>"); // Log server start and port information
+    app.route('/Top')
+        .post(async (req, res)=>{
+            try {
+                const topUsers = await appUser.find()
+                  .sort({ bestScore: -1 }) // Sort by bestScore in descending order
+                
+                console.log("--========> TOP USERS:",topUsers);
+                res.json({status: true, topUsers});
+
+              } catch (error) {
+                console.error("Error retrieving top users:", error);
+                res.json({status: false});
+                throw error;
+              }
+
+        });
+
+// Start the server and listen on port
+app.listen(PORT, () => {
+    console.log(`<|Berkeley listening port ${PORT}|>`); // Log server start and port information
 });
