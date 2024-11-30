@@ -3,6 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   output: 'export',  // Change from 'standalone' to 'export'
   images: {
+    unoptimized: true,
     domains: [
       "i.pinimg.com",
       "www.excelsior.com.mx",
@@ -23,7 +24,6 @@ const nextConfig = {
       "encrypted-tbn0.gstatic.com",
       "upload.wikimedia.org"
     ],
-    unoptimized: true,
   },
   webpack(config, options) {
     // Adding rule for audio files (MP3, WAV, OGG)
