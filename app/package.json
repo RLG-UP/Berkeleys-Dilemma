@@ -25,7 +25,7 @@
   "client": "next dev",
   "dev": "concurrently \"npm run server\" \"npm run client\"",
   "prod": "npm run build && npm run export",
-  "export": "next export --outdir out"  
+  "export": "next export"  
 },
   "eslintConfig": {
     "extends": [
