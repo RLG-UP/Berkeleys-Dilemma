@@ -7,8 +7,10 @@
     "doc": "docs"
   },
   "scripts": {
-    "dev": "next dev",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "next build",
+    "start": "nodemon server.js",
+    "server": "node server"
   },
   "repository": {
     "type": "git",
@@ -33,7 +35,7 @@
     "appwrite": "^16.0.2",
     "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
-    "bootstrap": "^5.3.3",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
@@ -41,14 +43,7 @@
     "googleapis": "^144.0.0",
     "https": "^1.0.0",
     "mongoose": "^8.7.3",
-    "next": "^15.0.3",
     "nodemailer": "^6.9.15",
-    "nodemon": "^3.1.7",
-    "react": "^18.3.1",
-    "react-bootstrap": "^2.10.5",
-    "react-dom": "^18.3.1"
-  },
-  "devDependencies": {
-    "concurrently": "^9.1.0"
+    "nodemon": "^3.1.7"
   }
 }
