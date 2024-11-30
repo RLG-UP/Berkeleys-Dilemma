@@ -14,7 +14,7 @@
     "client": "npm start --prefix app",
     "client-install": "npm install --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "render-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix app && npm run build --prefix app"
+    "render-postbuild": "cross-env NPM_CONFIG_PRODUCTION=false npm install --prefix app && npm run build --prefix app"
   },
   "repository": {
     "type": "git",
@@ -51,6 +51,7 @@
     "nodemon": "^3.1.7"
   },
   "devDependencies": {
-    "concurrently": "^9.1.0"
+    "concurrently": "^9.1.0",
+    "cross-env": "^7.0.3"
   }
 }

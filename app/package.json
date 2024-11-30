@@ -6,6 +6,7 @@
   "dependencies": {
     "@arcgis/core": "^4.31.6",
     "axios": "^1.7.8",
+    "berkeleys-dilemma": "file:..",
     "bootstrap": "^5.3.3",
     "esri": "^0.0.1-security",
     "esri-loader": "^3.7.0",
