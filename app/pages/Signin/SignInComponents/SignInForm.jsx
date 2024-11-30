@@ -1,4 +1,3 @@
-'use client'
 import React, { useState } from 'react';
 import styles from '../../css/signin.module.css'; 
 import Link from 'next/link';
