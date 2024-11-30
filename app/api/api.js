@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Use environment variable for the base URL (you can define this in your .env file)
 const api = axios.create({
-    baseURL: 'http://localhost:5000',  // Change this to match your server's base URL
+    baseURL: 'https://berkeleys-dilemma.onrender.com',  // Change this to match your server's base URL
     headers: {
         'Content-Type': 'application/json',
     }
