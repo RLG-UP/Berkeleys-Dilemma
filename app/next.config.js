@@ -23,6 +23,7 @@ const nextConfig = {
       "encrypted-tbn0.gstatic.com",
       "upload.wikimedia.org"
     ],
+    unoptimized: true,
   },
   webpack(config, options) {
     // Adding rule for audio files (MP3, WAV, OGG)
