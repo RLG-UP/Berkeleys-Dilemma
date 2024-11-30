@@ -22,7 +22,7 @@ function DirectoryProvider({ children }) {
     
 
     return (
-        <DirectoryContext.Provider value={{ state, dispatch, login, signIn, updateScore }}>
+        <DirectoryContext.Provider value={{ state, dispatch, login, signIn, updateScore, stateTop, logout, editUser }}>
             {children}
         </DirectoryContext.Provider>
     );
@@ -37,11 +37,11 @@ async function login(username, password, dispatch) {
     try {
         const res = await api.post('/login', { username, password });
         if (res.data.success) {
-
             dispatch({ type: LOGIN, payload: res.data.user });
         } else {
             dispatch({type: FAKE_LOG, payload: true});
         }
+        return res.data.success;
     } catch (error) {
         console.error("Error logging in:", error);
     }

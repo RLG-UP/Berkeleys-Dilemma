@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styles from '../css/account.module.css'; // Sign-in specific styles
 import Link from 'next/link';
 import { useBerkeleysContext, login } from '../../src/context/DirectoryProvider';
@@ -8,9 +8,11 @@ import { useRouter } from "next/router";
 
 function Login() {
     const router = useRouter();
+    const [dopple, setDopple] = useState(false);
     const { dispatch, state } = useBerkeleysContext();
     const [errorMessage, setErrorMessage] = useState(null);
     const [accountExists, setAccountExists] = useState(false);
+
 
     // Simulated login logic (replace with actual logic)
     const handleLogin = async (event) => {
@@ -20,14 +22,20 @@ function Login() {
         const password = formData.get('password');
 
         try {
-            // Call the login function from DirectoryProvider
-            await login(username, password, dispatch);  // Dispatch the login action
 
-            // Assuming login function works and dispatches the user data, reset error states
+            
+            // Call the login function from DirectoryProvider
+            const loginSuccess = await login(username, password, dispatch);
+
+            // Update dopple state based on success
+            setDopple(!loginSuccess);
             setErrorMessage(null);
-            if (!state.dopple){
+
+            console.log("*((((((((((((((((", dopple);
+            if (loginSuccess) {
                 router.push('/IndexPage');
-            }
+            } 
+            
         } catch (error) {
             // If there's an error with the login, show the appropriate error message
             console.error("Login failed:", error);
@@ -49,7 +57,7 @@ function Login() {
                             <strong>Treat it as one.</strong>
                         </p>
                         <h6 className={styles.log_err_title}>
-                            {state.dopple
+                            {dopple
                                 ? 'User or Password Incorrect'
                                 : errorMessage}
                         </h6>

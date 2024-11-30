@@ -6,21 +6,18 @@ function DirectoryReducer(state, action) {
             return {
                 ...state,
                 user: action.payload,  // Update user state after sign-in
-                dopple: false,
             };
         case LOGIN:
             return {
                 ...state,
                 user: action.payload,  // Update user state after login
                 loggedState: true,
-                dopple: false,
             };
         case LOGOUT:
             return {
                 ...state,
                 user: {},  // Clear user data on logout
                 loggedState: false,
-                dopple: false,
             };
         case EDIT_INFO:
             return {
@@ -43,7 +40,6 @@ function DirectoryReducer(state, action) {
         case FAKE_LOG:
             return{
                 ...state,
-                dopple: action.payload,
             };
 
         default:
