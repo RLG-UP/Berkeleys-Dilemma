@@ -14,8 +14,9 @@
   "client": "npm start --prefix app",
   "client-install": "npm install --prefix client",
   "dev": "concurrently \"npm run server\" \"npm run client\"",
-  "render-postbuild": "cross-env NPM_CONFIG_PRODUCTION=false npm install --prefix app && npm run build --prefix app && npm run export --prefix app"
+  "render-postbuild": "cross-env NPM_CONFIG_PRODUCTION=false npm install --prefix app && npm run build --prefix app"
 }
+
 ,
   "repository": {
     "type": "git",
