@@ -33,8 +33,8 @@ app.use(cors());
 const PORT = 5000;
 
 // MongoDB environment variables
-const user = process.env.DB_USER;
-const pass = process.env.DB_PASS;
+const user = encodeURIComponent(process.env.DB_USER);
+const pass = encodeURIComponent(process.env.DB_PASS);
 const db = process.env.DB;
 const slt = parseInt(process.env.SALT, 10); // Convert SALT to number for bcrypt
 if (isNaN(slt)) { // Exit if SALT is not a number
