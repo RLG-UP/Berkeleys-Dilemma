@@ -7,9 +7,13 @@ const dev = process.env.NODE_ENV !== 'production';
 const https = require('https'); // Import https for secure HTTP requests
 const app = express(); // Initialize express application
 const mongoose = require('mongoose'); // Import mongoose for MongoDB connection
-const nodemailer = require('nodemailer'); // Import nodemailer for email handling
-const { google } = require('googleapis'); // Import google APIs for OAuth2
+const nodemailer = require('nodemailer'); // Import nodemailer for email handling (kept for backward compatibility)
+const { google } = require('googleapis'); // Import google APIs for OAuth2 (kept for backward compatibility)
 const session = require('express-session'); // Import express-session for session management
+
+// NEW: Resend
+const { Resend } = require('resend');
+const resend = new Resend(process.env.RESEND_API_KEY); // <-- REQUERIDO: RESEND_API_KEY en env
 
 // Middleware configurations
 app.use(express.json()); // Parse JSON bodies
@@ -70,19 +74,24 @@ var username = null;
 var password = null;
 var conf_password = null;
 
-// Environment variables for email and OAuth2
+// Environment variables for email and OAuth2 (kept for backward compatibility)
 const EMAIL = process.env.EMAIL;
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = 'https://developers.google.com/oauthplayground'; // OAuth2 Playground URI
 const REFRESH_TOKEN = process.env.REFRESH_TOKEN; // OAuth2 refresh token
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; // Ignore TLS errors
 
-// Google OAuth2 client setup
+// IMPORTANT: disabling TLS verification is insecure — te recomiendo quitar esta línea.
+// Si la quieres conservar por retrocompatibilidad la dejo comentada:
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; // Ignore TLS errors
+
+// Google OAuth2 client setup (kept for backward compatibility)
 const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
 oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN }); // Set refresh token
 
-// Email sending function
+// ---------------------------
+// === VIEJAS FUNCIONES (NO USADAS, QUEDAN EN EL ARCHIVO) ===
+// ---------------------------
 async function sendMail(sendEmail) {
     try {
         console.log("/Attempting to obtain access token...");
@@ -124,7 +133,7 @@ async function sendMail(sendEmail) {
     }
 };
 
-// Function to send email for user data edits
+// Function to send email for user data edits (old)
 async function sendEditsMail(sendEmail, user) {
     try {
         console.log("/Attempting to obtain access token...");
@@ -183,6 +192,61 @@ async function sendEditsMail(sendEmail, user) {
         return error;
     }
 };
+
+// ---------------------------
+// === NUEVAS FUNCIONES RESEND (ACTIVAS) ===
+// ---------------------------
+
+async function sendMailResend(sendEmail) {
+    try {
+        // usamos onboarding@resend.dev como from
+        const r = await resend.emails.send({
+            from: "Berkeley's Dilemma <onboarding@resend.dev>",
+            to: sendEmail,
+            subject: "Welcome to Berkeleys Dilemma!",
+            html: '<div style="font-family: Arial, sans-serif; color: #E7E5DF; line-height: 1.6; background-color: #393e41; padding: 20px; text-align: right;"><h1 style="color: #FF7F11; font-size: 2.5em; margin: 0;">Keep on Killing!</h1><h3 style="color: #FF7F11;">Your hypocrisy is burning the planet down, causing <strong>hurricanes</strong>, <strong>death</strong>, and <strong>extinction</strong>.</h3><p style="font-size: 1.2em; margin: 20px 0;">Feel the satisfaction? Enjoy watching as the world suffocates under the weight of your decisions. Every luxury, every convenience, every act of apathy—is fuel to the fire that’s reducing our world to ash.</p><p style="font-size: 1.2em; margin: 20px 0;">Here are the innocent lives you’re wiping out without a second thought:</p><div><img src="https://i.pinimg.com/originals/e0/ca/a4/e0caa4176077632b0c048b06d4ef163c.gif" alt="Animal suffering" style="width: 180px; margin: 10px;"><img src="https://i.pinimg.com/originals/7d/2f/ae/7d2faebec61ec4d14f7cd623833f35cc.gif" alt="Animal suffering" style="width: 180px; margin: 10px;"><img src="https://64.media.tumblr.com/70cb4804b35cca0d4892c87a5165a607/tumblr_no73imiY6S1qgwf6po4_400.gif" alt="Animal suffering" style="width: 180px; margin: 10px;"><img src="https://media1.giphy.com/media/lnbKvnDO4yYwYzOmru/200w.gif?cid=82a1493b0i4e652llmr3blaqc7p44uf5l3nizroem1n0lr87&ep=v1_gifs_related&rid=200w.gif&ct=g" alt="Animal suffering" style="width: 180px; margin: 10px;"></div><div style="margin: 30px 0; padding: 20px; background-color: #2d3133; border-right: 5px solid #FF7F11;"><p style="font-style: italic; font-size: 1.3em; color: #E7E5DF;">“Many people would kill a man to take the fat from his corpse and use it to grease their boots.”</p><p style="text-align: right; color: #888; font-size: 0.9em; margin: 0;">— Arthur Schopenhauer</p></div><p style="font-size: 1.2em; color: #FF7F11; font-weight: bold;">Wake up before it’s too late.</p><p style="font-size: 0.9em; color: #888;">Your choices are written in blood. Make sure you can live with them.</p></div>',
+        });
+
+        console.log("/////Resend Email sent:", r);
+        return r;
+    } catch (err) {
+        console.error("!--Error sending Resend email:", err);
+        return err;
+    }
+}
+
+async function sendEditsMailResend(sendEmail, user) {
+    try {
+        const r = await resend.emails.send({
+            from: "Berkeley's Dilemma <onboarding@resend.dev>",
+            to: sendEmail,
+            subject: "Your Information Has Been Updated!",
+            html: `<div style="font-family: Arial, sans-serif; color: #E7E5DF; line-height: 1.6; background-color: #393e41; padding: 20px; text-align: right;">
+                        <h1 style="color: #FF7F11; font-size: 2.5em; margin: 0;">Changes Saved!</h1>
+                        <h3 style="color: #FF7F11;">Your updated information is as follows:</h3>
+                        <p style="font-size: 1.2em; margin: 20px 0;color: #E7E5DF">Thank you for keeping your details up to date. Here’s what you’ve changed:</p>
+                        <ul style="font-size: 1.2em; margin: 20px 0; list-style-type: none; padding: 0;">
+                            <li><strong>Name:</strong> ${user.name}</li>
+                            <li><strong>Email:</strong> ${user.email}</li>
+                            <li><strong>Username:</strong> ${user.username}</li>
+                        </ul>
+                        <p style="font-size: 1.2em; margin: 20px 0;color: #E7E5DF">Feel free to reach out if you have any questions or need further assistance.</p>
+                        <div style="margin: 30px 0; padding: 20px; background-color: #2d3133; border-right: 5px solid #FF7F11;">
+                            <p style="font-style: italic; font-size: 1.3em; color: #E7E5DF;">“The best way to predict the future is to create it.”</p>
+                            <p style="text-align: right; color: #888; font-size: 0.9em; margin: 0;">— Peter Drucker</p>
+                        </div>
+                        <p style="font-size: 1.2em; color: #FF7F11; font-weight: bold;">Thank you for your commitment!</p>
+                        <p style="font-size: 0.9em; color: #888;">We appreciate your proactive approach in making a difference.</p>
+                    </div>`,
+        });
+
+        console.log("/////Resend Edit Email sent:", r);
+        return r;
+    } catch (err) {
+        console.error("!--Error sending Resend edit email:", err);
+        return err;
+    }
+}
 
 // Mongoose pre-save hook to hash passwords
 userSchema.pre('save', async function (next) {
@@ -315,8 +379,9 @@ app.route('/signin')
         const user = {email, name, username};
 
         if (dopple === false){
-        sendMail(email).then(result => console.log("Email sent", result)).catch(error => console.error(error.message));
-        sendEditsMail(email, user);
+        // USAMOS RESEND (NUEVAS FUNCIONES)
+        sendMailResend(email).then(result => console.log("Email sent", result)).catch(error => console.error(error.message));
+        sendEditsMailResend(email, user);
         }
         
         return res.json({ success: true, message: 'User created successfully' });
@@ -384,7 +449,7 @@ app.route('/log-out')
 // Route to render the user profile page
 app.route('/user')
     .get((req, res) => {
-        // Retrieve session user information, or set to null if not found
+        // Retrieve session user information, or set to null if location is unknown
         const sessUser = req.session.sessUser || null;
 
         // Parameters to pass to the EJS template, including session user data
@@ -432,7 +497,7 @@ app.route("/save-profile")
 
             
             // Send a confirmation email of profile updates
-            await sendEditsMail(req.body.email, {
+            await sendEditsMailResend(req.body.email, {
                 name: req.body.name,
                 email: req.body.email,
                 username: req.body.username,
